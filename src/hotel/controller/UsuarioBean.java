@@ -20,10 +20,45 @@ public class UsuarioBean extends BaseBean{
 	@Inject
 	private SessionBean session;
 
-	public Boolean login(String email, String senha) throws Exception{
-		Usuario usuario = userDAO.Login(email,senha);
-		if(usuario!=null){
-			session.setUsuarioLogado(usuario);
+	private String email;
+	private String senha;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public UsuarioDAO getUserDAO() {
+		return userDAO;
+	}
+
+	public void setUserDAO(UsuarioDAO userDAO) {
+		this.userDAO = userDAO;
+	}
+
+	public SessionBean getSession() {
+		return session;
+	}
+
+	public void setSession(SessionBean session) {
+		this.session = session;
+	}
+
+	public Boolean login() throws Exception{
+		Usuario user = userDAO.Login(email, senha);
+		if(user!=null){
+			session.setUsuarioLogado(user);
 			return true;
 		}
 		return false;

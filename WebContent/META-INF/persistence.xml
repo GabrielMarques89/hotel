@@ -4,8 +4,10 @@
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 	<persistence-unit name="primary">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>jdbc/hotel</jta-data-source>
+		<provider>
+			org.hibernate.jpa.HibernatePersistenceProvider
+		</provider>
+		<jta-data-source>jdbc/hotelJdbc</jta-data-source>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
