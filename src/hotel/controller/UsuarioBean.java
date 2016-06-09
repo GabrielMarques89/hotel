@@ -11,14 +11,14 @@ import javax.inject.Named;
  * Created by grupoeuropa on 09/06/16.
  */
 
-@Named
+@Named("UsuarioManagedBean")
 @RequestScoped
 public class UsuarioBean extends BaseBean{
 	@Inject
 	private UsuarioDAO userDAO;
 
 	@Inject
-	public SessionBean session;
+	private SessionBean session;
 
 	public Boolean login(String email, String senha) throws Exception{
 		Usuario usuario = userDAO.Login(email,senha);
