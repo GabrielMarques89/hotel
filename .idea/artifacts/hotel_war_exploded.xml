@@ -7,6 +7,8 @@
           <element id="module-output" name="hotel" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.webjars:jquery:2.1.4" />
+          <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.4" />
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.1.0.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
