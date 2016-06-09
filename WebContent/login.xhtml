@@ -5,54 +5,41 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<f:view locale="en">
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <ui:insert name="header">
-            <title>Projeto Hotel</title>
-        </ui:insert>
-
-        <link type="text/css" rel="stylesheet"
-              href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
-        <script type="text/javascript"
-                src="#{request.contextPath}/resources/js/bootstrap.min.js"></script>
-        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/resources/css/default.css"/>
-
-    </h:head>
+    <h:head></h:head>
     <h:body>
-        <div class="container-fluid">
-            <div class="row" style="padding-top: 6em;">
-                <div style="margin-left: auto;margin-right: auto;width: 350px;">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h:form prependId="false">
-                                <p:growl id="messages" sticky="true"/>
-                                <div>
-                                    <label>Email</label>
-                                    <br/>
-                                    <p:inputText value="#{usuarioBean.email}" required="true"
-                                                 requiredMessage="O email é obrigatório"></p:inputText>
-                                </div>
-                                <div>
-                                    <label>Senha</label>
-                                    <br/>
-                                    <p:password value="#{usuarioBean.senha}" required="true"
-                                                id="password"
-                                                requiredMessage="A senha é obrigatória"></p:password>
-                                </div>
-                                <div class="row">
-                                    <br/>
-                                    <div class="col-lg-24 col-md-24 col-sm-24">
-                                        <p:commandButton value="Login" ajax="false"
-                                                         action="#{usuarioBean.login}"/>
+        <ui:composition template="template/layout.xhtml">
+            <ui:define name="content">
+                <div class="acesso container">
+                    <div class="login col-lg-24 row-fluid centering">
+                        <!-- messages -->
+                        <p:messages id="msg" />
+                        <!-- /messages -->
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h:form class="form">
+                                    <div class="form-group">
+                                        <label for="email">E-mail</label>
+                                        <p:inputText class="form-control" type="email" name="email" id="email"
+                                                     placeholder="Digite seu e-mail"
+                                                     value="#{usuarioBean.email}"
+                                                     requiredMessage="O email é obrigatório"
+                                                     required="true" />
                                     </div>
-                                </div>
-                            </h:form>
+                                    <div class="form-group">
+                                        <label for="senha">Senha</label>
+                                        <p:password class="form-control" name="senha" id="senha"
+                                                    placeholder="Digite sua senha"
+                                                    value="#{usuarioBean.email}"
+                                                    requiredMessage="A senha é obrigatória"
+                                                    required="true"/>
+                                    </div>
+                                    <p:commandButton class="btn btn-success btn-block" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
-</f:view>
 </html>

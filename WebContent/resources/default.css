@@ -1,5 +1,0 @@
-body{ background: url('bg.jpg') center no-repeat; }
-input, textarea, .ui-selectonemenu{ width: 100% !important; }
-input.hasDatepicker { width: 80% !important; }
-.modal-button{ text-align: right; }
-.container { margin-top: 20px; }

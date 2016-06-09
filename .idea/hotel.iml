@@ -16,7 +16,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="primary" />
+        </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/WebContent/META-INF/persistence.xml" />
       </configuration>
     </facet>
@@ -51,5 +53,6 @@
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:all-themes:1.0.10" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.12" level="project" />
   </component>
 </module>
