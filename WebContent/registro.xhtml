@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+    <ui:composition template="template/layout.xhtml">
+        <ui:define name="content">
+            <div class="acesso container">
+                <div class="register col-lg-24 row-fluid centering">
+                    <!-- messages -->
+                    <p:messages id="msg" />
+                    <!-- /messages -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h:form class="form">
+                                <div class="form-group">
+                                    <label for="usuario-nome-completo">Nome completo</label>
+                                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="" placeholder="Digite seu nome" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-email">E-mail</label>
+                                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="" placeholder="Digite seu e-mail" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-data-nascimento">Data nascimento</label>
+                                    <p:inputText class="form-control" type="text" name="usuario-data-nascimento" id="usuario-data-nascimento" value="" placeholder="" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-genero">Gênero</label>
+                                    <select class="form-control" name="usuario-genero" id="usuario-genero">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-cpf">CPF</label>
+                                    <p:inputText class="form-control" type="text" name="usuario-cpf" id="usuario-cpf" value="" placeholder="Digite seu CPF" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-telefone">Telefone</label>
+                                    <p:inputText class="form-control" name="usuario-telefone" id="usuario-telefone" value="" placeholder="Digite seu telefone"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-endereco">Endereco</label>
+                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="" placeholder="Digite seu endereço"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-senha">Senha</label>
+                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="" placeholder="Digite sua senha" required="true"/>
+                                </div>
+                                <button class="btn btn-success btn-block">Entrar</button>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
