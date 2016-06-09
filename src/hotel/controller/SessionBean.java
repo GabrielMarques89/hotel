@@ -3,9 +3,7 @@ package hotel.controller;
 import hotel.model.Usuario;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -13,11 +11,7 @@ import java.io.Serializable;
 @SessionScoped
 public class SessionBean implements Serializable {
 
-	@Inject
-	private Conversation conversation;
-
 	private Usuario usuarioLogado;
-
 
 	@PostConstruct
 	public void init() {
