@@ -2,12 +2,14 @@ package hotel.dao;
 
 import hotel.model.Usuario;
 
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
  * Created by grupoeuropa on 09/06/16.
  */
+@Stateless
 public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 
 	public Usuario Login(String email, String senha) throws Exception{
@@ -25,5 +27,4 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 			throw e;
 		}
 	}
-
 }

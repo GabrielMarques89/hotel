@@ -8,22 +8,17 @@ import hotel.model.Enum.Genero;
 import hotel.model.Enum.StatusHospede;
 import hotel.model.Enum.TipoUsuario;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-@Table(name = "TBL_USUARIO")
-@PrimaryKeyJoinColumn(name = "ID_USUARIO")
+@Table(name = "TBL_USUARIOS")
 public class Usuario extends Entidade {
 
     @Column(name = "TP_STATUS")
     private StatusHospede status;
 
-    @Column(name="TP_USUARIO")
+    @Column(name = "TP_USUARIO")
     private TipoUsuario tipoUsuario;
 
     @Column(name = "NM_PESSOA")
@@ -33,9 +28,10 @@ public class Usuario extends Entidade {
     private Genero genero;
 
     @Column(name = "DT_NASCIMENTO")
+    @Temporal(TemporalType.DATE)
     private Date nascimento;
 
-    @Column(name = "DS_CPF",unique = true)
+    @Column(name = "DS_CPF", unique = true)
     private String cpf;
 
     @Column(name = "DS_TELEFONE")
@@ -51,11 +47,11 @@ public class Usuario extends Entidade {
     private String senha;
 
     public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
+        return this.tipoUsuario;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -63,7 +59,7 @@ public class Usuario extends Entidade {
     }
 
     public Genero getGenero() {
-        return genero;
+        return this.genero;
     }
 
     public void setGenero(Genero genero) {
@@ -71,7 +67,7 @@ public class Usuario extends Entidade {
     }
 
     public Date getNascimento() {
-        return nascimento;
+        return this.nascimento;
     }
 
     public void setNascimento(Date nascimento) {
@@ -79,7 +75,7 @@ public class Usuario extends Entidade {
     }
 
     public String getTelefone() {
-        return telefone;
+        return this.telefone;
     }
 
     public void setTelefone(String telefone) {
@@ -87,7 +83,7 @@ public class Usuario extends Entidade {
     }
 
     public String getEndereco() {
-        return endereco;
+        return this.endereco;
     }
 
     public void setEndereco(String endereco) {
@@ -95,7 +91,7 @@ public class Usuario extends Entidade {
     }
 
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
     public void setSenha(String senha) {
@@ -115,7 +111,7 @@ public class Usuario extends Entidade {
     }
 
     public String getNomeCompleto() {
-        return nomeCompleto;
+        return this.nomeCompleto;
     }
 
     public void setNomeCompleto(String nomeCompleto) {
@@ -123,11 +119,10 @@ public class Usuario extends Entidade {
     }
 
     public StatusHospede getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(StatusHospede status) {
         this.status = status;
     }
 }
-

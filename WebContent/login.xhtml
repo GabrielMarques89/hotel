@@ -30,13 +30,13 @@
                                 <div>
                                     <label>Email</label>
                                     <br/>
-                                    <p:inputText value="#{UsuarioManagedBean.usuario.email}" required="true"
+                                    <p:inputText value="#{usuarioBean.email}" required="true"
                                                  requiredMessage="O email é obrigatório"></p:inputText>
                                 </div>
                                 <div>
                                     <label>Senha</label>
                                     <br/>
-                                    <p:password value="#{UsuarioManagedBean.usuario.senha}" required="true"
+                                    <p:password value="#{usuarioBean.senha}" required="true"
                                                 id="password"
                                                 requiredMessage="A senha é obrigatória"></p:password>
                                 </div>
@@ -44,7 +44,7 @@
                                     <br/>
                                     <div class="col-lg-24 col-md-24 col-sm-24">
                                         <p:commandButton value="Login" ajax="false"
-                                                         action="#{UsuarioManagedBean.login}"/>
+                                                         action="#{usuarioBean.login}"/>
                                     </div>
                                 </div>
                             </h:form>

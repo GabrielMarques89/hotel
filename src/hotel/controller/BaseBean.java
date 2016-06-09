@@ -10,6 +10,8 @@ import java.io.Serializable;
 @ConversationScoped
 public class BaseBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	protected SessionBean sessionBean;
 

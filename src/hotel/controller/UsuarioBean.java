@@ -3,22 +3,24 @@ package hotel.controller;
 import hotel.dao.UsuarioDAO;
 import hotel.model.Usuario;
 
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-/**
- * Created by grupoeuropa on 09/06/16.
- */
-
-@Named("UsuarioManagedBean")
-@RequestScoped
+@Named
+@ConversationScoped
 public class UsuarioBean extends BaseBean{
+	private static final long serialVersionUID = 1L;
+
+
 	@Inject
 	private UsuarioDAO userDAO;
 
-	@Inject
-	private SessionBean session;
+	@PostConstruct
+	public void init() {
+		System.out.println("asd");
+	}
 
 	private String email;
 	private String senha;
@@ -39,28 +41,12 @@ public class UsuarioBean extends BaseBean{
 		this.senha = senha;
 	}
 
-	public UsuarioDAO getUserDAO() {
-		return userDAO;
-	}
-
-	public void setUserDAO(UsuarioDAO userDAO) {
-		this.userDAO = userDAO;
-	}
-
-	public SessionBean getSession() {
-		return session;
-	}
-
-	public void setSession(SessionBean session) {
-		this.session = session;
-	}
-
-	public Boolean login() throws Exception{
+	public String login() throws Exception{
 		Usuario user = userDAO.Login(email, senha);
 		if(user!=null){
-			session.setUsuarioLogado(user);
-			return true;
+			sessionBean.setUsuarioLogado(user);
+			return "index.xhtml";
 		}
-		return false;
+		return "login.xhtml";
 	}
 }
