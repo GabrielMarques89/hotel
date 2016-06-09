@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<link type="text/css" rel="stylesheet" href="/Example/resources/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/Example/resources/default.css" />
+		<script type="text/javascript" src="/Example/resources/datepicker-pt-BR.js"></script>
+	</h:head>
+	<h:body>
+		<div class="container">
+			<h:form styleClass="col-xs-3">
+				<p:menu style="width:100%">
+			        <p:submenu label="Ações">
+			            <!-- <p:menuitem value="#{msg['chales']}" action="#{menuBean.urlChale()}" ajax="false" />
+			            <p:menuitem value="#{msg['reservar.servicos']}" action="#{menuBean.urlReservaServico()}" ajax="false" />
+			            <p:menuitem value="#{msg['servicos']}" action="#{menuBean.urlServico()}" ajax="false" />
+			            <p:menuitem value="#{msg['equipamentos']}" action="#{menuBean.urlEquipamento()}" ajax="false" />
+			            <p:menuitem value="#{msg['cancelar.reserva']}" action="#{menuBean.urlCancelarReserva()}" ajax="false" />
+			            <p:menuitem value="#{msg['efetuar.checkin']}" action="#{menuBean.urlCheckIn()}" ajax="false" />
+			            <p:menuitem value="#{msg['efetuar.checkout']}" action="#{menuBean.urlCheckOut()}" ajax="false" />
+			            <p:menuitem value="#{msg['balanco.estadia']}" action="#{menuBean.urlBalanco()}" ajax="false" />
+			            <p:menuitem value="#{msg['historico']}" action="#{menuBean.urlHistorico()}" ajax="false" /> -->
+			        </p:submenu>
+			    </p:menu>
+		    </h:form>
+			
+			<div class="col-xs-9 conteudo">
+		 		<ui:insert name="conteudo" />
+			</div>
+	 	</div>
+	</h:body>
+</html>
