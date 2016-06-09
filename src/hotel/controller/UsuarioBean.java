@@ -13,7 +13,6 @@ import javax.inject.Named;
 public class UsuarioBean extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
-
 	@Inject
 	private UsuarioDAO userDAO;
 
@@ -22,8 +21,17 @@ public class UsuarioBean extends BaseBean{
 		System.out.println("asd");
 	}
 
+	private Usuario user;
 	private String email;
 	private String senha;
+
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
 
 	public String getEmail() {
 		return email;
@@ -48,5 +56,14 @@ public class UsuarioBean extends BaseBean{
 			return "index.xhtml";
 		}
 		return "login.xhtml";
+	}
+
+	public String cadastro(Usuario user) throws Exception{
+		Usuario usuario = userDAO.merge(user);
+		if(user!=null){
+			sessionBean.setUsuarioLogado(user);
+			return "index.xhtml";
+		}
+		return "cadastro.xhtml";
 	}
 }

@@ -15,23 +15,23 @@ import java.util.Date;
 @Table(name = "TBL_USUARIOS")
 public class Usuario extends Entidade {
 
-    @Column(name = "TP_STATUS")
+    @Column(name = "TP_STATUS", nullable = false)
     private StatusHospede status;
 
-    @Column(name = "TP_USUARIO")
+    @Column(name = "TP_USUARIO", nullable = false)
     private TipoUsuario tipoUsuario;
 
-    @Column(name = "NM_PESSOA")
+    @Column(name = "NM_PESSOA", nullable = false)
     private String nomeCompleto;
 
-    @Column(name = "EN_GENERO")
+    @Column(name = "EN_GENERO", nullable = false)
     private Genero genero;
 
     @Column(name = "DT_NASCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date nascimento;
 
-    @Column(name = "DS_CPF", unique = true)
+    @Column(name = "DS_CPF", unique = true, nullable = false)
     private String cpf;
 
     @Column(name = "DS_TELEFONE")
@@ -40,10 +40,10 @@ public class Usuario extends Entidade {
     @Column(name = "DS_ENDERECO")
     private String endereco;
 
-    @Column(name = "DS_EMAIL")
+    @Column(name = "DS_EMAIL", nullable = false)
     private String email;
 
-    @Column(name = "DS_SENHA")
+    @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
     public TipoUsuario getTipoUsuario() {
