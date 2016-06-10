@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<h:head></h:head>
 <h:body>
     <ui:composition template="template/layout.xhtml">
         <ui:define name="content">
@@ -17,6 +15,8 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h:form class="form">
+                                <!--TODO: Os parametros do tipo enum tem que ser listados num dropdown...-->
+                                <!--TODO: Validações (usar o usuarioBean.cadastro para trazer as mensagens de erro... ler os PDF (slide III do rosalem) )-->
                                 <div class="form-group">
                                     <label for="usuario-nome-completo">Nome completo</label>
                                     <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="" placeholder="Digite seu nome" required="true"/>
@@ -50,7 +50,7 @@
                                     <label for="usuario-senha">Senha</label>
                                     <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="" placeholder="Digite sua senha" required="true"/>
                                 </div>
-                                <button class="btn btn-success btn-block">Entrar</button>
+                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.cadastro}"/>
                             </h:form>
                         </div>
                     </div>

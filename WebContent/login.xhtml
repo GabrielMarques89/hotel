@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <h:head></h:head>
     <h:body>
         <ui:composition template="template/layout.xhtml">
             <ui:define name="content">
@@ -21,7 +19,7 @@
                                         <label for="email">E-mail</label>
                                         <p:inputText class="form-control" type="email" name="email" id="email"
                                                      placeholder="Digite seu e-mail"
-                                                     value="#{usuarioBean.email}"
+                                                     value="#{usuarioBean.user.email}"
                                                      requiredMessage="O email é obrigatório"
                                                      required="true" />
                                     </div>
@@ -29,11 +27,12 @@
                                         <label for="senha">Senha</label>
                                         <p:password class="form-control" name="senha" id="senha"
                                                     placeholder="Digite sua senha"
-                                                    value="#{usuarioBean.senha}"
+                                                    value="#{usuarioBean.user.senha}"
                                                     requiredMessage="A senha é obrigatória"
                                                     required="true"/>
                                     </div>
                                     <p:commandButton class="btn btn-success btn-block" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
+                                    <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="/registro.xhtml"/>
                                 </h:form>
                             </div>
                         </div>

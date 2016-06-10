@@ -11,6 +11,7 @@ import hotel.model.Enum.TipoUsuario;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "TBL_USUARIOS")
 public class Usuario extends Entidade {
@@ -31,6 +32,13 @@ public class Usuario extends Entidade {
     @Temporal(TemporalType.DATE)
     private Date nascimento;
 
+    @Column(name = "DT_CRIACAO")
+    @Temporal(TemporalType.DATE)
+    private Date dataCriacao;
+
+    @Column(name = "DT_ULTIMO_ACESSO")
+    private Date ultimoAcesso;
+
     @Column(name = "DS_CPF", unique = true, nullable = false)
     private String cpf;
 
@@ -46,7 +54,24 @@ public class Usuario extends Entidade {
     @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
-    public TipoUsuario getTipoUsuario() {
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Date getUltimoAcesso() {
+		return ultimoAcesso;
+	}
+
+	public void setUltimoAcesso(Date ultimoAcesso) {
+		this.ultimoAcesso = ultimoAcesso;
+	}
+
+	public TipoUsuario getTipoUsuario() {
         return this.tipoUsuario;
     }
 

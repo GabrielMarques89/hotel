@@ -2,11 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:p="http://primefaces.org/ui">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
 	<ui:composition template="/template/layout.xhtml">
 		<ui:define name="content">
 			<script type="text/javascript">
@@ -44,11 +43,15 @@
 			</script>
 			<h:form>
 				<p:fieldset style="height:138px;text-align: center;">
-					<p:outputLabel value="#{msg['bem.vindo']}" style="font-size: 30px;" />
-					<p:outputLabel value="Luiz, teste." style="font-size: 30px;" />
-					<div id="Clock"></div>
+					<p:outputLabel value="Bem vindo " style="font-size: 30px;" />
+					<p:outputLabel value="#{sessionBean.usuarioLogado.nomeCompleto}" style="font-size: 30px;" />
+                    <div>
+                        <p:outputLabel value="Último acesso em: #{sessionBean.usuarioLogado.ultimoAcesso}" style="font-size: 30px;" />
+                    </div>
+					<div><p:commandButton value="logout" ajax="false" action="#{usuarioBean.logout}"/></div>
 				</p:fieldset>				
 			</h:form>
+            <div id="Clock"></div>
 			<script type="text/javascript">
 				//<![CDATA[
 				var Elem = document.getElementById("Clock");

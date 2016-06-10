@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 @Named
 @ConversationScoped
@@ -21,9 +22,13 @@ public class UsuarioBean extends BaseBean{
 		System.out.println("asd");
 	}
 
-	private Usuario user;
-	private String email;
-	private String senha;
+	private static String loginPage = "/login.xhtml";
+	private static String indexPage = "/index.xhtml";
+	private static String cadastroPage = "/registro.xhtml";
+
+//	private String email;
+//	private String senha;
+	private Usuario user = new Usuario();
 
 	public Usuario getUser() {
 		return user;
@@ -33,37 +38,44 @@ public class UsuarioBean extends BaseBean{
 		this.user = user;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//
+//	public String getSenha() {
+//		return senha;
+//	}
+//
+//	public void setSenha(String senha) {
+//		this.senha = senha;
+//	}
 
 	public String login() throws Exception{
-		Usuario user = userDAO.Login(email, senha);
-		if(user!=null){
-			sessionBean.setUsuarioLogado(user);
-			return "index.xhtml";
+		Usuario usuario = userDAO.Login(user.getEmail(),user.getSenha());
+		if(usuario!=null){
+			sessionBean.setUsuarioLogado(usuario);
+			return indexPage;
 		}
-		return "login.xhtml";
+		return loginPage;
+	}
+
+	public String logout() throws Exception{
+		sessionBean.getUsuarioLogado().setUltimoAcesso(new Date());
+		userDAO.merge(sessionBean.getUsuarioLogado());
+		sessionBean.setUsuarioLogado(null);
+		return loginPage;
 	}
 
 	public String cadastro(Usuario user) throws Exception{
 		Usuario usuario = userDAO.merge(user);
 		if(user!=null){
-			sessionBean.setUsuarioLogado(user);
-			return "index.xhtml";
+			sessionBean.setUsuarioLogado(usuario);
+			return indexPage;
 		}
-		return "cadastro.xhtml";
+		return cadastroPage;
 	}
 }
