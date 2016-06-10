@@ -22,12 +22,6 @@ public class UsuarioBean extends BaseBean{
 		System.out.println("asd");
 	}
 
-	private static String loginPage = "/login.xhtml";
-	private static String indexPage = "/index.xhtml";
-	private static String cadastroPage = "/registro.xhtml";
-
-//	private String email;
-//	private String senha;
 	private Usuario user = new Usuario();
 
 	public Usuario getUser() {
@@ -37,22 +31,6 @@ public class UsuarioBean extends BaseBean{
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
-
-//	public String getEmail() {
-//		return email;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-//
-//	public String getSenha() {
-//		return senha;
-//	}
-//
-//	public void setSenha(String senha) {
-//		this.senha = senha;
-//	}
 
 	public String login() throws Exception{
 		Usuario usuario = userDAO.Login(user.getEmail(),user.getSenha());
@@ -64,8 +42,10 @@ public class UsuarioBean extends BaseBean{
 	}
 
 	public String logout() throws Exception{
-		sessionBean.getUsuarioLogado().setUltimoAcesso(new Date());
-		userDAO.merge(sessionBean.getUsuarioLogado());
+		Usuario userToSave = sessionBean.getUsuarioLogado();
+		userToSave.setUltimoAcesso(new Date());
+		userDAO.merge(userToSave);
+		//Todo: Descobrir pq merge não salva o horário .... o persist salva, mas gera uma exceção de detatched entity..
 		sessionBean.setUsuarioLogado(null);
 		return loginPage;
 	}

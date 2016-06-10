@@ -34,10 +34,10 @@ public class Listener implements PhaseListener {
 		facesContext = phaseEvent.getFacesContext();
 		String pagina = facesContext.getViewRoot().getViewId();
 		if (pagina == null || this.urlsPermitidas.contains(pagina)) {
-			if (sessionBean.getUsuarioLogado() != null) {
+			if (sessionBean.isLoggedIn()) {
 				redirectTo(indexPage);
 			}
-		}else if(sessionBean.getUsuarioLogado() == null){
+		}else if(!sessionBean.isLoggedIn()){
 			redirectTo(loginPage);
 		}
 	}

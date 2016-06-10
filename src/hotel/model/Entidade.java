@@ -12,8 +12,19 @@ public abstract class Entidade {
     @Column(name = "`num_pk`")
     protected Long id;
 
+    @Version
+    @Column(name = "NR_VERSION")
+    protected Integer version = 0;
 
-    public Long getId() {
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	public Long getId() {
         return this.id;
     }
 

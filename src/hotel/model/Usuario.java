@@ -37,6 +37,7 @@ public class Usuario extends Entidade {
     private Date dataCriacao;
 
     @Column(name = "DT_ULTIMO_ACESSO")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date ultimoAcesso;
 
     @Column(name = "DS_CPF", unique = true, nullable = false)

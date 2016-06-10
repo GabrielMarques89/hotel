@@ -3,6 +3,8 @@ package hotel.dao;
 import hotel.model.Usuario;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -12,6 +14,7 @@ import javax.persistence.Query;
 @Stateless
 public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Usuario Login(String email, String senha) throws Exception{
 		StringBuilder queryHql = new StringBuilder("SELECT USR FROM Usuario USR ");
 		queryHql.append("WHERE USR.email = :email AND USR.senha = :senha");

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="template/layout.xhtml">
+        <ui:define name="content">
+            <div class="acesso container">
+                <div class="register col-lg-24 row-fluid centering">
+                    <!-- messages -->
+                    <p:messages id="msg" />
+                    <!-- /messages -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h:form class="form">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <p:inputText
+                                        class="form-control" type="text" name="nome"
+                                        id="nome" placeholder="Digite o nome do tipo de quarto" required="true"
+                                        value="#{tipoQuartoBean.tipoQuarto.nome}"
+                                    />
+                                    <label>Número de camas</label>
+                                </div>
+                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{tipoQuartoBean.cadastro}"/>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

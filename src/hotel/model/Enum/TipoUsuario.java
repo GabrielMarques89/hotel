@@ -6,5 +6,6 @@ package hotel.model.Enum;
 public enum TipoUsuario {
 	Funcionario,
 	Hospede,
-	Administrador
+	Administrador,
+	Afiliado
 }

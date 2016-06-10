@@ -58,7 +58,7 @@ public abstract class BaseDAO<T extends Entidade, K extends Serializable> implem
 		return t;
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void persist(final T entity) {
 		this.entityManager.persist(entity);
 		this.entityManager.flush();

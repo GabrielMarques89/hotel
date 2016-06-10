@@ -11,7 +11,9 @@ import java.io.Serializable;
 public class BaseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	protected static String loginPage = "Views/login.xhtml";
+	protected static String indexPage = "Views/index.xhtml";
+	protected static String cadastroPage = "Views/registro.xhtml";
 	@Inject
 	protected SessionBean sessionBean;
 
