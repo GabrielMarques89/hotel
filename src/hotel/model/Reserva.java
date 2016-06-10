@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by grupoeuropa on 09/06/16.
  */
 @Entity
-@Table(name = "TBL_RESERVAS")
+@Table(name = "TBL_RESERVAS", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_QUARTO", "ID_USUARIO", "DT_INICIO" } ) })
 public class Reserva extends Entidade{
 	@Column(name = "DT_INICIO", nullable = false)
 	private Date dataInicial;

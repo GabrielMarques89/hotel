@@ -84,7 +84,11 @@ public class ReservaBean extends BaseBean {
 	@Override
 	public String cadastro() {
 		reserva.setUsuario(sessionBean.getUsuarioLogado());
-		reservaDAO.merge(reserva);
-		return indexPage;
+		try{
+			reservaDAO.merge(reserva);
+			return indexPage;
+		}catch (Exception e){
+			throw  e;
+		}
 	}
 }
