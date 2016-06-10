@@ -17,57 +17,33 @@
                             <h:form class="form">
                                 <div class="form-group">
                                     <label>Data inicial</label>
-                                    <p:outputLabel for="popup" value="Popup:" />
                                     <p:calendar id="dtInicial" value="#{reservaBean.reserva.dataInicial}" />
                                 </div>
-                            </h:form>
-                        </div>
 
-                        <div class="panel-body">
-                            <h:form class="form">
                                 <div class="form-group">
-                                    <label>Data final</label>
-                                    <p:outputLabel for="popup" value="Popup:" />
+                                    <label>Data Final</label>
                                     <p:calendar id="dtFinal" value="#{reservaBean.reserva.dataFinal}" />
                                 </div>
-                            </h:form>
-                        </div>
 
-
-                        <div class="form-group">
-                            <label>Quarto</label>
-                            <p:selectOneMenu
+                                <label>Quarto</label>
+                                <p:selectOneMenu
                                     class="form-control" name="tipoQuarto"
                                     id="quarto" placeholder="Escolha o quarto" required="true"
-                                    value="#{reservaBean.reserva.quarto.id}"
-                            >
-                                <f:selectItems value="#{reservaBean.listQuartos}" var="item"
-                                               itemValue="#{item.id}" itemLabel="#{item.numero}"/>
-                            </p:selectOneMenu>
-                        </div>
+                                    value="#{reservaBean.reserva.quarto.id}">
+                                        <f:selectItems value="#{reservaBean.listQuartos}" var="item"
+                                       itemValue="#{item.id}" itemLabel="#{item.numero}"/>
+                                </p:selectOneMenu>
 
+                                <label for="dependentes">E-mail</label>
+                                <p:inputText class="form-control" type="dependentes" name="dependentes" id="dependentes"
+                                     placeholder="Digite a quantidade de dependentes"
+                                     value="#{reservaBean.reserva.quantiaDependentes}"
+                                     requiredMessage="Quantia de dependentes é obrigatória"
+                                     required="true" />
 
-                        <div class="form-group">
-                            <label>Tipo de quarto</label>
-                            <p:selectOneMenu
-                                    class="form-control" name="tipoQuarto"
-                                    id="tipoQuarto" placeholder="Escolha o tipo de quarto" required="true"
-                                    value="#{quartoBean.quarto.tipo.id}"
-                            >
-                                <f:selectItems value="#{reservaBean.listUsuarios}" var="user"
-                                               itemValue="#{user.id}" itemLabel="#{user.nome}"/>
-                            </p:selectOneMenu>
+                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{reservaBean.cadastro}"/>
+                            </h:form>
                         </div>
-
-                        <div class="form-group">
-                            <label for="dependentes">E-mail</label>
-                            <p:inputText class="form-control" type="dependentes" name="dependentes" id="dependentes"
-                                         placeholder="Digite a quantidade de dependentes"
-                                         value="#{reservaBean.reserva.quantiaDependentes}"
-                                         requiredMessage="Quantia de dependentes é obrigatória"
-                                         required="true" />
-                        </div>
-                        <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{reservaBean.cadastro}"/>
                     </div>
                 </div>
             </div>
