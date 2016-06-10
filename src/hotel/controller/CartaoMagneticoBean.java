@@ -5,7 +5,9 @@ package hotel.controller;
 
 import hotel.dao.CartaoMagneticoDAO;
 import hotel.model.CartaoMagnetico;
+import hotel.model.Quarto;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,7 +24,7 @@ public class CartaoMagneticoBean extends BaseBean {
 	@Inject
 	private CartaoMagneticoDAO cartaoMagneticoDAO;
 
-	private CartaoMagnetico cartaoMagnetico = new CartaoMagnetico();
+	private CartaoMagnetico cartaoMagnetico;
 
 	public CartaoMagnetico getCartaoMagnetico() {
 		return cartaoMagnetico;
@@ -30,5 +32,17 @@ public class CartaoMagneticoBean extends BaseBean {
 
 	public void setCartaoMagnetico(CartaoMagnetico cartaoMagnetico) {
 		this.cartaoMagnetico = cartaoMagnetico;
+	}
+
+	@Override
+	@PostConstruct
+	public void postConst() {
+		cartaoMagnetico = new CartaoMagnetico();
+		cartaoMagnetico.setQuarto(new Quarto());
+	}
+
+	@Override
+	public String cadastro() {
+		return null;
 	}
 }

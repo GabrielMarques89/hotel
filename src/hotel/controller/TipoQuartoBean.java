@@ -3,6 +3,7 @@ package hotel.controller;
 import hotel.dao.TipoQuartoDAO;
 import hotel.model.TipoQuarto;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +20,7 @@ public class TipoQuartoBean extends BaseBean{
 	@Inject
 	private TipoQuartoDAO tipoQuartoDAO;
 
-	private TipoQuarto tipoQuarto = new TipoQuarto();
+	private TipoQuarto tipoQuarto;
 
 	public TipoQuarto getTipoQuarto() {
 		return tipoQuarto;
@@ -34,5 +35,9 @@ public class TipoQuartoBean extends BaseBean{
 		return indexPage;
 	}
 
-
+	@Override
+	@PostConstruct
+	public void postConst() {
+		tipoQuarto = new TipoQuarto();
+	}
 }

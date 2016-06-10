@@ -5,7 +5,9 @@ package hotel.controller;
 
 import hotel.dao.PagamentoDAO;
 import hotel.model.Pagamento;
+import hotel.model.Reserva;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,7 +20,7 @@ public class PagamentoBean extends BaseBean {
 	@Inject
 	private PagamentoDAO pagamentoDAO;
 
-	private Pagamento pagamento = new Pagamento();
+	private Pagamento pagamento;
 
 	public Pagamento getPagamento() {
 		return pagamento;
@@ -26,5 +28,17 @@ public class PagamentoBean extends BaseBean {
 
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
+	}
+
+	@Override
+	@PostConstruct
+	public void postConst() {
+		pagamento = new Pagamento();
+		pagamento.setReserva(new Reserva());
+	}
+
+	@Override
+	public String cadastro() {
+		return null;
 	}
 }

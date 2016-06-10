@@ -17,12 +17,7 @@ public class UsuarioBean extends BaseBean{
 	@Inject
 	private UsuarioDAO userDAO;
 
-	@PostConstruct
-	public void init() {
-		System.out.println("asd");
-	}
-
-	private Usuario user = new Usuario();
+	private Usuario user;
 
 	public Usuario getUser() {
 		return user;
@@ -41,6 +36,12 @@ public class UsuarioBean extends BaseBean{
 		return loginPage;
 	}
 
+	@Override
+	@PostConstruct
+	public void postConst() {
+		user = new Usuario();
+	}
+
 	public String logout() throws Exception{
 		Usuario userToSave = sessionBean.getUsuarioLogado();
 		userToSave.setUltimoAcesso(new Date());
@@ -50,7 +51,8 @@ public class UsuarioBean extends BaseBean{
 		return loginPage;
 	}
 
-	public String cadastro(Usuario user) throws Exception{
+	@Override
+	public String cadastro(){
 		Usuario usuario = userDAO.merge(user);
 		if(user!=null){
 			sessionBean.setUsuarioLogado(usuario);

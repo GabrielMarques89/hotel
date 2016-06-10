@@ -22,9 +22,25 @@
                                         id="nome" placeholder="Digite o nome do tipo de quarto" required="true"
                                         value="#{tipoQuartoBean.tipoQuarto.nome}"
                                     />
-                                    <label>Número de camas</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Numero de camas</label>
+                                    <p:inputText
+                                            class="form-control" type="text" name="camas"
+                                            id="camas" placeholder="Digite o numero camas do tipo de quarto" required="true"
+                                            value="#{tipoQuartoBean.tipoQuarto.camas}"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor da Diaria</label>
+                                    <p:inputText
+                                            class="form-control" type="text" name="diaria"
+                                            id="diaria" placeholder="Digite o valor da diaria para este tipo de quarto" required="true"
+                                            value="#{tipoQuartoBean.tipoQuarto.diaria}"
+                                    />
                                 </div>
                                 <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{tipoQuartoBean.cadastro}"/>
+                                <p:button class="btn btn-success btn-block" value="Voltar" ajax="false" action="index.xhtml"/>
                             </h:form>
                         </div>
                     </div>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="template/layout.xhtml">
+        <ui:define name="content">
+            <div class="acesso container">
+                <div class="register col-lg-24 row-fluid centering">
+                    <!-- messages -->
+                    <p:messages id="msg" />
+                    <!-- /messages -->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h:form class="form">
+                                <div class="form-group">
+                                    <label>Data inicial</label>
+                                    <p:outputLabel for="popup" value="Popup:" />
+                                    <p:calendar id="dtInicial" value="#{reservaBean.reserva.dataInicial}" />
+                                </div>
+                            </h:form>
+                        </div>
+
+                        <div class="panel-body">
+                            <h:form class="form">
+                                <div class="form-group">
+                                    <label>Data final</label>
+                                    <p:outputLabel for="popup" value="Popup:" />
+                                    <p:calendar id="dtFinal" value="#{reservaBean.reserva.dataFinal}" />
+                                </div>
+                            </h:form>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Quarto</label>
+                            <p:selectOneMenu
+                                    class="form-control" name="tipoQuarto"
+                                    id="quarto" placeholder="Escolha o quarto" required="true"
+                                    value="#{reservaBean.reserva.quarto.id}"
+                            >
+                                <f:selectItems value="#{reservaBean.listQuartos}" var="item"
+                                               itemValue="#{item.id}" itemLabel="#{item.numero}"/>
+                            </p:selectOneMenu>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Tipo de quarto</label>
+                            <p:selectOneMenu
+                                    class="form-control" name="tipoQuarto"
+                                    id="tipoQuarto" placeholder="Escolha o tipo de quarto" required="true"
+                                    value="#{quartoBean.quarto.tipo.id}"
+                            >
+                                <f:selectItems value="#{reservaBean.listUsuarios}" var="user"
+                                               itemValue="#{user.id}" itemLabel="#{user.nome}"/>
+                            </p:selectOneMenu>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dependentes">E-mail</label>
+                            <p:inputText class="form-control" type="dependentes" name="dependentes" id="dependentes"
+                                         placeholder="Digite a quantidade de dependentes"
+                                         value="#{reservaBean.reserva.quantiaDependentes}"
+                                         requiredMessage="Quantia de dependentes é obrigatória"
+                                         required="true" />
+                        </div>
+                        <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{reservaBean.cadastro}"/>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
