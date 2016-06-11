@@ -32,12 +32,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-data-nascimento">Data nascimento</label>
-                                    <p:calendar id="usuario-data-nascimento" value="#{calendarioBean.data}"/>
-                                    <h:outputText value="#{usuarioBean.user.nascimento}"
+                                    <p:calendar id="usuario-data-nascimento" value="#{usuarioBean.user.nascimento}"
                                                   requiredMessage="O campo 'Data Nascimento' é obrigatório."
-                                                  required="true">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
+                                                  required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-genero">Gênero</label>
@@ -61,14 +58,14 @@
                                     <p:inputMask id="usuario-telefoneValue" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="usuario-endereco">Endereco</label>
+                                    <label for="usuario-endereco">Endereço</label>
                                     <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="#{usuarioBean.user.endereco}" placeholder="Digite seu endereço"
                                                  requiredMessage="O campo 'Endereço' é obrigatório."
                                                  required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-senha">Senha</label>
-                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="" placeholder="Digite sua senha"
+                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{usuarioBean.user.senha}" placeholder="Digite sua senha"
                                                  requiredMessage="O campo 'Senha' é obrigatório."
                                                  required="true"/>
                                 </div>

@@ -76,19 +76,21 @@ public class ReservaBean extends BaseBean {
 
 	public void click() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
-
 		requestContext.update("form:display");
 		requestContext.execute("PF('dlg').show()");
 	}
 
 	@Override
-	public String cadastro() {
-		reserva.setUsuario(sessionBean.getUsuarioLogado());
+	public String cadastro() throws Exception{
 		try{
-			reservaDAO.merge(reserva);
-			return indexPage;
+			reserva.setUsuario(sessionBean.getUsuarioLogado());
+			Reserva reservaSalva = reservaDAO.merge(reserva);
+			if(reservaSalva != null){
+				return cadastroReserva;
+			}
 		}catch (Exception e){
 			throw  e;
 		}
+		return indexPage;
 	}
 }

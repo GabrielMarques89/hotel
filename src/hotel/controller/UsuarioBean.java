@@ -1,6 +1,8 @@
 package hotel.controller;
 
 import hotel.dao.UsuarioDAO;
+import hotel.model.Enum.StatusHospede;
+import hotel.model.Enum.TipoUsuario;
 import hotel.model.Usuario;
 
 import javax.annotation.PostConstruct;
@@ -53,8 +55,18 @@ public class UsuarioBean extends BaseBean{
 
 	@Override
 	public String cadastro() throws Exception{
+		//Inserindo a data de criação
+		user.setDataCriacao(new Date());
+
+		//Inserindo o status do usuário
+		user.setStatus(StatusHospede.ATIVO);
+
+		//Inserido o tipo de usuário
+		user.setTipoUsuario(TipoUsuario.CLIENTE);
+
 		Usuario usuario = userDAO.merge(user);
-		if(user!=null){
+
+		if(usuario != null){
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
 		}

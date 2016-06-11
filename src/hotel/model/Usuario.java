@@ -55,24 +55,23 @@ public class Usuario extends Entidade {
     @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
 
-	public Date getDataCriacao() {
-		return dataCriacao;
-	}
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
 
-	public void setDataCriacao(Date dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
+    public Date getUltimoAcesso() {
+        return ultimoAcesso;
+    }
 
-	public Date getUltimoAcesso() {
-		return ultimoAcesso;
-	}
+    public void setUltimoAcesso(Date ultimoAcesso) {
+        this.ultimoAcesso = ultimoAcesso;
+    }
 
-	public void setUltimoAcesso(Date ultimoAcesso) {
-		this.ultimoAcesso = ultimoAcesso;
-	}
-
-	public TipoUsuario getTipoUsuario() {
+    public TipoUsuario getTipoUsuario() {
         return this.tipoUsuario;
     }
 
