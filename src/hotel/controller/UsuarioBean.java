@@ -54,6 +54,7 @@ public class UsuarioBean extends BaseBean{
 	}
 
 	@Override
+	//TODO: VALIDAR OS CAMPOS ÚNICOS
 	public String cadastro() throws Exception{
 		//Inserindo a data de criação
 		user.setDataCriacao(new Date());
