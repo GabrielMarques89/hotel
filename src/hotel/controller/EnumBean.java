@@ -1,6 +1,6 @@
 package hotel.controller;
 
-import hotel.model.Enum.Genero;
+import hotel.model.Enum.*;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Named;
@@ -13,5 +13,21 @@ import javax.inject.Named;
 public class EnumBean {
     public Genero[] getGeneros() {
         return Genero.values();
+    }
+
+    public SituacaoReserva[] getSituacoesReserva() {
+        return SituacaoReserva.values();
+    }
+
+    public StatusHospede[] getStatusHospede() {
+        return StatusHospede.values();
+    }
+
+    public TipoPagamento[] getTiposPagamento() {
+        return TipoPagamento.values();
+    }
+
+    public TipoUsuario[] getTiposUsuario() {
+        return TipoUsuario.values();
     }
 }
