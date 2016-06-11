@@ -1,51 +1,47 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 <h:body>
-    <ui:composition template="template/layout.xhtml">
+    <ui:composition template="template/layoutAdmin.xhtml">
         <ui:define name="content">
-            <div class="acesso container">
-                <div class="register col-lg-24 row-fluid centering">
-                    <!-- messages -->
-                    <p:messages id="msg" />
-                    <!-- /messages -->
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h:form class="form">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <p:inputText
-                                        class="form-control" type="text" name="nome"
-                                        id="nome" placeholder="Digite o nome do tipo de quarto" required="true"
-                                        value="#{tipoQuartoBean.tipoQuarto.nome}"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label>Numero de camas</label>
-                                    <p:inputText
-                                            class="form-control" type="text" name="camas"
-                                            id="camas" placeholder="Digite o numero camas do tipo de quarto" required="true"
-                                            value="#{tipoQuartoBean.tipoQuarto.camas}"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label>Valor da Diaria</label>
-                                    <p:inputText
-                                            class="form-control" type="text" name="diaria"
-                                            id="diaria" placeholder="Digite o valor da diaria para este tipo de quarto" required="true"
-                                            value="#{tipoQuartoBean.tipoQuarto.diaria}"
-                                    />
-                                </div>
-                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{tipoQuartoBean.cadastro}"/>
-                                <p:button class="btn btn-success btn-block" value="Voltar" ajax="false" action="index.xhtml"/>
-                            </h:form>
-                        </div>
-                    </div>
+            <!-- messages -->
+            <p:messages id="msg"/>
+            <!-- /messages -->
+            <h:form class="form">
+                <div class="form-group">
+                    <label for="nome-quarto">Nome do quarto</label>
+                    <p:inputText
+                            class="form-control" type="text" name="nome-quarto"
+                            id="nome-quarto" placeholder="Digite o nome do tipo de quarto" required="true"
+                            requiredMessage="O campo 'Nome do quarto' é obrigatório."
+                            value="#{tipoQuartoBean.tipoQuarto.nome}"
+                    />
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="numero-camas">Número de camas</label>
+                    <p:inputText
+                            class="form-control" type="text" name="numero-camas"
+                            id="numero-camas" placeholder="Digite o numero camas do tipo de quarto" required="true"
+                            requiredMessage="O campo 'Número de camas' é obrigatório."
+                            value="#{tipoQuartoBean.tipoQuarto.camas}"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="valor-diaria">Valor da diária</label>
+                    <p:inputText
+                            class="form-control" type="text" name="valor-diaria"
+                            id="valor-diaria" placeholder="Digite o valor da diaria para este tipo de quarto" required="true"
+                            requiredMessage="O campo 'Valor da diária' é obrigatório."
+                            value="#{tipoQuartoBean.tipoQuarto.diaria}"
+                    />
+                </div>
+                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false"
+                                 action="#{tipoQuartoBean.cadastro}"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

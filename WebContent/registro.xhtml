@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
     <ui:composition template="template/layout.xhtml">
         <ui:define name="content">
@@ -19,36 +20,57 @@
                                 <!--TODO: Validações (usar o usuarioBean.cadastro para trazer as mensagens de erro... ler os PDF (slide III do rosalem) )-->
                                 <div class="form-group">
                                     <label for="usuario-nome-completo">Nome completo</label>
-                                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="" placeholder="Digite seu nome" required="true"/>
+                                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{usuarioBean.user.nomeCompleto}" placeholder="Digite seu nome"
+                                                 requiredMessage="O campo 'Nome completo' é obrigatório."
+                                                 required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-email">E-mail</label>
-                                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="" placeholder="Digite seu e-mail" required="true"/>
+                                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{usuarioBean.user.email}" placeholder="Digite seu e-mail"
+                                                 requiredMessage="O campo 'E-mail' é obrigatório."
+                                                 required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-data-nascimento">Data nascimento</label>
-                                    <p:inputText class="form-control" type="text" name="usuario-data-nascimento" id="usuario-data-nascimento" value="" placeholder="" required="true"/>
+                                    <p:calendar id="usuario-data-nascimento" value="#{calendarioBean.data}"/>
+                                    <h:outputText value="#{usuarioBean.user.dataCriacao}"
+                                                  requiredMessage="O campo 'Data Nascimento' é obrigatório."
+                                                  required="true">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-genero">Gênero</label>
-                                    <select class="form-control" name="usuario-genero" id="usuario-genero">
-                                    </select>
+                                    <p:selectOneMenu id="usuario-genero" value="#{usuarioBean.user.genero}" style="width: 100%" required="true" requiredMessage="O campo 'Gênero' é obrigatório.">
+                                        <f:selectItems value="#{enumBean.generos}" var="genero"
+                                                       itemValue="#{genero}" itemLabel="#{genero.label}" />
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-cpf">CPF</label>
-                                    <p:inputText class="form-control" type="text" name="usuario-cpf" id="usuario-cpf" value="" placeholder="Digite seu CPF" required="true"/>
+                                    <h:outputText value="#{usuarioBean.user.cpf}" name="usuario-cpf" id="usuario-cpf" placeholder="Digite seu CPF"
+                                                  requiredMessage="O campo 'CPF' é obrigatório."
+                                                  required="true"/>
+                                    <p:inputMask id="usuario-cpfValue" value="#{usuarioBean.user.cpf}" mask="999-999-999-99"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-telefone">Telefone</label>
-                                    <p:inputText class="form-control" name="usuario-telefone" id="usuario-telefone" value="" placeholder="Digite seu telefone"/>
+                                    <h:outputText value="#{usuarioBean.user.telefone}" name="usuario-telefone" id="usuario-telefone" placeholder="Digite seu telefone"
+                                                  requiredMessage="O campo 'Telefone' é obrigatório."
+                                                  required="true"/>
+                                    <p:inputMask id="usuario-telefoneValue" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-endereco">Endereco</label>
-                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="" placeholder="Digite seu endereço"/>
+                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="" placeholder="Digite seu endereço"
+                                                 requiredMessage="O campo 'Endereço' é obrigatório."
+                                                 required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-senha">Senha</label>
-                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="" placeholder="Digite sua senha" required="true"/>
+                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="" placeholder="Digite sua senha"
+                                                 requiredMessage="O campo 'Senha' é obrigatório."
+                                                 required="true"/>
                                 </div>
                                 <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.cadastro}"/>
                             </h:form>

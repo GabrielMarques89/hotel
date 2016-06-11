@@ -20,7 +20,7 @@
                                         <p:inputText class="form-control" type="email" name="email" id="email"
                                                      placeholder="Digite seu e-mail"
                                                      value="#{usuarioBean.user.email}"
-                                                     requiredMessage="O email é obrigatório"
+                                                     requiredMessage="O campo 'E-mail' é obrigatório."
                                                      required="true" />
                                     </div>
                                     <div class="form-group">
@@ -28,11 +28,15 @@
                                         <p:password class="form-control" name="senha" id="senha"
                                                     placeholder="Digite sua senha"
                                                     value="#{usuarioBean.user.senha}"
-                                                    requiredMessage="A senha é obrigatória"
+                                                    requiredMessage="O campo 'Senha' é obrigatório."
                                                     required="true"/>
                                     </div>
-                                    <p:commandButton class="btn btn-success btn-block" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
-                                    <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="/registro.xhtml"/>
+                                    <div class="pull-left">
+                                        <p:commandButton class="btn btn-success" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
+                                    </div>
+                                    <div class="pull-right">
+                                        <p:commandButton class="btn btn-primary" value="Cadastrar" action="/registro.xhtml"/>
+                                    </div>
                                 </h:form>
                             </div>
                         </div>

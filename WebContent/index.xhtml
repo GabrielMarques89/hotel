@@ -6,77 +6,64 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
-	<ui:composition template="/template/layout.xhtml">
+	<ui:composition template="/template/layoutAdmin.xhtml">
 		<ui:define name="content">
-			<script type="text/javascript">
-				//<![CDATA[
-				var now = new Date();
-				var mName = now.getMonth() +1 ;
-				var dName = now.getDay() +1;
-				var dayNr = now.getDate();
-				var yearNr=now.getYear();
-				if(dName==1) {Day = "Domingo";}
-				if(dName==2) {Day = "Segunda-feira";}
-				if(dName==3) {Day = "Terça-feira";}
-				if(dName==4) {Day = "Quarta-feira";}
-				if(dName==5) {Day = "Quinta-feira";}
-				if(dName==6) {Day = "Sexta-feira";}
-				if(dName==7) {Day = "Sábado";}
-				if(mName==1){Month = "Janeiro";}
-				if(mName==2){Month = "Fevereiro";}
-				if(mName==3){Month = "Março";}
-				if(mName==4){Month = "Abril";}
-				if(mName==5){Month = "Maio";}
-				if(mName==6){Month = "Junho";}
-				if(mName==7){Month = "Julho";}
-				if(mName==8){Month = "Agosto";}
-				if(mName==9){Month = "Setembro";}
-				if(mName==10){Month = "Outubro";}
-				if(mName==11){Month = "Novembro";}
-				if(mName==12){Month = "Dezembro";}
-				if(yearNr < 2000) {Year = 1900 + yearNr;}
-				else {Year = yearNr;}
-				var todaysDate =(" " + Day + ", " + dayNr + "/" + Month + "/" + Year);
-				
-				document.write('  '+todaysDate);
-				//]]>
-			</script>
-			<h:form>
-				<p:fieldset style="height:138px;text-align: center;">
-					<p:outputLabel value="Bem vindo " style="font-size: 30px;" />
-					<p:outputLabel value="#{sessionBean.usuarioLogado.nomeCompleto}" style="font-size: 30px;" />
-                    <div>
-                        <p:outputLabel value="Último acesso em: #{sessionBean.usuarioLogado.ultimoAcesso}" style="font-size: 30px;" />
-                    </div>
-					<div><p:commandButton value="logout" ajax="false" action="#{usuarioBean.logout}"/></div>
-                    <div><p:commandButton value="Cadastro de tipo de quarto" ajax="false" action="cadastroTipoQuarto.xhtml"/></div>
-                    <div><p:commandButton value="Cadastro de quarto" ajax="false" action="cadastroQuarto.xhtml"/></div>
-                    <div><p:commandButton value="Cadastro de reserva" ajax="false" action="cadastroReserva.xhtml"/></div>
-				</p:fieldset>				
-			</h:form>
-            <div id="Clock"></div>
-			<script type="text/javascript">
-				//<![CDATA[
-				var Elem = document.getElementById("Clock");
-				function Horario(){ 
-				  var Hoje = new Date(); 
-				  var Horas = Hoje.getHours(); 
-				  if(Horas < 10){ 
-				    Horas = "0"+Horas; 
-				  } 
-				  var Minutos = Hoje.getMinutes(); 
-				  if(Minutos < 10){ 
-				    Minutos = "0"+Minutos; 
-				  } 
-				  var Segundos = Hoje.getSeconds(); 
-				  if(Segundos < 10){ 
-				    Segundos = "0"+Segundos; 
-				  } 
-				  Elem.innerHTML = Horas+":"+Minutos+":"+Segundos; 
-				  } 
-				  window.setInterval("Horario()",1000);
-				//]]>
-			</script>
+			<!--<script type="text/javascript">-->
+				<!--//<![CDATA[-->
+				<!--var now = new Date();-->
+				<!--var mName = now.getMonth() +1 ;-->
+				<!--var dName = now.getDay() +1;-->
+				<!--var dayNr = now.getDate();-->
+				<!--var yearNr=now.getYear();-->
+				<!--if(dName==1) {Day = "Domingo";}-->
+				<!--if(dName==2) {Day = "Segunda-feira";}-->
+				<!--if(dName==3) {Day = "Terça-feira";}-->
+				<!--if(dName==4) {Day = "Quarta-feira";}-->
+				<!--if(dName==5) {Day = "Quinta-feira";}-->
+				<!--if(dName==6) {Day = "Sexta-feira";}-->
+				<!--if(dName==7) {Day = "Sábado";}-->
+				<!--if(mName==1){Month = "Janeiro";}-->
+				<!--if(mName==2){Month = "Fevereiro";}-->
+				<!--if(mName==3){Month = "Março";}-->
+				<!--if(mName==4){Month = "Abril";}-->
+				<!--if(mName==5){Month = "Maio";}-->
+				<!--if(mName==6){Month = "Junho";}-->
+				<!--if(mName==7){Month = "Julho";}-->
+				<!--if(mName==8){Month = "Agosto";}-->
+				<!--if(mName==9){Month = "Setembro";}-->
+				<!--if(mName==10){Month = "Outubro";}-->
+				<!--if(mName==11){Month = "Novembro";}-->
+				<!--if(mName==12){Month = "Dezembro";}-->
+				<!--if(yearNr < 2000) {Year = 1900 + yearNr;}-->
+				<!--else {Year = yearNr;}-->
+				<!--var todaysDate =(" " + Day + ", " + dayNr + "/" + Month + "/" + Year);-->
+				<!---->
+				<!--document.write('  '+todaysDate);-->
+				<!--//]]>-->
+			<!--</script>-->
+            <!--<div id="Clock"></div>-->
+			<!--<script type="text/javascript">-->
+				<!--//<![CDATA[-->
+				<!--var Elem = document.getElementById("Clock");-->
+				<!--function Horario(){ -->
+				  <!--var Hoje = new Date(); -->
+				  <!--var Horas = Hoje.getHours(); -->
+				  <!--if(Horas < 10){ -->
+				    <!--Horas = "0"+Horas; -->
+				  <!--} -->
+				  <!--var Minutos = Hoje.getMinutes(); -->
+				  <!--if(Minutos < 10){ -->
+				    <!--Minutos = "0"+Minutos; -->
+				  <!--} -->
+				  <!--var Segundos = Hoje.getSeconds(); -->
+				  <!--if(Segundos < 10){ -->
+				    <!--Segundos = "0"+Segundos; -->
+				  <!--} -->
+				  <!--Elem.innerHTML = Horas+":"+Minutos+":"+Segundos; -->
+				  <!--} -->
+				  <!--window.setInterval("Horario()",1000);-->
+				<!--//]]>-->
+			<!--</script>-->
 		</ui:define>
 	</ui:composition>
 </html>

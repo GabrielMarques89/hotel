@@ -52,12 +52,16 @@ public class UsuarioBean extends BaseBean{
 	}
 
 	@Override
-	public String cadastro(){
+	public String cadastro() throws Exception{
 		Usuario usuario = userDAO.merge(user);
 		if(user!=null){
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
 		}
 		return cadastroPage;
+	}
+
+	public String editarDados(){
+		return null;
 	}
 }

@@ -1,14 +1,14 @@
 html, body {
-    height:100%;
     margin:0;
     padding:0
 }
 
-.acesso .login {
+.acesso.container{
     width: 400px;
+    margin-top: 300px;
 }
 
-.login .panel{
+.acesso .panel{
     padding: 5px;
 }
 
@@ -28,4 +28,24 @@ html, body {
 .centering {
     float:none;
     margin:0 auto;
+}
+
+.btn {
+    padding: 5px !important;
+}
+
+input {
+    width: 100%;
+}
+
+/* PRIVATE LAYOUT */
+.private-content.container {
+    width: 1000px;
+}
+
+/* CUSTOM PRIMEFACES */
+
+.ui-selectonemenu-trigger {
+    width: 30px !important;
+    padding: 5px !important;
 }

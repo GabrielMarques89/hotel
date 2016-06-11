@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <ui:insert name="header">
+        <title>Projeto Hotel</title>
+    </ui:insert>
+    <!-- bootstrap -->
+    <h:outputScript name="js/jquery.min.js"/>
+    <h:outputScript name="js/bootstrap.min.js"/>
+    <h:outputScript name="js/default.js"/>
+    <h:outputStylesheet name="css/bootstrap.min.css"/>
+    <h:outputStylesheet name="css/font-awesome.min.css"/>
+
+    <!-- custom -->
+    <h:outputStylesheet name="css/default.css"/>
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="headerAdmin.xhtml"/>
+    </ui:insert>
+    <div class="private-content container">
+        <div class="col-lg-24 centering" style="padding-top: 200px">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

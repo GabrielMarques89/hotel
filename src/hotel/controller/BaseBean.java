@@ -21,5 +21,5 @@ public abstract class BaseBean implements Serializable {
 	@PostConstruct
 	public abstract void postConst();
 
-	public abstract String cadastro();
+	public abstract String cadastro() throws Exception;
 }

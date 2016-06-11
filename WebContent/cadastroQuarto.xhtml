@@ -1,48 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
-    <ui:composition template="template/layout.xhtml">
+    <ui:composition template="template/layoutAdmin.xhtml">
         <ui:define name="content">
-            <div class="acesso container">
-                <div class="register col-lg-24 row-fluid centering">
-                    <!-- messages -->
-                    <p:messages id="msg" />
-                    <!-- /messages -->
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h:form class="form">
-                                <div class="form-group">
-                                    <label>Numero</label>
-                                    <p:inputText
-                                            class="form-control" type="text" name="numero"
-                                            id="numero" placeholder="Digite o numero do quarto" required="true"
-                                            value="#{quartoBean.quarto.numero}"
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <label>Tipo de quarto</label>
-                                    <p:selectOneMenu
-                                            class="form-control" name="tipoQuarto"
-                                            id="tipoQuarto" placeholder="Escolha o tipo de quarto" required="true"
-                                            value="#{quartoBean.quarto.tipo.id}"
-                                    >
-                                        <f:selectItems value="#{quartoBean.listTipos}" var="item"
-                                                       itemValue="#{item.id}" itemLabel="#{item.nome}"/>
-                                    </p:selectOneMenu>
-                                </div>
-                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{quartoBean.cadastro}"/>
-                                <p:commandButton class="btn btn-success btn-block" value="Voltar" ajax="false" action="index.xhtml"/>
-
-                            </h:form>
-                        </div>
-                    </div>
+            <!-- messages -->
+            <p:messages id="msg"/>
+            <!-- /messages -->
+            <h:form class="form">
+                <div class="form-group">
+                    <label for="numero">Numero</label>
+                    <p:inputText
+                            class="form-control" type="text" name="numero"
+                            id="numero" placeholder="Digite o numero do quarto" required="true"
+                            requiredMessage="O campo 'Número' é obrigatório."
+                            value="#{quartoBean.quarto.numero}"/>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="tipoQuarto">Tipo de quarto</label>
+                    <p:selectOneMenu
+                            name="tipoQuarto" style="width: 100%"
+                            id="tipoQuarto" placeholder="Escolha o tipo de quarto" required="true"
+                            requiredMessage="O campo 'Tipo de quarto' é obrigatório."
+                            value="#{quartoBean.quarto.tipo.id}">
+                        <f:selectItems value="#{quartoBean.listTipos}" var="item"
+                                       itemValue="#{item.id}" itemLabel="#{item.nome}"/>
+                    </p:selectOneMenu>
+                </div>
+                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false"
+                                 action="#{quartoBean.cadastro}"/>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>
