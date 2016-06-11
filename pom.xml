@@ -4,6 +4,14 @@
 	<groupId>hotel</groupId>
 	<artifactId>hotel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.webjars</groupId>

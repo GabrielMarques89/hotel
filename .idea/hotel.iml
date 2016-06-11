@@ -33,6 +33,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Payara GlassFish 4.1.1.162 - Bean Validation" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Payara GlassFish 4.1.1.162 - JSF" level="application_server_libraries" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:2.1.4" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:bootstrap:3.3.4" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:4.3.5.Final" level="project" />
