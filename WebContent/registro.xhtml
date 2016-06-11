@@ -9,7 +9,7 @@
     <ui:composition template="template/layout.xhtml">
         <ui:define name="content">
             <div class="acesso container">
-                <div class="register col-lg-24 row-fluid centering">
+                <div class="register col-lg-24 centering">
                     <!-- messages -->
                     <p:messages id="msg" />
                     <!-- /messages -->
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label for="usuario-data-nascimento">Data nascimento</label>
                                     <p:calendar id="usuario-data-nascimento" value="#{calendarioBean.data}"/>
-                                    <h:outputText value="#{usuarioBean.user.dataCriacao}"
+                                    <h:outputText value="#{usuarioBean.user.nascimento}"
                                                   requiredMessage="O campo 'Data Nascimento' é obrigatório."
                                                   required="true">
                                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-endereco">Endereco</label>
-                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="" placeholder="Digite seu endereço"
+                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="#{usuarioBean.user.endereco}" placeholder="Digite seu endereço"
                                                  requiredMessage="O campo 'Endereço' é obrigatório."
                                                  required="true"/>
                                 </div>
