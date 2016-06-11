@@ -5,7 +5,14 @@ html, body {
 
 .acesso.container{
     width: 400px;
+}
+
+.acesso .login {
     margin-top: 300px;
+}
+
+.acesso .register {
+    margin-top: 200px;
 }
 
 .acesso .panel{
