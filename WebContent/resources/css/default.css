@@ -67,6 +67,45 @@ table .action-header {
     margin: 0 auto;
 }
 
+.h-navbar.navbar-default .navbar-brand {
+     color: rgba(255, 255, 255, 1);
+ }
+.h-navbar.navbar-default {
+     font-size: 15px;
+     background-color: rgba(38, 56, 84, 1);
+     border-width: 0;
+     border-radius: 0;
+ }
+.h-navbar.navbar-default .navbar-nav>li>a {
+     color: rgba(255, 255, 255, 1);
+     background-color: rgba(38, 56, 84, 1);
+ }
+.h-navbar.navbar-default .navbar-nav>li>a:hover,
+.h-navbar.navbar-default .navbar-nav>li>a:focus {
+     color: rgba(255, 255, 255, 1);
+     background-color: rgba(231, 51, 76, 1);
+ }
+.h-navbar.navbar-default .navbar-nav>.active>a,
+.h-navbar.navbar-default .navbar-nav>.active>a:hover,
+.h-navbar.navbar-default .navbar-nav>.active>a:focus {
+     color: rgba(255, 255, 255, 1);
+     background-color: rgba(231, 51, 76, 1);
+ }
+.h-navbar.navbar-default .navbar-toggle {
+     border-color: #e7334c;
+ }
+.h-navbar.navbar-default .navbar-toggle:hover,
+.h-navbar.navbar-default .navbar-toggle:focus {
+     background-color: #e7334c;
+ }
+.h-navbar.navbar-default .navbar-toggle .icon-bar {
+     background-color: #e7334c;
+ }
+.h-navbar.navbar-default .navbar-toggle:hover .icon-bar,
+.h-navbar.navbar-default .navbar-toggle:focus .icon-bar {
+     background-color: #263854;
+ }
+
 /* PRIVATE LAYOUT */
 .private-content.container {
     width: 1000px;

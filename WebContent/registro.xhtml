@@ -58,7 +58,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-telefone">Telefone</label>
-                                    <p:inputMask id="usuario-telefone" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999" requiredMessage="O campo 'Telefone' é obrigatório." placeholder="Digite seu Telefone" required="true"/>
+                                    <p:inputMask id="usuario-telefone" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999" requiredMessage="O campo 'Telefone' é obrigatório." placeholder="Digite seu telefone" required="true"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="usuario-endereco">Endereço</label>
+                                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="#{usuarioBean.user.endereco}" placeholder="Digite seu endereço"
+                                                 requiredMessage="O campo 'Endereço' é obrigatório."
+                                                 required="true"/>
                                 </div>
                                 <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.salvar}"/>
                             </h:form>
