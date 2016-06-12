@@ -57,6 +57,12 @@ table .action-header {
     color: #fff !important;
 }
 
+.btn-dropdown.btn-default,
+.btn-dropdown.btn-default:hover {
+    border-radius: 0!important;
+    border-color: transparent !important;
+}
+
 /* PRIVATE LAYOUT */
 .private-content.container {
     width: 1000px;
