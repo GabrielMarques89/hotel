@@ -8,7 +8,42 @@
         xmlns:p="http://primefaces.org/ui">
 	<ui:composition template="/template/layoutAdmin.xhtml">
 		<ui:define name="content">
+			<h:form rendered="#{!empty sessionBean.usuarioLogado and (sessionBean.usuarioLogado.tipoUsuario eq 'FUNCIONARIO' or sessionBean.usuarioLogado.tipoUsuario eq 'ADMINISTRADOR')}">
+				<div class="col-lg-24">
+					<h3 class="text-center">Próximas reservas</h3>
+					<p:dataTable var="reserva" value="#{reservaBean.listaReservas}" style="table-layout: auto !important;">
+						<p:column headerText="Id">
+							<h:outputText value="#{reserva.id}" />
+						</p:column>
 
+						<p:column headerText="N. Quarto">
+							<h:outputText value="#{reserva.quarto.numero}" />
+						</p:column>
+
+						<p:column headerText="Nome do cliente">
+							<h:outputText value="#{reserva.usuario.nomeCompleto}" />
+						</p:column>
+
+						<p:column headerText="Data entrada">
+							<h:outputText value="#{reserva.dataInicial}" />
+						</p:column>
+
+						<p:column headerText="Data saída">
+							<h:outputText value="#{reserva.dataFinal}" />
+						</p:column>
+
+						<p:column headerText="Situação">
+							<h:outputText value="#{reserva.situacaoReserva}" />
+						</p:column>
+						<p:column headerText="Ações" class="action-header">
+							<h:form>
+								<!--//TODO: CORRIGIR AQUI-->
+								<p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.alterarStatus(reserva.id, null)}" icon="fa fa-flag" ajax="false"/>
+							</h:form>
+						</p:column>
+					</p:dataTable>
+				</div>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </html>
