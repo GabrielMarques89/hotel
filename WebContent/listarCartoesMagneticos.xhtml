@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <p:dataTable var="cartaoMagnetico" value="#{cartaoMagneticoBean.listaCartoesMagneticos}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{cartaoMagnetico.id}" />
+                </p:column>
+
+                <p:column headerText="Código">
+                    <h:outputText value="#{cartaoMagnetico.codigo}" />
+                </p:column>
+
+                <p:column headerText="Quarto">
+                    <h:outputText value="#{cartaoMagnetico.quarto}" />
+                </p:column>
+
+                <p:column headerText="Consumo">
+                    <h:outputText value="#{cartaoMagnetico.consumo}" />
+                </p:column>
+
+                <p:column headerText="Ações" class="action-header">
+                    <h:form>
+                        <p:commandButton value="Editar" id="editar-quarto" action="#{cartaoMagneticoBean.irEditar(cartaoMagnetico.id)}" icon="fa fa-pencil" ajax="false" />
+                        <p:commandButton value="Desativar" id="excluir-quarto" action="#{cartaoMagneticoBean.excluir(cartaoMagnetico.id)}" icon="fa fa-trash" ajax="false"/>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

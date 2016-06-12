@@ -17,9 +17,11 @@ public abstract class BaseBean implements Serializable {
 	protected static String listarQuartos = "listarQuartos.xhtml";
 	protected static String listarReservas = "listarReservas.xhtml";
 	protected static String listarClientes = "listarClientes.xhtml";
+	protected static String listarCartoesMagneticos = "listarCartoesMagneticos.xhtml";
 	protected static String cadastroPage = "registro.xhtml";
 	protected static String cadastroCliente = "cadastroCliente.xhtml";
 	protected static String cadastroReserva = "cadastroReserva.xhtml";
+	protected static String cadastroCartaoMagnetico = "cadastroCartaoMagnetico.xhtml";
 	protected static String cadastroQuarto = "cadastroQuarto.xhtml";
 	protected static String cadastroTipoQuarto = "cadastroTipoQuarto.xhtml";
 

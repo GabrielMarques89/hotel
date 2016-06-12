@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <p:dataTable var="quarto" value="#{quartoBean.listaQuartos}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{quarto.id}" />
+                </p:column>
+
+                <p:column headerText="Nome completo">
+                    <h:outputText value="#{quarto.numero}" />
+                </p:column>
+
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{quarto.tipo}" />
+                </p:column>
+
+                <p:column headerText="Ações" class="action-header">
+                    <h:form>
+                        <p:commandButton value="Editar" id="editar-quarto" action="#{quarto.irEditar(quarto.id)}" icon="fa fa-pencil" ajax="false" />
+                        <p:commandButton value="Excluir" id="excluir-quarto" action="#{quarto.excluir(quarto.id)}" icon="fa fa-trash" ajax="false"/>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

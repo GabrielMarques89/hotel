@@ -66,4 +66,31 @@ public class QuartoBean extends BaseBean {
 		}
 		return cadastroQuarto;
 	}
+
+	public String irEditar(long id) throws Exception{
+		try{
+			quarto = quartoDAO.findById(id);
+			if(quarto != null){
+				return cadastroQuarto;
+			}
+			MsgUtil.addErrorMessage("Desculpe, mas não o quarto não foi encontrado.", "");
+		}catch (Exception e){
+			MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+		}
+		return listarClientes;
+	}
+
+	public String excluir(long id) throws Exception{
+		try{
+			quarto = quartoDAO.findById(id);
+			if(quarto != null){
+				quartoDAO.remove(quarto);
+			}else{
+				MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
+			}
+		}catch (Exception e){
+			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
+		}
+		return listarQuartos;
+	}
 }
