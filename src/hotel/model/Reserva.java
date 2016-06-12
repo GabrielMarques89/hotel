@@ -1,5 +1,7 @@
 package hotel.model;
 
+import hotel.model.Enum.SituacaoReserva;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,6 +19,9 @@ public class Reserva extends Entidade{
 
 	@Column(name = "QT_DEPENDENTES")
 	private int quantiaDependentes;
+
+	@Column(name = "TP_SITUACAO")
+	private SituacaoReserva situacaoReserva;
 
 	@JoinColumn(name = "ID_USUARIO", nullable = false, foreignKey = @ForeignKey(name = "FK_RESERVA_USUARIO"))
 	@OneToOne(fetch = FetchType.EAGER)
@@ -68,5 +73,13 @@ public class Reserva extends Entidade{
 
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
+	}
+
+	public SituacaoReserva getSituacaoReserva() {
+		return situacaoReserva;
+	}
+
+	public void setSituacaoReserva(SituacaoReserva situacaoReserva) {
+		this.situacaoReserva = situacaoReserva;
 	}
 }

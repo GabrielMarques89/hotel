@@ -16,8 +16,9 @@ public abstract class BaseBean implements Serializable {
 	protected static String editarDados = "editarDados.xhtml";
 	protected static String listarQuartos = "listarQuartos.xhtml";
 	protected static String listarReservas = "listarReservas.xhtml";
-	protected static String listarClientes = "listaClientes.xhtml";
+	protected static String listarClientes = "listarClientes.xhtml";
 	protected static String cadastroPage = "registro.xhtml";
+	protected static String cadastroCliente = "cadastroCliente.xhtml";
 	protected static String cadastroReserva = "cadastroReserva.xhtml";
 	protected static String cadastroQuarto = "cadastroQuarto.xhtml";
 	protected static String cadastroTipoQuarto = "cadastroTipoQuarto.xhtml";
@@ -28,5 +29,5 @@ public abstract class BaseBean implements Serializable {
 	@PostConstruct
 	public abstract void postConst();
 
-	public abstract String cadastro() throws Exception;
+	public abstract String salvar() throws Exception;
 }

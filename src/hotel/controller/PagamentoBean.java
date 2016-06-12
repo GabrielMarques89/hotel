@@ -38,7 +38,7 @@ public class PagamentoBean extends BaseBean {
 	}
 
 	@Override
-	public String cadastro() {
+	public String salvar() {
 		return null;
 	}
 }

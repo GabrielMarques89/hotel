@@ -1,12 +1,15 @@
 package hotel.controller;
 
+import hotel.Util.MsgUtil;
 import hotel.dao.UsuarioDAO;
+import hotel.model.Enum.StatusHospede;
 import hotel.model.Enum.TipoUsuario;
 import hotel.model.Usuario;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
@@ -14,22 +17,19 @@ import java.util.List;
  * Created by Luiz Guilherme on 11/06/2016.
  */
 @Named
-@ManagedBean
-public class ClienteBean {
+@ConversationScoped
+public class ClienteBean extends BaseBean{
     private static final long serialVersionUID = 1L;
 
-    private List<Usuario> listaUsuarios;
+    @Inject
     private UsuarioDAO usuarioDAO;
+
     private Usuario usuario;
 
+    private List<Usuario> listaUsuarios;
+
     @PostConstruct
-    public void postConst(){
-        try {
-            listaUsuarios = usuarioDAO.listAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    public void postConst(){}
 
     public Usuario getUsuario() {
         return usuario;
@@ -39,15 +39,58 @@ public class ClienteBean {
         this.usuario = usuario;
     }
 
-    public List<Usuario> getListaUsuarios() throws Exception {
-        return listaUsuarios;
+    public List<Usuario> getListaUsuarios() {
+        return usuarioDAO.listAll();
     }
 
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
 
-    public String cadastro() throws Exception {
-        return null;
+    public String salvar() throws Exception {
+        try{
+            usuario = usuarioDAO.merge(usuario);
+            if(usuario != null) {
+                MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+            }else{
+                MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+            }
+        }catch (Exception e){
+            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+        }
+        return cadastroQuarto;
+    }
+
+    public String irEditar(long id) throws Exception{
+        try{
+            usuario = usuarioDAO.findById(id);
+            if(usuario != null){
+                return cadastroCliente;
+            }
+            MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
+        }catch (Exception e){
+            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+        }
+        return listarClientes;
+    }
+
+    public String alterarStatus(long id) throws Exception{
+        try{
+            usuario = usuarioDAO.findById(id);
+            if(usuario != null){
+
+                if(usuario.getStatus().equals(StatusHospede.ATIVO)){
+                    usuario.setStatus(StatusHospede.INATIVO);
+                }else{
+                    usuario.setStatus(StatusHospede.ATIVO);
+                }
+                usuarioDAO.merge(usuario);
+            }else{
+                MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
+            }
+        }catch (Exception e){
+            MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
+        }
+        return listarClientes;
     }
 }

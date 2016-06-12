@@ -1,5 +1,6 @@
 package hotel.controller;
 
+import hotel.Util.MsgUtil;
 import hotel.dao.TipoQuartoDAO;
 import hotel.model.TipoQuarto;
 
@@ -7,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 /**
  * Created by grupoeuropa on 10/06/16.
@@ -22,6 +24,8 @@ public class TipoQuartoBean extends BaseBean{
 
 	private TipoQuarto tipoQuarto;
 
+	private List<TipoQuarto> listaTipoQuartos;
+
 	public TipoQuarto getTipoQuarto() {
 		return tipoQuarto;
 	}
@@ -30,9 +34,26 @@ public class TipoQuartoBean extends BaseBean{
 		this.tipoQuarto = tipoQuarto;
 	}
 
-	public String cadastro(){
-		tipoQuartoDAO.merge(tipoQuarto);
-		return indexPage;
+	public List<TipoQuarto> getListaTipoQuartos() {
+		return tipoQuartoDAO.listAll();
+	}
+
+	public void setListaTipoQuartos(List<TipoQuarto> listaTipoQuartos) {
+		this.listaTipoQuartos = listaTipoQuartos;
+	}
+
+	public String salvar()throws Exception{
+		try{
+			TipoQuarto tipoQuartoSalvo = tipoQuartoDAO.merge(tipoQuarto);
+			if(tipoQuartoSalvo != null){
+				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+			}else{
+				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+			}
+		}catch (Exception e){
+			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
+		}
+		return cadastroTipoQuarto;
 	}
 
 	@Override

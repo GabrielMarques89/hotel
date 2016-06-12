@@ -49,6 +49,14 @@ input {
     width: 100%;
 }
 
+table .action-header {
+    text-align: center;
+}
+
+.btn-danger {
+    color: #fff !important;
+}
+
 /* PRIVATE LAYOUT */
 .private-content.container {
     width: 1000px;
@@ -66,10 +74,16 @@ input {
     font-size: 12px;
 }
 
+.ui-messages-info-icon,
+.ui-messages-warn-icon,
 .ui-messages-error-icon {
-    display: none;
+    display: none !important;
 }
 
 .ui-messages ul {
     margin: 0 0px !important;
+}
+
+.ui-datatable table {
+    table-layout: auto !important;
 }

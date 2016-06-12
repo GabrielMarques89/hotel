@@ -3,6 +3,7 @@ package hotel.controller;
  * Created by grupoeuropa on 10/06/16.
  */
 
+import hotel.Util.MsgUtil;
 import hotel.dao.QuartoDAO;
 import hotel.dao.TipoQuartoDAO;
 import hotel.model.Quarto;
@@ -25,7 +26,9 @@ public class QuartoBean extends BaseBean {
 	@Inject
 	private TipoQuartoDAO tipoQuartoDAO;
 
-	private List<TipoQuarto> listTipos;
+	private Quarto quarto;
+
+	private List<Quarto> listaQuartos;
 
 	@Override
 	@PostConstruct
@@ -34,7 +37,13 @@ public class QuartoBean extends BaseBean {
 		quarto.setTipo(new TipoQuarto());
 	}
 
-	private Quarto quarto;
+	public List<Quarto> getListaQuartos() {
+		return quartoDAO.listAll();
+	}
+
+	public void setListaQuartos(List<Quarto> listaQuartos) {
+		this.listaQuartos = listaQuartos;
+	}
 
 	public Quarto getQuarto() {
 		return quarto;
@@ -44,16 +53,17 @@ public class QuartoBean extends BaseBean {
 		this.quarto = quarto;
 	}
 
-	public List<TipoQuarto> getListTipos() {
-		return tipoQuartoDAO.listAll();
-	}
-
-	public void setListTipos(List<TipoQuarto> listTipos) {
-		this.listTipos = listTipos;
-	}
-
-	public String cadastro(){
-		quartoDAO.merge(quarto);
-		return indexPage;
+	public String salvar()throws Exception{
+		try{
+			Quarto quartoSalvo = quartoDAO.merge(quarto);
+			if(quartoSalvo != null) {
+				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+			}else{
+				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+			}
+		}catch (Exception e){
+			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
+		}
+		return cadastroQuarto;
 	}
 }

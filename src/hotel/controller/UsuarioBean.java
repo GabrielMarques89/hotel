@@ -1,5 +1,6 @@
 package hotel.controller;
 
+import hotel.Util.MsgUtil;
 import hotel.dao.UsuarioDAO;
 import hotel.model.Enum.StatusHospede;
 import hotel.model.Enum.TipoUsuario;
@@ -10,6 +11,8 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Named
 @ConversationScoped
@@ -20,6 +23,16 @@ public class UsuarioBean extends BaseBean{
 	private UsuarioDAO userDAO;
 
 	private Usuario user;
+
+	public List<Usuario> getListaUsuario() {
+		return listaUsuario;
+	}
+
+	public void setListaUsuario(List<Usuario> listaUsuario) {
+		this.listaUsuario = listaUsuario;
+	}
+
+	private List<Usuario> listaUsuario;
 
 	public Usuario getUser() {
 		return user;
@@ -42,6 +55,7 @@ public class UsuarioBean extends BaseBean{
 	@PostConstruct
 	public void postConst() {
 		user = new Usuario();
+		listaUsuario = userDAO.listAll();
 	}
 
 	public String logout() throws Exception{
@@ -55,7 +69,7 @@ public class UsuarioBean extends BaseBean{
 
 	@Override
 	//TODO: VALIDAR OS CAMPOS ÚNICOS
-	public String cadastro() throws Exception{
+	public String salvar() throws Exception{
 		//Inserindo a data de criação
 		user.setDataCriacao(new Date());
 
@@ -74,18 +88,26 @@ public class UsuarioBean extends BaseBean{
 		return cadastroPage;
 	}
 
-	public String editarDados()throws Exception{
-		Usuario usuario = userDAO.findById(sessionBean.getUsuarioLogado().getId());
+	public String editarDados(){
+		try{
+			Usuario usuarioLogado = sessionBean.getUsuarioLogado();
+			Usuario usuario = userDAO.findById(usuarioLogado.getId());
 
-		if(usuario != null){
-			if(user.getSenha() != usuario.getSenha()){
+			if(usuario != null){
 				//TODO: PRECISA UTILIZAR O HASH AQUI
-				usuario.setSenha(user.getSenha());
+				if(usuario.getSenha() != usuarioLogado.getSenha()){
+					usuario.setSenha(usuarioLogado.getSenha());
+				}
+				//TODO: PRECISA VALIDAR O E-MAIL
+				usuario.setNomeCompleto(user.getEmail());
+				usuario.setEmail(user.getEmail());
+				userDAO.merge(usuario);
+				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+			}else{
+				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
 			}
-			//TODO: PRECISA VALIDAR O E-MAIL
-			usuario.setNomeCompleto(user.getEmail());
-			usuario.setEmail(user.getEmail());
-			userDAO.merge(usuario);
+		}catch (Exception e){
+			MsgUtil.addWarnMessage("Ocorreu algum problema...", "");
 		}
 		return editarDados;
 	}

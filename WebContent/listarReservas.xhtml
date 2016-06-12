@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <p:dataTable var="reserva" value="#{reservaBean.listaReservas}" style="table-layout: auto !important;">
+                <p:column headerText="Id">
+                    <h:outputText value="#{reserva.id}" />
+                </p:column>
+
+                <p:column headerText="N. Quarto">
+                    <h:outputText value="#{reserva.quarto.numero}" />
+                </p:column>
+
+                <p:column headerText="Data entrada">
+                    <h:outputText value="#{reserva.dataInicial}" />
+                </p:column>
+
+                <p:column headerText="Data saída">
+                    <h:outputText value="#{reserva.dataFinal}" />
+                </p:column>
+
+                <p:column headerText="Situação">
+                    <h:outputText value="#{reserva.situacaoReserva}" />
+                </p:column>
+                <p:column headerText="Ações" class="action-header">
+                    <h:form>
+                        <p:commandButton value="Editar" id="editar-reserva" action="#{reservaBean.irEditar(reserva.id)}" icon="fa fa-pencil" ajax="false" />
+                        <p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.alterarStatus(reserva.id)}" icon="fa fa-flag" ajax="false"/>
+                    </h:form>
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <h:form class="form">
+                <div class="form-group">
+                    <label for="usuario-nome-completo">Nome completo</label>
+                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{clienteBean.usuario.nomeCompleto}"
+                                 placeholder="Digite seu nome"
+                                 requiredMessage="O campo 'Nome completo' é obrigatório."
+                                 required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-email">E-mail</label>
+                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{clienteBean.usuario.email}"
+                                 placeholder="Digite seu e-mail"
+                                 requiredMessage="O campo 'E-mail' é obrigatório."
+                                 required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-data-nascimento">Data nascimento</label>
+                    <p:calendar id="usuario-data-nascimento" value="#{clienteBean.usuario.nascimento}"
+                                requiredMessage="O campo 'Data Nascimento' é obrigatório."
+                                required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-genero">Gênero</label>
+                    <p:selectOneMenu id="usuario-genero" value="#{clienteBean.usuario.genero}" style="width: 100%"
+                                     required="true"
+                                     requiredMessage="O campo 'Gênero' é obrigatório.">
+                        <f:selectItems value="#{enumBean.generos}" var="genero"
+                                       itemValue="#{genero}" itemLabel="#{genero.label}" />
+                    </p:selectOneMenu>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-cpf">CPF</label>
+                    <p:inputMask id="usuario-cpf" value="#{clienteBean.usuario.cpf}" mask="999-999-999-99" requiredMessage="O campo 'CPF' é obrigatório." placeholder="Digite seu CPF" required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-telefone">Telefone</label>
+                    <p:inputMask id="usuario-telefone" value="#{clienteBean.usuario.telefone}" mask="(99)9999-9999" requiredMessage="O campo 'Telefone' é obrigatório." placeholder="Digite seu Telefone" required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-endereco">Endereço</label>
+                    <p:inputText class="form-control" name="usuario-endereco" id="usuario-endereco" value="#{clienteBean.usuario.endereco}" placeholder="Digite seu endereço"
+                                 requiredMessage="O campo 'Endereço' é obrigatório."
+                                 required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="usuario-senha">Senha</label>
+                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{clienteBean.usuario.senha}" placeholder="Digite sua senha"
+                                 requiredMessage="O campo 'Senha' é obrigatório."
+                                 required="true"/>
+                </div>
+                <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false" action="#{clienteBean.salvar}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

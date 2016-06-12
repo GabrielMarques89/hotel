@@ -10,19 +10,26 @@
         <ui:define name="content">
             <p:dataTable var="usuario" value="#{clienteBean.listaUsuarios}">
                 <p:column headerText="Id">
-                    <h:outputText value="#{clienteBean.usuario.id}" />
+                    <h:outputText value="#{usuario.id}" />
                 </p:column>
 
                 <p:column headerText="Nome completo">
-                    <h:outputText value="#{clienteBean.usuario.nomeCompleto}" />
+                    <h:outputText value="#{usuario.nomeCompleto}" />
                 </p:column>
 
                 <p:column headerText="E-mail">
-                    <h:outputText value="#{clienteBean.usuario.email}" />
+                    <h:outputText value="#{usuario.email}" />
                 </p:column>
 
                 <p:column headerText="Status">
-                    <h:outputText value="#{clienteBean.usuario.status}" />
+                    <h:outputText value="#{usuario.status}" />
+                </p:column>
+                <p:column headerText="Ações" class="action-header">
+                    <h:form>
+                        <p:commandButton value="Editar" id="editar-usuario" action="#{clienteBean.irEditar(usuario.id)}" icon="fa fa-pencil" ajax="false" />
+                        <p:commandButton value="Desativar" id="desativar-usuario" action="#{clienteBean.alterarStatus(usuario.id)}" icon="fa fa-ban" ajax="false" rendered="#{usuario.status eq 'ATIVO'}"/>
+                        <p:commandButton value="Ativar" id="ativar-usuario" action="#{clienteBean.alterarStatus(usuario.id)}" icon="fa fa-check" ajax="false" rendered="#{usuario.status eq 'INATIVO'}"/>
+                    </h:form>
                 </p:column>
             </p:dataTable>
         </ui:define>
