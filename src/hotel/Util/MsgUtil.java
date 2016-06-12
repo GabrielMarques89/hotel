@@ -1,14 +1,13 @@
 package hotel.Util;
 
+import org.apache.log4j.Logger;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
-import org.apache.log4j.Logger;
 
 public class MsgUtil {
 

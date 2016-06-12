@@ -6,8 +6,10 @@ package hotel.model.Enum;
 public enum SituacaoReserva {
 	ATIVA("Ativa"),
 	CANCELADA("Cancelada"),
-	SUSPENSA("Suspensa"),
-	ARQUIVADA("Arquivada");
+	ATRASADA("Atrasada"),
+	ARQUIVADA("Arquivada"),
+	AGENDADA("Agendada"),
+	HOSPEDADA("Hospedada");
 
 	private String label;
 

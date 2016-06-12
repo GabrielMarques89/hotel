@@ -5,11 +5,10 @@ import hotel.model.Usuario;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import java.io.Serializable;
 
 @Named
 @SessionScoped
-public class SessionBean implements Serializable {
+public class SessionBean extends BaseBean{
 
 	private Usuario usuarioLogado;
 
@@ -20,11 +19,11 @@ public class SessionBean implements Serializable {
 
 	public String logout() {
 		this.usuarioLogado = null;
-		return "/login.jsf";
+		return loginPage;
 	}
 
 	public String goHome() {
-		return "/index.jsf?faces-redirect=true";
+		return indexPage;
 	}
 
 	public boolean isLoggedIn() {
@@ -37,5 +36,13 @@ public class SessionBean implements Serializable {
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
+	}
+
+	@Override public void postConst() {
+		usuarioLogado = null;
+	}
+
+	@Override public String salvar() throws Exception {
+		return null;
 	}
 }

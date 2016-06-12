@@ -64,7 +64,9 @@
                         <ul class="dropdown-menu">
                             <li><a href="editarDados.xhtml">Editar dados</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <h:form>
+                                <li><h:commandLink id="view" action="#{sessionBean.logout}" value="Logout"/></li>
+                            </h:form>
                         </ul>
                     </li>
                 </ul>

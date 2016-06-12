@@ -2,11 +2,10 @@ package hotel.controller;
 
 import hotel.Util.MsgUtil;
 import hotel.dao.UsuarioDAO;
+import hotel.model.Enum.Genero;
 import hotel.model.Enum.StatusHospede;
-import hotel.model.Enum.TipoUsuario;
 import hotel.model.Usuario;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -29,7 +28,9 @@ public class ClienteBean extends BaseBean{
     private List<Usuario> listaUsuarios;
 
     @PostConstruct
-    public void postConst(){}
+    public void postConst(){
+        usuario = new Usuario();
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -56,9 +57,10 @@ public class ClienteBean extends BaseBean{
                 MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
             }
         }catch (Exception e){
-            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+            throw e;
+//            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
         }
-        return cadastroQuarto;
+        return indexPage;
     }
 
     public String irEditar(long id) throws Exception{
@@ -69,7 +71,7 @@ public class ClienteBean extends BaseBean{
             }
             MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
         }catch (Exception e){
-            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+            throw e;
         }
         return listarClientes;
     }
@@ -78,7 +80,6 @@ public class ClienteBean extends BaseBean{
         try{
             usuario = usuarioDAO.findById(id);
             if(usuario != null){
-
                 if(usuario.getStatus().equals(StatusHospede.ATIVO)){
                     usuario.setStatus(StatusHospede.INATIVO);
                 }else{

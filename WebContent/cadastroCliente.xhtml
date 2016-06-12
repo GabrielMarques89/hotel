@@ -16,6 +16,16 @@
                                  placeholder="Digite seu nome"
                                  requiredMessage="O campo 'Nome completo' é obrigatório."
                                  required="true"/>
+                    <p:inputText class="form-control" type="hidden" name="usuario-id-completo" id="usuario-id" value="#{clienteBean.usuario.id}"
+                                 requiredMessage="O campo 'id completo' é obrigatório."
+                                 required="true"/>
+                    <p:inputText class="form-control" type="hidden" name="usuario-status-completo" status="usuario-status" value="#{clienteBean.usuario.status}"
+                                 requiredMessage="O campo 'status completo' é obrigatório."
+                                 required="true"/>
+                    <!--TODO: Data de criacao hidden-->
+                    <p:inputText class="form-control" type="hidden" name="usuario-tipoUsuario-completo" tipoUsuario="usuario-tipoUsuario" value="#{clienteBean.usuario.tipoUsuario}"
+                                 requiredMessage="O campo 'tipoUsuario completo' é obrigatório."
+                                 required="true"/>
                 </div>
                 <div class="form-group">
                     <label for="usuario-email">E-mail</label>
@@ -30,15 +40,18 @@
                                 requiredMessage="O campo 'Data Nascimento' é obrigatório."
                                 required="true"/>
                 </div>
+
                 <div class="form-group">
+                    <!--TODO - Corrigir... genero nao esta aparecendo ...-->
                     <label for="usuario-genero">Gênero</label>
                     <p:selectOneMenu id="usuario-genero" value="#{clienteBean.usuario.genero}" style="width: 100%"
-                                     required="true"
+                                     required="false"
                                      requiredMessage="O campo 'Gênero' é obrigatório.">
                         <f:selectItems value="#{enumBean.generos}" var="genero"
                                        itemValue="#{genero}" itemLabel="#{genero.label}" />
                     </p:selectOneMenu>
                 </div>
+
                 <div class="form-group">
                     <label for="usuario-cpf">CPF</label>
                     <p:inputMask id="usuario-cpf" value="#{clienteBean.usuario.cpf}" mask="999-999-999-99" requiredMessage="O campo 'CPF' é obrigatório." placeholder="Digite seu CPF" required="true"/>
