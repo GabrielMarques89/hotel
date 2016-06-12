@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <p:dataTable var="usuario" value="#{clienteBean.listaUsuarios}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{clienteBean.usuario.id}" />
+                </p:column>
+
+                <p:column headerText="Nome completo">
+                    <h:outputText value="#{clienteBean.usuario.nomeCompleto}" />
+                </p:column>
+
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{clienteBean.usuario.email}" />
+                </p:column>
+
+                <p:column headerText="Status">
+                    <h:outputText value="#{clienteBean.usuario.status}" />
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

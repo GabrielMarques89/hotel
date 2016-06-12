@@ -14,6 +14,9 @@ public abstract class BaseBean implements Serializable {
 	protected static String loginPage = "login.xhtml";
 	protected static String indexPage = "index.xhtml";
 	protected static String editarDados = "editarDados.xhtml";
+	protected static String listarQuartos = "listarQuartos.xhtml";
+	protected static String listarReservas = "listarReservas.xhtml";
+	protected static String listarClientes = "listaClientes.xhtml";
 	protected static String cadastroPage = "registro.xhtml";
 	protected static String cadastroReserva = "cadastroReserva.xhtml";
 	protected static String cadastroQuarto = "cadastroQuarto.xhtml";

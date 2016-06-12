@@ -30,7 +30,7 @@ public class UsuarioBean extends BaseBean{
 	}
 
 	public String login() throws Exception{
-		Usuario usuario = userDAO.Login(user.getEmail(),user.getSenha());
+		Usuario usuario = userDAO.login(user.getEmail(),user.getSenha());
 		if(usuario!=null){
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
@@ -74,7 +74,19 @@ public class UsuarioBean extends BaseBean{
 		return cadastroPage;
 	}
 
-	public String editarDados(){
-		return null;
+	public String editarDados()throws Exception{
+		Usuario usuario = userDAO.findById(sessionBean.getUsuarioLogado().getId());
+
+		if(usuario != null){
+			if(user.getSenha() != usuario.getSenha()){
+				//TODO: PRECISA UTILIZAR O HASH AQUI
+				usuario.setSenha(user.getSenha());
+			}
+			//TODO: PRECISA VALIDAR O E-MAIL
+			usuario.setNomeCompleto(user.getEmail());
+			usuario.setEmail(user.getEmail());
+			userDAO.merge(usuario);
+		}
+		return editarDados;
 	}
 }

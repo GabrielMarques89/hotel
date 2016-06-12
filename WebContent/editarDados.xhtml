@@ -8,9 +8,6 @@
 <h:body>
     <ui:composition template="template/layoutAdmin.xhtml">
         <ui:define name="content">
-            <!-- messages -->
-            <p:messages id="msg"/>
-            <!-- /messages -->
             <h:form class="form">
                 <div class="form-group">
                     <label for="usuario-nome-completo">Nome completo</label>
@@ -26,11 +23,11 @@
                 </div>
                 <div class="form-group">
                     <label for="usuario-senha">Senha</label>
-                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{sessionBean.usuarioLogado.senha}"
+                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{sessionBean.usuarioLogado.senha}" placeholder="Digite sua senha"
                                  requiredMessage="O campo 'Senha' é obrigatório."
                                  required="true"/>
                 </div>
-                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false"
+                <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false"
                                  action="#{usuarioBean.editarDados}"/>
             </h:form>
         </ui:define>

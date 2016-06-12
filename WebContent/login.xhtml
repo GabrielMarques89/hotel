@@ -10,7 +10,7 @@
                 <div class="acesso container">
                     <div class="login col-lg-24 centering">
                         <!-- messages -->
-                        <p:messages id="msg" />
+                        <p:messages id="msg"/>
                         <!-- /messages -->
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -35,7 +35,9 @@
                                         <p:commandButton class="btn btn-success" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
                                     </div>
                                     <div class="pull-right">
-                                        <p:commandButton class="btn btn-primary" value="Cadastrar" action="/registro.xhtml"/>
+                                        <a class="ui-button ui-widget ui-state-default ui-corner-all btn btn-primary btn-prime" href="registro.xhtml">
+                                            <span class="ui-button-text ui-c">Cadastrar</span>
+                                        </a>
                                     </div>
                                 </h:form>
                             </div>

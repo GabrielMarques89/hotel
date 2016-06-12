@@ -11,22 +11,22 @@
             <div class="acesso container">
                 <div class="register col-lg-24 centering">
                     <!-- messages -->
-                    <p:messages id="msg" />
+                    <p:messages id="msg"/>
                     <!-- /messages -->
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h:form class="form">
-                                <!--TODO: Os parametros do tipo enum tem que ser listados num dropdown...-->
-                                <!--TODO: Validações (usar o usuarioBean.cadastro para trazer as mensagens de erro... ler os PDF (slide III do rosalem) )-->
                                 <div class="form-group">
                                     <label for="usuario-nome-completo">Nome completo</label>
-                                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{usuarioBean.user.nomeCompleto}" placeholder="Digite seu nome"
+                                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{usuarioBean.user.nomeCompleto}"
+                                                 placeholder="Digite seu nome"
                                                  requiredMessage="O campo 'Nome completo' é obrigatório."
                                                  required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-email">E-mail</label>
-                                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{usuarioBean.user.email}" placeholder="Digite seu e-mail"
+                                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{usuarioBean.user.email}"
+                                                 placeholder="Digite seu e-mail"
                                                  requiredMessage="O campo 'E-mail' é obrigatório."
                                                  required="true"/>
                                 </div>
@@ -38,7 +38,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-genero">Gênero</label>
-                                    <p:selectOneMenu id="usuario-genero" value="#{usuarioBean.user.genero}" style="width: 100%" required="true" requiredMessage="O campo 'Gênero' é obrigatório.">
+                                    <p:selectOneMenu id="usuario-genero" value="#{usuarioBean.user.genero}" style="width: 100%"
+                                                     required="true"
+                                                     requiredMessage="O campo 'Gênero' é obrigatório.">
                                         <f:selectItems value="#{enumBean.generos}" var="genero"
                                                        itemValue="#{genero}" itemLabel="#{genero.label}" />
                                     </p:selectOneMenu>
@@ -48,14 +50,14 @@
                                     <h:outputText value="#{usuarioBean.user.cpf}" name="usuario-cpf" id="usuario-cpf" placeholder="Digite seu CPF"
                                                   requiredMessage="O campo 'CPF' é obrigatório."
                                                   required="true"/>
-                                    <p:inputMask id="usuario-cpfValue" value="#{usuarioBean.user.cpf}" mask="999-999-999-99"/>
+                                    <p:inputMask id="usuario-cpfValue" value="#{usuarioBean.user.cpf}" mask="999-999-999-99" requiredMessage="O campo 'CPF' é obrigatório." required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-telefone">Telefone</label>
                                     <h:outputText value="#{usuarioBean.user.telefone}" name="usuario-telefone" id="usuario-telefone" placeholder="Digite seu telefone"
                                                   requiredMessage="O campo 'Telefone' é obrigatório."
                                                   required="true"/>
-                                    <p:inputMask id="usuario-telefoneValue" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999"/>
+                                    <p:inputMask id="usuario-telefoneValue" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999" requiredMessage="O campo 'Telefone' é obrigatório." required="true"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-endereco">Endereço</label>
@@ -69,7 +71,7 @@
                                                  requiredMessage="O campo 'Senha' é obrigatório."
                                                  required="true"/>
                                 </div>
-                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="true" action="#{usuarioBean.cadastro}"/>
+                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.cadastro}"/>
                             </h:form>
                         </div>
                     </div>

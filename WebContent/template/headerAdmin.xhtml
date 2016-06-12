@@ -25,32 +25,42 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Clientes<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Listar clientes</a></li>
+                            <li><a href="listarClientes.xhtml">Listar clientes</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reservas<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> Reservas<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="cadastroReserva.xhtml">Cadastrar reserva</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Listar reservas</a></li>
+                            <li><a href="listarReservas.xhtml">Listar reservas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quartos<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bed" aria-hidden="true"></i> Quartos<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="cadastroQuarto.xhtml">Cadastrar quarto</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Listar quartos</a></li>
+                            <li><a href="cadastroTipoQuarto.xhtml">Cadastrar categoria</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="listarQuartos.xhtml">Listar quartos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-credit-card" aria-hidden="true"></i> Cartões Magnéticos<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cadastroQuarto.xhtml">Cadastrar cartão</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="listarQuartos.xhtml">Listar cartões</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="#"> Último acesso: #{sessionBean.usuarioLogado.ultimoAcesso}</a></li>
                     <li id="menu-usuario" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{sessionBean.usuarioLogado.nomeCompleto}<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> #{sessionBean.usuarioLogado.nomeCompleto} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="editarDados.xhtml">Editar dados</a></li>
                             <li role="separator" class="divider"></li>

@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<h:head>
-		<ui:insert name="header">
-			<title>Projeto Hotel</title>
-		</ui:insert>
-		<!-- bootstrap -->
-		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-		<h:outputScript name="js/bootstrap.min.js"/>
-		<h:outputScript name="js/default.js"/>
-		<h:outputStylesheet name="css/bootstrap.min.css"/>
-		<h:outputStylesheet name="css/font-awesome.min.css"/>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <ui:insert name="header">
+        <title>Projeto Hotel</title>
+    </ui:insert>
 
-		<!-- custom -->
-		<h:outputStylesheet name="css/default.css"/>
-	</h:head>
-	<h:body>
-		<div id="public-content">
-			<ui:insert name="content">
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript name="js/bootstrap.min.js"/>
+    <h:outputScript name="js/default.js"/>
 
-			</ui:insert>
-			<ui:include src="spinner.xhtml"/>
-		</div>
-	</h:body>
+    <h:outputStylesheet name="css/bootstrap.min.css"/>
+    <h:outputStylesheet name="css/font-awesome.min.css"/>
+    <h:outputStylesheet name="css/default.css"/>
+
+    <!--<h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>-->
+    <!--<h:outputScript name="webjars/font-awesome/4.4.0/css/font-awesome.css" target="head"/>-->
+    <!--<h:outputScript name="webjars/bootstrap/3.3.4/css/bootstrap.css" target="head"/>-->
+    <!--<h:outputScript name="webjars/bootstrap/3.3.4/js/bootstrap.js"/>-->
+    <!--<h:outputScript name="js/default.js"/>-->
+</h:head>
+<h:body>
+    <div id="public-content">
+        <ui:insert name="content">
+        </ui:insert>
+        <ui:include src="spinner.xhtml"/>
+    </div>
+</h:body>
 </html>

@@ -12,7 +12,7 @@ html, body {
 }
 
 .acesso .register {
-    margin-top: 200px;
+    margin-top: 150px;
 }
 
 .acesso .panel{
@@ -41,6 +41,10 @@ html, body {
     padding: 5px !important;
 }
 
+.btn-prime {
+    padding: 10px !important;
+}
+
 input {
     width: 100%;
 }
@@ -55,4 +59,17 @@ input {
 .ui-selectonemenu-trigger {
     width: 30px !important;
     padding: 5px !important;
+}
+
+.ui-messages,
+.ui-datatable {
+    font-size: 12px;
+}
+
+.ui-messages-error-icon {
+    display: none;
+}
+
+.ui-messages ul {
+    margin: 0 0px !important;
 }

@@ -3,20 +3,23 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <ui:insert name="header">
         <title>Projeto Hotel</title>
     </ui:insert>
-    <!-- bootstrap -->
-    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     <h:outputScript name="js/bootstrap.min.js"/>
     <h:outputScript name="js/default.js"/>
+
     <h:outputStylesheet name="css/bootstrap.min.css"/>
     <h:outputStylesheet name="css/font-awesome.min.css"/>
-
-    <!-- custom -->
     <h:outputStylesheet name="css/default.css"/>
+    <!-- TODO: TEMPORÁRIO -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"></link>
+
 </h:head>
 <h:body>
     <ui:insert name="header">
@@ -24,6 +27,9 @@
     </ui:insert>
     <div class="private-content container">
         <div class="col-lg-24 centering" style="padding-top: 200px">
+            <!-- messages -->
+            <p:messages id="msg"/>
+            <!-- /messages -->
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ui:insert name="content"></ui:insert>
