@@ -8,7 +8,7 @@ html, body {
 }
 
 .acesso .login {
-    margin-top: 300px;
+    margin-top: 150px;
 }
 
 .acesso .register {
@@ -61,6 +61,10 @@ table .action-header {
 .btn-dropdown.btn-default:hover {
     border-radius: 0!important;
     border-color: transparent !important;
+}
+
+.logo img{
+    margin: 0 auto;
 }
 
 /* PRIVATE LAYOUT */

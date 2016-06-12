@@ -32,7 +32,7 @@
                     <h:form>
                         <p:commandButton value="Editar" id="editar-reserva" action="#{reservaBean.irEditar(reserva.id)}" icon="fa fa-pencil" ajax="false" />
                         <!--//TODO: CORRIGIR AQUI-->
-                        <p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.alterarStatus(reserva.id, null)}" icon="fa fa-flag" ajax="false"/>
+                        <p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.irAlterarStatus(reserva.id)}" icon="fa fa-flag" ajax="false"/>
                     </h:form>
                 </p:column>
             </p:dataTable>

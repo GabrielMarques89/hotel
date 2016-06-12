@@ -55,12 +55,13 @@ public class QuartoBean extends BaseBean {
 
 	@Override
 	public String salvar()throws Exception{
-		Quarto quartoSalvo = quartoDAO.merge(quarto);
-		if(quartoSalvo != null) {
+		quarto = quartoDAO.merge(quarto);
+		if(quarto != null) {
             MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
         }else{
             MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
         }
+		postConst();
 		return cadastroQuarto;
 	}
 

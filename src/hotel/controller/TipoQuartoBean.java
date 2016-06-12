@@ -43,12 +43,24 @@ public class TipoQuartoBean extends BaseBean{
 	}
 
 	public String salvar()throws Exception{
-		TipoQuarto tipoQuartoSalvo = tipoQuartoDAO.merge(tipoQuarto);
-		if(tipoQuartoSalvo != null){
-            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-        }else{
-            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-        }
+		boolean existeErro = false;
+
+		if(tipoQuarto.getCamas() <= 0){
+			MsgUtil.addErrorMessage("A quantidade de camas não é um número válido.", "");
+			existeErro = true;
+		}
+		if(tipoQuarto.getDiaria() <= 0){
+			MsgUtil.addErrorMessage("O preço do quarto não é um valor válido.", "");
+			existeErro = true;
+		}
+		if(!existeErro){
+			TipoQuarto tipoQuartoSalvo = tipoQuartoDAO.merge(tipoQuarto);
+			if(tipoQuartoSalvo != null){
+				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+			}else{
+				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+			}
+		}
 		return cadastroTipoQuarto;
 	}
 

@@ -31,6 +31,12 @@
                                                  required="true"/>
                                 </div>
                                 <div class="form-group">
+                                    <label for="usuario-senha">Senha</label>
+                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{usuarioBean.user.senha}" placeholder="Digite sua senha"
+                                                 requiredMessage="O campo 'Senha' é obrigatório."
+                                                 required="true"/>
+                                </div>
+                                <div class="form-group">
                                     <label for="usuario-data-nascimento">Data nascimento</label>
                                     <p:calendar id="usuario-data-nascimento" value="#{usuarioBean.user.nascimento}" placeholder="Selecione a data"
                                                   requiredMessage="O campo 'Data Nascimento' é obrigatório."
@@ -53,12 +59,6 @@
                                 <div class="form-group">
                                     <label for="usuario-telefone">Telefone</label>
                                     <p:inputMask id="usuario-telefone" value="#{usuarioBean.user.telefone}" mask="(99)9999-9999" requiredMessage="O campo 'Telefone' é obrigatório." placeholder="Digite seu Telefone" required="true"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuario-senha">Senha</label>
-                                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{usuarioBean.user.senha}" placeholder="Digite sua senha"
-                                                 requiredMessage="O campo 'Senha' é obrigatório."
-                                                 required="true"/>
                                 </div>
                                 <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.salvar}"/>
                             </h:form>

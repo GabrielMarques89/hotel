@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="template/layoutAdmin.xhtml">
+        <ui:define name="content">
+            <h:form class="form">
+                <div class="form-group">
+                    <label for="reserva-quarto">Número do quarto</label>
+                    <p:inputText class="form-control" name="reserva-quarto" id="reserva-quarto" value="#{reservaBean.reserva.quarto.numero}" readonly="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="reserva-cliente">Nome do cliente</label>
+                    <p:inputText class="form-control" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}" readonly="true"/>
+                </div>
+                <div class="form-group">
+                    <!--TODO - Corrigir... genero nao esta aparecendo ...-->
+                    <label for="reserva-situacao">Situação</label>
+                    <p:selectOneMenu id="reserva-situacao" value="#{reservaBean.reserva.situacaoReserva}" style="width: 100%"
+                                     required="true"
+                                     requiredMessage="O campo 'Situação' é obrigatório.">
+                        <f:selectItems value="#{enumBean.situacoesReserva}" var="situacaoReserva"
+                                       itemValue="#{situacaoReserva}" itemLabel="#{situacaoReserva.label}" />
+                    </p:selectOneMenu>
+                </div>
+                <p:commandButton class="btn btn-success btn-block" value="Alterar" ajax="false" action="#{reservaBean.alterarStatus}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
