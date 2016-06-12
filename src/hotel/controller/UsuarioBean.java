@@ -70,45 +70,45 @@ public class UsuarioBean extends BaseBean{
 	@Override
 	//TODO: VALIDAR OS CAMPOS ÚNICOS
 	public String salvar() throws Exception{
-		//Inserindo a data de criação
-		user.setDataCriacao(new Date());
+		if(user.getNascimento().equals(new Date()) || user.getNascimento().after(new Date())){
+			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
+		}else{
+			//Inserindo a data de criação
+			user.setDataCriacao(new Date());
 
-		//Inserindo o status do usuário
-		user.setStatus(StatusHospede.ATIVO);
+			//Inserindo o status do usuário
+			user.setStatus(StatusHospede.ATIVO);
 
-		//Inserido o tipo de usuário
-		user.setTipoUsuario(TipoUsuario.CLIENTE);
+			//Inserido o tipo de usuário
+			user.setTipoUsuario(TipoUsuario.CLIENTE);
 
-		Usuario usuario = userDAO.merge(user);
+			Usuario usuario = userDAO.merge(user);
 
-		if(usuario != null){
-			sessionBean.setUsuarioLogado(usuario);
-			return indexPage;
+			if(usuario != null){
+				sessionBean.setUsuarioLogado(usuario);
+				return indexPage;
+			}
 		}
 		return cadastroPage;
 	}
 
-	public String editarDados(){
-		try{
-			Usuario usuarioLogado = sessionBean.getUsuarioLogado();
-			Usuario usuario = userDAO.findById(usuarioLogado.getId());
+	public String editarDados() throws Exception {
+		Usuario usuarioLogado = sessionBean.getUsuarioLogado();
+		Usuario usuario = userDAO.findById(usuarioLogado.getId());
 
-			if(usuario != null){
-				//TODO: PRECISA UTILIZAR O HASH AQUI
-				if(usuario.getSenha() != usuarioLogado.getSenha()){
-					usuario.setSenha(usuarioLogado.getSenha());
-				}
-				//TODO: PRECISA VALIDAR O E-MAIL
-				usuario.setNomeCompleto(user.getEmail());
-				usuario.setEmail(user.getEmail());
-				userDAO.merge(usuario);
-				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-			}else{
-				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-			}
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Ocorreu algum problema...", "");
-		}
+		if(usuario != null){
+            //TODO: PRECISA UTILIZAR O HASH AQUI
+            if(usuario.getSenha() != usuarioLogado.getSenha()){
+                usuario.setSenha(usuarioLogado.getSenha());
+            }
+            //TODO: PRECISA VALIDAR O E-MAIL
+            usuario.setNomeCompleto(user.getEmail());
+            usuario.setEmail(user.getEmail());
+            userDAO.merge(usuario);
+            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+        }
 		return editarDados;
 	}
 }

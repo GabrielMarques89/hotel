@@ -97,69 +97,57 @@ public class ReservaBean extends BaseBean {
 
 	@Override
 	public String salvar() throws Exception{
-		try{
-			boolean existeErro = false;
+		boolean existeErro = false;
 
-			//Data inicial é maior que data final?
-			if(reserva.getDataInicial().after(reserva.getDataFinal())){
-				MsgUtil.addErrorMessage("Erro! A 'Data inicial' não pode ser posterior à 'Data final'.", "");
-				existeErro = true;
-			}
-			//Data inicial são iguais?
-			if(reserva.getDataInicial().equals(reserva.getDataFinal())){
-				MsgUtil.addErrorMessage("Erro! A 'Data inicial' e 'Data final' não podem ser iguais.", "");
-				existeErro = true;
-			}
+		//Data inicial é maior que data final?
+		if(reserva.getDataInicial().after(reserva.getDataFinal())){
+            MsgUtil.addErrorMessage("Erro! A 'Data inicial' não pode ser posterior à 'Data final'.", "");
+            existeErro = true;
+        }
+		//Data inicial são iguais?
+		if(reserva.getDataInicial().equals(reserva.getDataFinal())){
+            MsgUtil.addErrorMessage("Erro! A 'Data inicial' e 'Data final' não podem ser iguais.", "");
+            existeErro = true;
+        }
 
-			//Verifica a existência de erros
-			if(existeErro == true){
-				return cadastroReserva;
-			}
+		//Verifica a existência de erros
+		if(existeErro == true){
+            return cadastroReserva;
+        }
 
-			reserva.setUsuario(sessionBean.getUsuarioLogado());
-			Reserva reservaSalva = reservaDAO.merge(reserva);
+		reserva.setUsuario(sessionBean.getUsuarioLogado());
+		Reserva reservaSalva = reservaDAO.merge(reserva);
 
-			if(reservaSalva != null){
-				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-			}else{
-				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-			}
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
-		}
+		if(reservaSalva != null){
+            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+        }
 		return cadastroReserva;
 	}
 
 	public String irEditar(long id) throws Exception{
-		try{
-			reserva = reservaDAO.findById(id);
-			if(reserva != null){
-				return cadastroReserva;
-			}
-			MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
-		}
+		reserva = reservaDAO.findById(id);
+		if(reserva != null){
+            return cadastroReserva;
+        }
+		MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
 		return listarReservas;
 	}
 
 	public String alterarStatus(long id, SituacaoReserva situacaoReserva) throws Exception{
-		try{
-			reserva = reservaDAO.findById(id);
-			if(reserva != null){
+		reserva = reservaDAO.findById(id);
+		if(reserva != null){
 
-				if(reserva.getSituacaoReserva().equals(situacaoReserva)){
-					MsgUtil.addErrorMessage("A reserva já está com o status {0}.", reserva.getSituacaoReserva());
-				}else{
-					reserva.setSituacaoReserva(situacaoReserva);
-					reservaDAO.merge(reserva);
-				}
-			}else{
-				MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
-			}
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
-		}
+            if(reserva.getSituacaoReserva().equals(situacaoReserva)){
+                MsgUtil.addErrorMessage("A reserva já está com o status {0}.", reserva.getSituacaoReserva());
+            }else{
+                reserva.setSituacaoReserva(situacaoReserva);
+                reservaDAO.merge(reserva);
+            }
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
+        }
 		return listarClientes;
 	}
 }

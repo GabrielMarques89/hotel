@@ -43,16 +43,12 @@ public class TipoQuartoBean extends BaseBean{
 	}
 
 	public String salvar()throws Exception{
-		try{
-			TipoQuarto tipoQuartoSalvo = tipoQuartoDAO.merge(tipoQuarto);
-			if(tipoQuartoSalvo != null){
-				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-			}else{
-				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-			}
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
-		}
+		TipoQuarto tipoQuartoSalvo = tipoQuartoDAO.merge(tipoQuarto);
+		if(tipoQuartoSalvo != null){
+            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+        }
 		return cadastroTipoQuarto;
 	}
 

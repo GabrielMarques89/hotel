@@ -67,29 +67,21 @@ public class CartaoMagneticoBean extends BaseBean {
 	}
 
 	public String irEditar(long id) throws Exception{
-		try{
-			cartaoMagnetico = cartaoMagneticoDAO.findById(id);
-			if(cartaoMagnetico != null){
-				return cadastroCartaoMagnetico;
-			}
-			MsgUtil.addErrorMessage("Desculpe, mas não o quarto não foi encontrado.", "");
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
-		}
+		cartaoMagnetico = cartaoMagneticoDAO.findById(id);
+		if(cartaoMagnetico != null){
+            return cadastroCartaoMagnetico;
+        }
+		MsgUtil.addErrorMessage("Desculpe, mas não o quarto não foi encontrado.", "");
 		return listarCartoesMagneticos;
 	}
 
 	public String excluir(long id) throws Exception{
-		try{
-			cartaoMagnetico = cartaoMagneticoDAO.findById(id);
-			if(cartaoMagnetico != null){
-				cartaoMagneticoDAO.remove(cartaoMagnetico);
-			}else{
-				MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
-			}
-		}catch (Exception e){
-			MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
-		}
+		cartaoMagnetico = cartaoMagneticoDAO.findById(id);
+		if(cartaoMagnetico != null){
+            cartaoMagneticoDAO.remove(cartaoMagnetico);
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
+        }
 		return listarQuartos;
 	}
 }

@@ -49,48 +49,35 @@ public class ClienteBean extends BaseBean{
     }
 
     public String salvar() throws Exception {
-        try{
-            usuario = usuarioDAO.merge(usuario);
-            if(usuario != null) {
-                MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-            }else{
-                MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-            }
-        }catch (Exception e){
-            throw e;
-//            MsgUtil.addWarnMessage("Houve algum problema. Por favor, tente mais tarde.", "");
+        usuario = usuarioDAO.merge(usuario);
+        if(usuario != null) {
+            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
         }
         return indexPage;
     }
 
     public String irEditar(long id) throws Exception{
-        try{
-            usuario = usuarioDAO.findById(id);
-            if(usuario != null){
-                return cadastroCliente;
-            }
-            MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
-        }catch (Exception e){
-            throw e;
+        usuario = usuarioDAO.findById(id);
+        if(usuario != null){
+            return cadastroCliente;
         }
+        MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
         return listarClientes;
     }
 
     public String alterarStatus(long id) throws Exception{
-        try{
-            usuario = usuarioDAO.findById(id);
-            if(usuario != null){
-                if(usuario.getStatus().equals(StatusHospede.ATIVO)){
-                    usuario.setStatus(StatusHospede.INATIVO);
-                }else{
-                    usuario.setStatus(StatusHospede.ATIVO);
-                }
-                usuarioDAO.merge(usuario);
+        usuario = usuarioDAO.findById(id);
+        if(usuario != null){
+            if(usuario.getStatus().equals(StatusHospede.ATIVO)){
+                usuario.setStatus(StatusHospede.INATIVO);
             }else{
-                MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
+                usuario.setStatus(StatusHospede.ATIVO);
             }
-        }catch (Exception e){
-            MsgUtil.addWarnMessage("Ocorreu algum problema. Por favor, tente mais tarde.", "");
+            usuarioDAO.merge(usuario);
+        }else{
+            MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
         }
         return listarClientes;
     }
