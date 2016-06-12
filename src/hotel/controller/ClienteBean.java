@@ -55,7 +55,7 @@ public class ClienteBean extends BaseBean{
         }else{
             MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
         }
-        return indexPage;
+        return cadastroCliente;
     }
 
     public String irEditar(long id) throws Exception{

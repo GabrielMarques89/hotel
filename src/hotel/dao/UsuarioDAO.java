@@ -16,9 +16,11 @@ import java.util.List;
 @Stateless
 public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 
+	private String selecionarUsuario = "SELECT USR FROM Usuario USR ";
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Usuario login(String email, String senha) throws Exception{
-		StringBuilder queryHql = new StringBuilder("SELECT USR FROM Usuario USR ");
+		StringBuilder queryHql = new StringBuilder(selecionarUsuario);
 		queryHql.append("WHERE USR.email = :email AND USR.senha = :senha");
 		try{
 			Query query = this.entityManager.createQuery(queryHql.toString());
@@ -33,9 +35,10 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 		}
 	}
 
+	//TODO: NÃO ESTÁ FUNCIONANDO
 	public List<Usuario> listarPorTipo(TipoUsuario tipoUsuario)throws Exception {
 		try {
-			StringBuilder queryHql = new StringBuilder("SELECT USR FROM Usuario USR ");
+			StringBuilder queryHql = new StringBuilder(selecionarUsuario);
 			Query query = this.entityManager.createQuery(queryHql.toString());
 			queryHql.append("WHERE USR.email = :email AND USR.senha = :senha");
 			query.setParameter("tipoUsuario", tipoUsuario);
@@ -43,8 +46,18 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 			return lista;
 		} catch (NoResultException e) {
 			return null;
-		} catch (Exception e) {
-			throw e;
 		}
+	}
+
+	public Boolean emailUnico(String email)throws Exception {
+		StringBuilder queryHql = new StringBuilder(selecionarUsuario);
+		Query query = this.entityManager.createQuery(queryHql.toString());
+		queryHql.append("WHERE USR.email = :email");
+		query.setParameter("email", email);
+		Usuario usuario = (Usuario) query.getSingleResult();
+		if(usuario.equals(null)){
+			return true;
+		}
+		return false;
 	}
 }

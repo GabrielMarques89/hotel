@@ -68,11 +68,22 @@ public class UsuarioBean extends BaseBean{
 	}
 
 	@Override
-	//TODO: VALIDAR OS CAMPOS ÚNICOS
 	public String salvar() throws Exception{
-		if(user.getNascimento().equals(new Date()) || user.getNascimento().after(new Date())){
-			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
-		}else{
+		Boolean existeErro = false;
+
+		//TODO: NÃO ESTÁ FUNCIONANDO
+//		if(user.getNascimento().equals(new Date()) || user.getNascimento().after(new Date())){
+//			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
+//			existeErro = true;
+//		}
+
+		//TODO: UNICIDADE NÃO ESTÁ FUNCIONANDO
+//		if(!userDAO.emailUnico(user.getEmail())){
+//			MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
+//			existeErro = true;
+//		}
+
+		if(!existeErro){
 			//Inserindo a data de criação
 			user.setDataCriacao(new Date());
 
@@ -90,25 +101,5 @@ public class UsuarioBean extends BaseBean{
 			}
 		}
 		return cadastroPage;
-	}
-
-	public String editarDados() throws Exception {
-		Usuario usuarioLogado = sessionBean.getUsuarioLogado();
-		Usuario usuario = userDAO.findById(usuarioLogado.getId());
-
-		if(usuario != null){
-            //TODO: PRECISA UTILIZAR O HASH AQUI
-            if(usuario.getSenha() != usuarioLogado.getSenha()){
-                usuario.setSenha(usuarioLogado.getSenha());
-            }
-            //TODO: PRECISA VALIDAR O E-MAIL
-            usuario.setNomeCompleto(user.getEmail());
-            usuario.setEmail(user.getEmail());
-            userDAO.merge(usuario);
-            MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-        }else{
-            MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-        }
-		return editarDados;
 	}
 }

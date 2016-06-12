@@ -53,6 +53,7 @@ public class QuartoBean extends BaseBean {
 		this.quarto = quarto;
 	}
 
+	@Override
 	public String salvar()throws Exception{
 		Quarto quartoSalvo = quartoDAO.merge(quarto);
 		if(quartoSalvo != null) {

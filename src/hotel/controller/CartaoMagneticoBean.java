@@ -47,7 +47,13 @@ public class CartaoMagneticoBean extends BaseBean {
 
 	@Override
 	public String salvar() {
-		return null;
+		cartaoMagnetico = cartaoMagneticoDAO.merge(cartaoMagnetico);
+		if(cartaoMagnetico != null) {
+			MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+		}else{
+			MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+		}
+		return cadastroCartaoMagnetico;
 	}
 
 	public CartaoMagneticoDAO getCartaoMagneticoDAO() {
