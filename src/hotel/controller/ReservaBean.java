@@ -148,6 +148,6 @@ public class ReservaBean extends BaseBean {
         }else{
             MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
         }
-		return listarClientes;
+		return listarReservas;
 	}
 }
