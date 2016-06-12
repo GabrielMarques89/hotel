@@ -23,8 +23,8 @@
 
                 <p:column headerText="Ações" class="action-header">
                     <h:form>
-                        <p:commandButton value="Editar" id="editar-quarto" action="#{quarto.irEditar(quarto.id)}" icon="fa fa-pencil" ajax="false" />
-                        <p:commandButton value="Excluir" id="excluir-quarto" action="#{quarto.excluir(quarto.id)}" icon="fa fa-trash" ajax="false"/>
+                        <p:commandButton value="Editar" id="editar-quarto" action="#{quartoBean.irEditar(quarto.id)}" icon="fa fa-pencil" ajax="false" />
+                        <p:commandButton value="Excluir" id="excluir-quarto" action="#{quartoBean.excluir(quarto.id)}" icon="fa fa-trash" ajax="false"/>
                     </h:form>
                 </p:column>
             </p:dataTable>
