@@ -55,16 +55,16 @@ public class ClienteBean extends BaseBean{
         }else{
             MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
         }
-        return cadastroCliente;
+        return cadastroUsuario;
     }
 
     public String irEditar(long id) throws Exception{
         usuario = usuarioDAO.findById(id);
         if(usuario != null){
-            return cadastroCliente;
+            return cadastroUsuario;
         }
         MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
-        return listarClientes;
+        return listarUsuarios;
     }
 
     public String alterarStatus(long id) throws Exception{
@@ -79,6 +79,6 @@ public class ClienteBean extends BaseBean{
         }else{
             MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
         }
-        return listarClientes;
+        return listarUsuarios;
     }
 }
