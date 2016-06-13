@@ -1,6 +1,8 @@
 package hotel.controller;
 
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -31,6 +33,10 @@ public abstract class BaseBean implements Serializable {
 
 	@PostConstruct
 	public abstract void postConst();
+
+	public String encrypt(String value){
+		return DigestUtils.sha1Hex(value);
+	}
 
 	public abstract String salvar() throws Exception;
 }

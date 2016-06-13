@@ -24,6 +24,9 @@
                 <p:column headerText="Status">
                     <h:outputText value="#{usuario.status}"/>
                 </p:column>
+                <p:column headerText="Tipo">
+                    <h:outputText value="#{usuario.tipoUsuario}"/>
+                </p:column>
                 <p:column headerText="Ações" class="action-header">
                     <h:form>
                         <p:commandButton value="Editar" id="editar-usuario" action="#{clienteBean.irEditar(usuario.id)}" icon="fa fa-pencil" ajax="false" />

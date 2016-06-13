@@ -48,11 +48,12 @@ public class UsuarioBean extends BaseBean {
 	}
 
 	public String login() throws Exception{
-		Usuario usuario = userDAO.login(user.getEmail(),user.getSenha());
+		Usuario usuario = userDAO.login(user.getEmail(),encrypt(user.getSenha()));
 		if(usuario!=null){
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
 		}
+        MsgUtil.addWarnMessage("Login ou senha inválidos.", "");
 		return loginPage;
 	}
 
@@ -89,7 +90,7 @@ public class UsuarioBean extends BaseBean {
 			user.setDataCriacao(new Date());
 			user.setStatus(StatusHospede.ATIVO);
 			user.setTipoUsuario(TipoUsuario.CLIENTE);
-
+			user.setSenha(encrypt(user.getSenha()));
 			try{
 				Usuario usuario = userDAO.merge(user);
 				if(usuario != null){

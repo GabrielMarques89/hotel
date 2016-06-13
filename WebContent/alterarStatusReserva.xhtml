@@ -12,15 +12,15 @@
             <h:form class="form">
                 <div class="form-group">
                     <label for="reserva-quarto">Número do quarto</label>
-                    <p:inputText class="form-control" name="reserva-quarto" id="reserva-quarto" value="#{reservaBean.reserva.quarto.numero}" readonly="true"/>
+                    <p:inputText class="form-control disabled" name="reserva-quarto" id="reserva-quarto" value="#{reservaBean.reserva.quarto.numero}"/>
+                    <!--TODO: Campos com class -> disabled tem que ficar inativos, mas transmitir os dados...-->
                 </div>
                 <div class="form-group">
                     <label for="reserva-cliente">Nome do cliente</label>
-                    <p:inputText class="form-control" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}" readonly="true"/>
-                    <p:inputText class="form-control" type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}" readonly="true"/>
+                    <p:inputText class="form-control disabled" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}"/>
+                    <p:inputText class="form-control disabled" type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}"/>
                 </div>
                 <div class="form-group">
-                    <!--TODO - Corrigir... genero nao esta aparecendo ...-->
                     <label for="reserva-situacao">Situação</label>
                     <p:selectOneMenu id="reserva-situacao" value="#{reservaBean.reserva.situacaoReserva}" style="width: 100%"
                                      required="true"

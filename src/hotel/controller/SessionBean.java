@@ -19,11 +19,6 @@ public class SessionBean extends BaseBean{
 
 	private Usuario usuarioLogado;
 
-	@PostConstruct
-	public void init() {
-		this.usuarioLogado = null;
-	}
-
 	public String logout() {
 		this.usuarioLogado = null;
 		return loginPage;
@@ -45,7 +40,9 @@ public class SessionBean extends BaseBean{
 		this.usuarioLogado = usuarioLogado;
 	}
 
-	@Override public void postConst() {
+	@Override
+	@PostConstruct
+	public void postConst() {
 		usuarioLogado = null;
 	}
 
@@ -63,25 +60,9 @@ public class SessionBean extends BaseBean{
 
 	public String editarDados() throws Exception {
 		Usuario usuarioDB = usuarioDAO.findById(usuarioLogado.getId());
-		if(usuarioDB != null){
-			//TODO: PRECISA UTILIZAR O HASH AQUI
-			if(!usuarioDB.getSenha().equals(usuarioLogado.getSenha())){
-				//usuarioDB.setSenha(Hash(getUsuarioLogado().getSenha()));
-			}
-
-			if(!usuarioDB.getEmail().equals(usuarioLogado.getEmail())){
-				//TODO: NÃO ESTÁ FUNCIONANDO
-//				if(!usuarioDAO.emailUnico(usuarioLogado.getEmail())) {
-//					MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
-//				}
-			}else{
-				usuarioDAO.merge(usuarioDB);
-				setUsuarioLogado(usuarioDB);
-				MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-			}
-		}else{
-			MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-		}
+		usuarioDAO.merge(usuarioDB);
+		setUsuarioLogado(usuarioDB);
+		MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
 		return editarDados;
 	}
 }
