@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by grupoeuropa on 09/06/16.
  */
 @Entity
-@Table(name = "TBL_CARTAO_MAGNETICO")
+@Table(name = "TBL_CARTAO_MAGNETICO", uniqueConstraints = @UniqueConstraint(columnNames = {"DS_CODIGO"}, name = "UK_CARTAO_CODIGO"))
 public class CartaoMagnetico extends Entidade {
 	@Column(name = "DS_CODIGO", nullable = false)
 	private String codigo;

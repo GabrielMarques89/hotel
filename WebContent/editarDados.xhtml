@@ -11,24 +11,25 @@
             <h:form class="form">
                 <div class="form-group">
                     <label for="usuario-nome-completo">Nome completo</label>
-                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{sessionBean.usuarioLogado.nomeCompleto}" placeholder="Digite seu nome"
+                    <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{usuarioBean.user.nomeCompleto}" placeholder="Digite seu nome"
                                  requiredMessage="O campo 'Nome completo' é obrigatório."
                                  required="true"/>
+                    <p:inputText class="form-control" type="hidden" name="idUser" id="idUser" value="#{usuarioBean.user.id}"/>
                 </div>
                 <div class="form-group">
                     <label for="usuario-email">E-mail</label>
-                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{sessionBean.usuarioLogado.email}" placeholder="Digite seu e-mail"
+                    <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{usuarioBean.user.email}" placeholder="Digite seu e-mail"
                                  requiredMessage="O campo 'E-mail' é obrigatório."
                                  required="true"/>
                 </div>
                 <div class="form-group">
                     <label for="usuario-senha">Senha</label>
-                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{sessionBean.usuarioLogado.senha}" placeholder="Digite sua senha"
+                    <p:inputText class="form-control" type="password" name="usuario-senha" id="usuario-senha" value="#{usuarioBean.user.senha}" placeholder="Digite sua senha"
                                  requiredMessage="O campo 'Senha' é obrigatório."
                                  required="true"/>
                 </div>
                 <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false"
-                                 action="#{sessionBean.editarDados}"/>
+                                 action="#{usuarioBean.edit}"/>
             </h:form>
         </ui:define>
     </ui:composition>

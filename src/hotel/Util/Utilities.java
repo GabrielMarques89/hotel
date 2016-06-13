@@ -24,12 +24,12 @@ public class Utilities {
 	public static ConstraintViolationHandler ConstraintViolationException(Throwable throwable) {
 		try {
 			if (throwable instanceof ConstraintViolationException) {
-				ConstraintViolationHandler handler = new ConstraintViolationHandler(((ConstraintViolationException) throwable).getLocalizedMessage(), true);
+				ConstraintViolationHandler handler = new ConstraintViolationHandler(throwable.getLocalizedMessage(), true);
 				return handler;
 			}
 			return ConstraintViolationException(throwable.getCause());
-		} catch (NullPointerException e2) {
-			System.out.println(e2);
+		} catch (NullPointerException e) {
+			System.out.println(e);
 		}
 		return null;
 	}

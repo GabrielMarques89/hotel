@@ -64,6 +64,20 @@ public class UsuarioBean extends BaseBean {
 		listaUsuario = userDAO.listAll();
 	}
 
+    public String editar(){
+        user = sessionBean.getUsuarioLogado();
+        return editarDados;
+    }
+
+    public String edit() throws Exception {
+        Usuario userToSave = userDAO.findById(user.getId());
+        userToSave.setEmail(user.getEmail());
+        userToSave.setSenha(user.getSenha());
+        userToSave.setNomeCompleto(user.getNomeCompleto());
+        user = userToSave;
+        return salvar();
+    }
+
 	public String logout() throws Exception{
 		Usuario userToSave = sessionBean.getUsuarioLogado();
 		userToSave.setUltimoAcesso(new Date());
@@ -87,9 +101,15 @@ public class UsuarioBean extends BaseBean {
 		}
 
 		if(!existeErro){
-			user.setDataCriacao(new Date());
-			user.setStatus(StatusHospede.ATIVO);
-			user.setTipoUsuario(TipoUsuario.CLIENTE);
+			if(user.getDataCriacao()==null){
+                user.setDataCriacao(new Date());
+            }
+            if(user.getStatus()==null){
+    			user.setStatus(StatusHospede.ATIVO);
+            }
+            if(user.getTipoUsuario()==null){
+			    user.setTipoUsuario(TipoUsuario.CLIENTE);
+            }
 			user.setSenha(encrypt(user.getSenha()));
 			try{
 				Usuario usuario = userDAO.merge(user);
@@ -102,7 +122,7 @@ public class UsuarioBean extends BaseBean {
 				if(handler == null) {
 					throw e;
 				}
-				if(handler.getContraintName().equals("DS_EMAIL")){
+				if(handler.getHasError()){
 					MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
 					return cadastroPage;
 				}

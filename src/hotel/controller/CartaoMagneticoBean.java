@@ -3,16 +3,20 @@ package hotel.controller;
  * Created by grupoeuropa on 10/06/16.
  */
 
+import hotel.ExceptionHandlers.ConstraintViolationHandler;
 import hotel.Util.MsgUtil;
 import hotel.dao.CartaoMagneticoDAO;
 import hotel.model.CartaoMagnetico;
 import hotel.model.Quarto;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+
+import static hotel.Util.Utilities.ConstraintViolationException;
 
 /**
  * Created by grupoeuropa on 10/06/16.
@@ -47,13 +51,28 @@ public class CartaoMagneticoBean extends BaseBean {
 
 	@Override
 	public String salvar() {
-		cartaoMagnetico = cartaoMagneticoDAO.merge(cartaoMagnetico);
-		if(cartaoMagnetico != null) {
-			MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
-		}else{
-			MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
-		}
-		return cadastroCartaoMagnetico;
+        try{
+            CartaoMagnetico cartaoMagneticoSalva = cartaoMagneticoDAO.merge(cartaoMagnetico);
+
+            if(cartaoMagneticoSalva != null){
+                MsgUtil.addInfoMessage("Dados salvos com sucesso!", "");
+            }else{
+                MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
+            }
+            return cadastroCartaoMagnetico;
+        }catch (EJBException ex){
+            ConstraintViolationHandler handler = ConstraintViolationException(ex);
+            if(handler == null){
+                throw ex;
+            }
+            if(handler.getHasError()){
+                MsgUtil.addErrorMessage("Já existe um cartaoMagnetico registrado com este número.", "");
+                return cadastroCartaoMagnetico;
+            }
+            throw ex;
+        }catch (Exception e){
+            throw e;
+        }
 	}
 
 	public CartaoMagneticoDAO getCartaoMagneticoDAO() {

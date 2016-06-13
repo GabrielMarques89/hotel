@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by grupoeuropa on 09/06/16.
  */
 @Entity
-@Table(name = "TBL_QUARTOS")
+@Table(name = "TBL_QUARTOS", uniqueConstraints = @UniqueConstraint(columnNames = {"DS_NUMERO"}, name = "UK_NUMERO_QUARTO"))
 public class Quarto extends Entidade {
 	@Column(name = "DS_NUMERO", nullable = false)
 	private String numero;

@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 @Named
 @SessionScoped
@@ -20,6 +21,9 @@ public class SessionBean extends BaseBean{
 	private Usuario usuarioLogado;
 
 	public String logout() {
+        Usuario user = this.usuarioLogado;
+        user.setUltimoAcesso(new Date());
+        usuarioDAO.merge(user);
 		this.usuarioLogado = null;
 		return loginPage;
 	}
@@ -43,7 +47,7 @@ public class SessionBean extends BaseBean{
 	@Override
 	@PostConstruct
 	public void postConst() {
-		usuarioLogado = null;
+		usuarioLogado = new Usuario();
 	}
 
 	@Override

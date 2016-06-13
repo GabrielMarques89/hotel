@@ -136,7 +136,9 @@ public class ReservaBean extends BaseBean {
 //			TODO: Adequar o handler para ler o erro da constraint e lançar a mensagem especifica, mexer no metodo ConstraintViolationException dentro de utilities
 			if(handler.getHasError()){
 				MsgUtil.addErrorMessage("O quarto escolhido já possui reserva nesta data.", "");
+                return cadastroReserva;
 			}
+            throw ex;
 		}catch (Exception e){
 			throw e;
 		}
