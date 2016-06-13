@@ -23,6 +23,7 @@ public class Listener implements PhaseListener {
 	private FacesContext facesContext;
 
 
+
 	public Listener() {
 		this.urlsPermitidas = new ArrayList<>();
 		this.urlsPermitidas.add("/login.xhtml");

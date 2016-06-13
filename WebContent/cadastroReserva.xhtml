@@ -23,7 +23,7 @@
                             requiredMessage="O campo 'Quarto' é obrigatório."
                             value="#{reservaBean.reserva.quarto.id}">
                         <f:selectItems value="#{reservaBean.listQuartos}" var="item"
-                                       itemValue="#{item.id}" itemLabel="#{item.numero}"/>
+                                       itemValue="#{item.id}" itemLabel="#{item.tipo.nome} (Quarto ##{item.numero})"/>
                     </p:selectOneMenu>
                 </div>
 
@@ -42,6 +42,8 @@
                 </p:panelGrid>
 
                 <div class="form-group">
+                    <p:inputText type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}"/>
+                    <p:inputText type="hidden" name="version" id="versionReserva" value="#{reservaBean.reserva.version}"/>
                     <label for="quantidade-dependentes">Quantidade de dependentes</label>
                     <p:inputText class="form-control" name="quantidade-dependentes" id="quantidade-dependentes"
                                  placeholder="Digite a quantidade de dependentes"

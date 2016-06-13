@@ -64,6 +64,11 @@ public class UsuarioBean extends BaseBean {
 		listaUsuario = userDAO.listAll();
 	}
 
+    public String minhasReservas(){
+
+        return listarReservas;
+    }
+
     public String editar(){
         user = sessionBean.getUsuarioLogado();
         return editarDados;

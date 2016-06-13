@@ -9,6 +9,7 @@ import hotel.dao.QuartoDAO;
 import hotel.dao.ReservaDAO;
 import hotel.dao.UsuarioDAO;
 import hotel.model.Enum.SituacaoReserva;
+import hotel.model.Enum.TipoUsuario;
 import hotel.model.Quarto;
 import hotel.model.Reserva;
 import hotel.model.Usuario;
@@ -73,7 +74,11 @@ public class ReservaBean extends BaseBean {
 	}
 
 	public List<Reserva> getListaReservas() {
-		return reservaDAO.listAll();
+        TipoUsuario tipoUser = sessionBean.getUsuarioLogado().getTipoUsuario();
+        if(tipoUser.equals(TipoUsuario.ADMINISTRADOR) || tipoUser.equals(TipoUsuario.FUNCIONARIO)){
+            return reservaDAO.listAll();
+        }
+        return reservaDAO.listarReservasUsuarioById(sessionBean.getUsuarioLogado().getId());
 	}
 
 	public void setListaReservas(List<Reserva> listaReservas) {
@@ -106,7 +111,8 @@ public class ReservaBean extends BaseBean {
 			reserva.setUsuario(sessionBean.getUsuarioLogado());
 		}
 		else {
-			reserva.setUsuario(usuarioDAO.findById(reserva.getUsuario().getId()));
+            Usuario user = usuarioDAO.findById(reserva.getUsuario().getId());
+			reserva.setUsuario(user);
 		}
 
 		LocalDate now = new LocalDate();
@@ -156,8 +162,8 @@ public class ReservaBean extends BaseBean {
 	public String irAlterarStatus(long id) throws Exception{
 		reserva = reservaDAO.findById(id);
 		if(reserva != null){
-			return alterarStatusReserva;
-		}
+            return alterarStatusReserva;
+        }
 		MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
 		return listarReservas;
 	}
@@ -169,6 +175,13 @@ public class ReservaBean extends BaseBean {
 		reservaDAO.merge(reserva);
 		return listarReservas;
 	}
+
+    public String cancelar(Long id){
+        reserva = reservaDAO.findById(id);
+        reserva.setSituacaoReserva(SituacaoReserva.CANCELADA);
+        reservaDAO.merge(reserva);
+        return listarReservas;
+    }
 
 	public Boolean isEditing(){
 		return reserva.getId()!= null && reserva.getId() > 0;
