@@ -29,12 +29,12 @@
                     <h:outputText value="#{reserva.situacaoReserva}" />
                 </p:column>
 
-
                 <p:column headerText="Ações" class="action-header">
                     <h:form>
                         <p:commandButton value="Editar" id="editar-reserva" action="#{reservaBean.irEditar(reserva.id)}" icon="fa fa-pencil" ajax="false" />
-                        <!--//TODO: CORRIGIR AQUI-->
                         <p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.irAlterarStatus(reserva.id)}" icon="fa fa-flag" ajax="false"/>
+                        <p:commandButton value="Check-out" id="check-out" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-times" ajax="false" rendered="#{reserva.situacaoReserva eq 'HOSPEDADA'}"/>
+                        <p:commandButton value="Check-in" id="check-in" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-check" ajax="false" rendered="#{reserva.situacaoReserva eq 'AGENDADA'}"/>
                     </h:form>
                 </p:column>
             </p:dataTable>

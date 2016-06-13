@@ -84,7 +84,7 @@ public class CartaoMagneticoBean extends BaseBean {
 	}
 
 	public List<CartaoMagnetico> getListaCartoesMagneticos() {
-		return listaCartoesMagneticos;
+		return cartaoMagneticoDAO.listAll();
 	}
 
 	public void setListaCartoesMagneticos(List<CartaoMagnetico> listaCartoesMagneticos) {

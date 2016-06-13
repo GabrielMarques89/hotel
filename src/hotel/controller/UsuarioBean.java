@@ -53,7 +53,7 @@ public class UsuarioBean extends BaseBean {
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
 		}
-        MsgUtil.addWarnMessage("Login ou senha inválidos.", "");
+        MsgUtil.addErrorMessage("Login ou senha inválidos.", "");
 		return loginPage;
 	}
 

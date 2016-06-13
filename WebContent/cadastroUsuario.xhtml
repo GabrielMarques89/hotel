@@ -11,18 +11,18 @@
         <ui:define name="content">
             <h:form class="form">
                 <div class="form-group">
+                    <p:inputText class="form-control" type="hidden" name="usuario-id" id="usuario-id" value="#{clienteBean.usuario.id}"
+                                 requiredMessage="O campo 'id' é obrigatório."
+                                 required="true"/>
                     <label for="usuario-nome-completo">Nome completo</label>
                     <p:inputText class="form-control" type="text" name="usuario-nome-completo" id="usuario-nome-completo" value="#{clienteBean.usuario.nomeCompleto}"
                                  placeholder="Digite seu nome"
                                  requiredMessage="O campo 'Nome completo' é obrigatório."
                                  required="true"/>
-                    <p:inputText class="form-control" type="hidden" name="usuario-id-completo" id="usuario-id" value="#{clienteBean.usuario.id}"
-                                 requiredMessage="O campo 'id completo' é obrigatório."
-                                 required="true"/>
-                    <p:inputText class="form-control" type="hidden" name="usuario-status-completo" status="usuario-status" value="#{clienteBean.usuario.status}"
+                    <p:inputText class="form-control" type="hidden" name="usuario-status" status="usuario-status" value="#{clienteBean.usuario.status}"
                                  requiredMessage="O campo 'status completo' é obrigatório."
                                  required="true"/>
-                    <p:calendar id="usuario-data-criacao" value="#{clienteBean.usuario.dataCriacao}"
+                    <p:calendar id="usuario-data-criacao" value="#{clienteBean.usuario.dataCriacao}" class="hidden"
                                 requiredMessage="O campo 'Data Criacao' é obrigatório."
                                 required="true"/>
                     <p:inputText class="form-control" type="hidden" name="usuario-tipoUsuario-completo" tipoUsuario="usuario-tipoUsuario" value="#{clienteBean.usuario.tipoUsuario}"

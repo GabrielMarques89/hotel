@@ -174,4 +174,15 @@ public class ReservaBean extends BaseBean {
 	public Boolean isEditing(){
 		return reserva.getId()!= null && reserva.getId() > 0;
 	}
+
+	public String checkInOut(long id) throws Exception{
+		reserva = reservaDAO.findById(id);
+		if(reserva.getSituacaoReserva().equals(SituacaoReserva.HOSPEDADA)){
+			reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
+		}else if(reserva.getSituacaoReserva().equals(SituacaoReserva.AGENDADA)){
+			reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
+		}
+		reservaDAO.merge(reserva);
+		return listarReservas;
+	}
 }
