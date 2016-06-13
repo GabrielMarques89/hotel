@@ -16,8 +16,9 @@
                 </div>
                 <div class="form-group">
                     <label for="reserva-cliente">Nome do cliente</label>
-                    <p:inputText class="form-control disabled" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}"/>
-                    <p:inputText class="form-control disabled" type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}"/>
+                    <p:inputText class="form-control" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}"/>
+                    <p:inputText class="form-control" type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}"/>
+                    <p:inputText class="form-control" type="hidden" name="version" version="versionReserva" value="#{reservaBean.reserva.version}"/>
                 </div>
                 <div class="form-group">
                     <label for="reserva-situacao">Situação</label>
