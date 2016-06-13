@@ -47,6 +47,16 @@ public class ReservaBean extends BaseBean {
 
 	private List<Reserva> listaReservas;
 
+	private List<Reserva> reservasFiltradas;
+
+	public List<Reserva> getReservasFiltradas() {
+		return reservasFiltradas;
+	}
+
+	public void setReservasFiltradas(List<Reserva> reservasFiltradas) {
+		this.reservasFiltradas = reservasFiltradas;
+	}
+
 	private Reserva reserva;
 
 	public Reserva getReserva() {

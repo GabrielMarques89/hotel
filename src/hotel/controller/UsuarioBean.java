@@ -51,7 +51,7 @@ public class UsuarioBean extends BaseBean {
 		Usuario usuario = userDAO.login(user.getEmail(),encrypt(user.getSenha()));
 		if(usuario!=null){
 			sessionBean.setUsuarioLogado(usuario);
-			return indexPage;
+			return listarReservas;
 		}
         MsgUtil.addErrorMessage("Login ou senha inválidos.", "");
 		return loginPage;
@@ -82,14 +82,6 @@ public class UsuarioBean extends BaseBean {
         user = userToSave;
         return salvar();
     }
-
-	public String logout() throws Exception{
-		Usuario userToSave = sessionBean.getUsuarioLogado();
-		userToSave.setUltimoAcesso(new Date());
-		userDAO.merge(userToSave);
-		sessionBean.setUsuarioLogado(null);
-		return loginPage;
-	}
 
 	@Override
 	public String salvar() throws Exception{
@@ -138,10 +130,8 @@ public class UsuarioBean extends BaseBean {
                     MsgUtil.addErrorMessage("Este CPF já está sendo utilizado por outro usuário.", "");
                 }
                 return cadastroPage;
-            }catch (Exception e){
-				throw e;
-			}
-		}
+            }
+        }
 		return cadastroPage;
 	}
 }

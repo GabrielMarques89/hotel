@@ -4,11 +4,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
     <ui:composition template="template/layoutAdmin.xhtml">
         <ui:define name="content">
-            <p:dataTable var="reserva" value="#{reservaBean.listaReservas}" style="table-layout: auto !important;">
+            <p:dataTable var="reserva" value="#{reservaBean.listaReservas}"
+                         widgetVar="listaDeReservas" style="table-layout: auto !important;"
+                         emptyMessage="Nenhuma reserva foi encontrada" filteredValue="#{reservaBean.reservasFiltradas}">
                 <p:column headerText="Id">
                     <h:outputText value="#{reserva.id}" />
                 </p:column>
@@ -17,7 +20,17 @@
                     <h:outputText value="#{reserva.quarto.numero}" />
                 </p:column>
 
-                <p:column headerText="Cliente">
+
+                <p:column filterBy="#{reserva.usuario.id}" headerText="Cliente" filterMatchMode="contains">
+                    <f:facet name="filter">
+                        <h:form>
+                            <p:selectOneMenu onchange="PF('listaDeReservas').filter()" >
+                                <f:selectItem itemLabel="Selecione um usuário" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{reservaBean.listUsuarios}" var="user"
+                                               itemValue="#{user.id}" itemLabel="#{user.nomeCompleto}"/>
+                            </p:selectOneMenu>
+                        </h:form>
+                    </f:facet>
                     <h:outputText value="#{reserva.usuario.nomeCompleto}" />
                 </p:column>
 
