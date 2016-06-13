@@ -8,7 +8,7 @@
         <ui:composition template="template/layout.xhtml">
             <ui:define name="content">
                 <div class="acesso container">
-                    <div class="login col-lg-24 centering">
+                    <div class="login col-lg-12 centering">
                         <!-- messages -->
                         <p:messages id="msg"/>
                         <!-- /messages -->
@@ -34,11 +34,11 @@
                                                     requiredMessage="O campo 'Senha' é obrigatório."
                                                     required="true"/>
                                     </div>
-                                    <div class="pull-left">
-                                        <p:commandButton class="btn btn-success" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
+                                    <div class="col-lg-6 pull-left row">
+                                        <p:commandButton class="btn btn-success btn-block" value="Entrar" ajax="false" action="#{usuarioBean.login}"/>
                                     </div>
-                                    <div class="pull-right">
-                                        <a class="ui-button ui-widget ui-state-default ui-corner-all btn btn-primary btn-prime" href="registro.xhtml">
+                                    <div class="col-lg-6 pull-right row">
+                                        <a class="ui-button ui-widget ui-state-default ui-corner-all btn btn-primary btn-prime btn-block" href="registro.xhtml">
                                             <span class="ui-button-text ui-c">Cadastrar</span>
                                         </a>
                                     </div>

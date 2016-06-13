@@ -9,7 +9,7 @@
     <ui:composition template="template/layout.xhtml">
         <ui:define name="content">
             <div class="acesso container">
-                <div class="register col-lg-24 centering">
+                <div class="register col-lg-12 centering">
                     <!-- messages -->
                     <p:messages id="msg"/>
                     <!-- /messages -->
@@ -66,7 +66,14 @@
                                                  requiredMessage="O campo 'Endereço' é obrigatório."
                                                  required="true"/>
                                 </div>
-                                <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.salvar}"/>
+                                <div class="col-lg-6 row pull-left">
+                                    <p:commandButton class="btn btn-success btn-block" value="Cadastrar" ajax="false" action="#{usuarioBean.salvar}"/>
+                                </div>
+                                <div class="col-lg-6 pull-right row">
+                                    <a class="ui-button ui-widget ui-state-default ui-corner-all btn btn-default btn-prime btn-block" href="login.xhtml">
+                                        <span class="ui-button-text ui-c">Voltar</span>
+                                    </a>
+                                </div>
                             </h:form>
                         </div>
                     </div>
