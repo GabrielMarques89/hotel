@@ -113,6 +113,10 @@ table .action-header {
     background-color: #151E2B !important;
 }
 
+.dropdown-menu {
+    text-align: center !important;
+}
+
 /* PRIVATE LAYOUT */
 .private-content.container {
     width: 1000px;
