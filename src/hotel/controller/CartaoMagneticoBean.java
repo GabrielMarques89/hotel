@@ -65,8 +65,8 @@ public class CartaoMagneticoBean extends BaseBean {
             if(handler == null){
                 throw ex;
             }
-            if(handler.getHasError()){
-                MsgUtil.addErrorMessage("Já existe um cartaoMagnetico registrado com este número.", "");
+            if(handler.getConstraintName().equals("UK_CARTAO_CODIGO")){
+                MsgUtil.addErrorMessage("Já existe um Cartao Magnetico registrado com este número.", "");
                 return cadastroCartaoMagnetico;
             }
             throw ex;
@@ -84,7 +84,7 @@ public class CartaoMagneticoBean extends BaseBean {
 	}
 
 	public List<CartaoMagnetico> getListaCartoesMagneticos() {
-		return listaCartoesMagneticos;
+		return cartaoMagneticoDAO.listAll();
 	}
 
 	public void setListaCartoesMagneticos(List<CartaoMagnetico> listaCartoesMagneticos) {

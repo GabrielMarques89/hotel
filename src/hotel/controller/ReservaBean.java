@@ -134,7 +134,7 @@ public class ReservaBean extends BaseBean {
 				throw ex;
 			}
 //			TODO: Adequar o handler para ler o erro da constraint e lançar a mensagem especifica, mexer no metodo ConstraintViolationException dentro de utilities
-			if(handler.getHasError()){
+            if(handler.getConstraintName().equals("UK_DATA_QUARTO")){
 				MsgUtil.addErrorMessage("O quarto escolhido já possui reserva nesta data.", "");
                 return cadastroReserva;
 			}
@@ -173,5 +173,16 @@ public class ReservaBean extends BaseBean {
 
 	public Boolean isEditing(){
 		return reserva.getId()!= null && reserva.getId() > 0;
+	}
+
+	public String checkInOut(long id) throws Exception{
+		reserva = reservaDAO.findById(id);
+		if(reserva.getSituacaoReserva().equals(SituacaoReserva.HOSPEDADA)){
+			reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
+		}else if(reserva.getSituacaoReserva().equals(SituacaoReserva.AGENDADA)){
+			reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
+		}
+		reservaDAO.merge(reserva);
+		return listarReservas;
 	}
 }

@@ -53,7 +53,7 @@ public class UsuarioBean extends BaseBean {
 			sessionBean.setUsuarioLogado(usuario);
 			return indexPage;
 		}
-        MsgUtil.addWarnMessage("Login ou senha inválidos.", "");
+        MsgUtil.addErrorMessage("Login ou senha inválidos.", "");
 		return loginPage;
 	}
 
@@ -122,11 +122,19 @@ public class UsuarioBean extends BaseBean {
 				if(handler == null) {
 					throw e;
 				}
-				if(handler.getHasError()){
+                if(handler.getConstraintName().equals("UK_EMAIL")){
 					MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
-					return cadastroPage;
 				}
-			}catch (Exception e){
+                if(handler.getConstraintName().equals("UK_CPF")){
+                    MsgUtil.addErrorMessage("Este CPF já está sendo utilizado por outro usuário.", "");
+                }
+                // TODO: Descobrir pq a UK está sendo criado com nome aleatório...
+                // Gambiarra.
+                else {
+                    MsgUtil.addErrorMessage("Este CPF já está sendo utilizado por outro usuário.", "");
+                }
+                return cadastroPage;
+            }catch (Exception e){
 				throw e;
 			}
 		}

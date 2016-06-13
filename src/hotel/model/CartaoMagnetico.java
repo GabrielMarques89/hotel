@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "TBL_CARTAO_MAGNETICO", uniqueConstraints = @UniqueConstraint(columnNames = {"DS_CODIGO"}, name = "UK_CARTAO_CODIGO"))
 public class CartaoMagnetico extends Entidade {
-	@Column(name = "DS_CODIGO", nullable = false)
+
+    @Column(name = "DS_CODIGO", nullable = false)
 	private String codigo;
 
 	@Column(name = "VL_CONSUMO", nullable = false)

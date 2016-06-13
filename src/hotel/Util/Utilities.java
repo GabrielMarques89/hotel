@@ -24,7 +24,7 @@ public class Utilities {
 	public static ConstraintViolationHandler ConstraintViolationException(Throwable throwable) {
 		try {
 			if (throwable instanceof ConstraintViolationException) {
-				ConstraintViolationHandler handler = new ConstraintViolationHandler(throwable.getLocalizedMessage(), true);
+				ConstraintViolationHandler handler = new ConstraintViolationHandler(((ConstraintViolationException) throwable).getConstraintName(), true);
 				return handler;
 			}
 			return ConstraintViolationException(throwable.getCause());

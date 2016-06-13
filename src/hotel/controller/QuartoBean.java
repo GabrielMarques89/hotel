@@ -73,7 +73,7 @@ public class QuartoBean extends BaseBean {
             if(handler == null){
                 throw ex;
             }
-            if(handler.getHasError()){
+            if(handler.getConstraintName().equals("UK_NUMERO_QUARTO")){
                 MsgUtil.addErrorMessage("Já existe um quarto registrado com este número.", "");
                 return cadastroQuarto;
             }
