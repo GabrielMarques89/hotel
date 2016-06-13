@@ -20,7 +20,7 @@
 							<h:outputText value="#{reserva.quarto.numero}" />
 						</p:column>
 
-						<p:column headerText="Nome do cliente">
+						<p:column headerText="Cliente">
 							<h:outputText value="#{reserva.usuario.nomeCompleto}" />
 						</p:column>
 
@@ -31,10 +31,11 @@
 						<p:column headerText="Situação">
 							<h:outputText value="#{reserva.situacaoReserva}" />
 						</p:column>
+
 						<p:column headerText="Ações" class="action-header">
 							<h:form>
-								<!--//TODO: CORRIGIR AQUI-->
-								<p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.alterarStatus(reserva.id, null)}" icon="fa fa-flag" ajax="false"/>
+								<p:commandButton value="Check-out" id="check-out" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-times" ajax="false" rendered="#{reserva.situacaoReserva eq 'HOSPEDADA'}"/>
+								<p:commandButton value="Check-in" id="check-in" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-check" ajax="false" rendered="#{reserva.situacaoReserva eq 'AGENDADA'}"/>
 							</h:form>
 						</p:column>
 					</p:dataTable>

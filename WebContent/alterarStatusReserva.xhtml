@@ -12,8 +12,8 @@
             <h:form class="form">
                 <div class="form-group">
                     <label for="reserva-quarto">Número do quarto</label>
-                    <p:inputText class="form-control disabled" name="reserva-quarto" id="reserva-quarto" value="#{reservaBean.reserva.quarto.numero}"/>
-                    <!--TODO: Campos com class -> disabled tem que ficar inativos, mas transmitir os dados...-->
+                    <p:inputText class="form-control" id="reserva-quarto-readyOnly" name="reserva-quarto-readyOnly" value="#{reservaBean.reserva.quarto.numero}" readonly="true"/>
+                    <p:inputText class="form-control" type="hidden" name="reserva-quarto" id="reserva-quarto" value="#{reservaBean.reserva.quarto.numero}"/>
                 </div>
                 <div class="form-group">
                     <label for="reserva-cliente">Nome do cliente</label>

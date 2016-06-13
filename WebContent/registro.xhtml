@@ -28,7 +28,9 @@
                                     <p:inputText class="form-control" type="email" name="usuario-email" id="usuario-email" value="#{usuarioBean.user.email}"
                                                  placeholder="Digite seu e-mail"
                                                  requiredMessage="O campo 'E-mail' é obrigatório."
-                                                 required="true"/>
+                                                 required="true">
+                                        <f:validator validatorId="validatorEmail" />
+                                    </p:inputText>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-senha">Senha</label>
@@ -54,7 +56,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-cpf">CPF</label>
-                                    <p:inputMask id="usuario-cpf" value="#{usuarioBean.user.cpf}" mask="999-999-999-99" requiredMessage="O campo 'CPF' é obrigatório." placeholder="Digite seu CPF" required="true"/>
+                                    <p:inputMask id="usuario-cpf" value="#{usuarioBean.user.cpf}" mask="999-999-999-99" requiredMessage="O campo 'CPF' é obrigatório."
+                                                 placeholder="Digite seu CPF"
+                                                 required="true">
+                                        <f:validator validatorId="validatorCPF" />
+                                    </p:inputMask>
                                 </div>
                                 <div class="form-group">
                                     <label for="usuario-telefone">Telefone</label>

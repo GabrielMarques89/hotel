@@ -62,7 +62,6 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 		}catch (Exception e){
 			throw e;
 		}
-
 	}
 
 	public Boolean emailUnico(String email)throws Exception {

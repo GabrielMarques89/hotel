@@ -82,7 +82,6 @@ public class UsuarioBean extends BaseBean {
 		Usuario userToSave = sessionBean.getUsuarioLogado();
 		userToSave.setUltimoAcesso(new Date());
 		userDAO.merge(userToSave);
-		//Todo: Descobrir pq merge não salva o horário .... o persist salva, mas gera uma exceção de detatched entity..
 		sessionBean.setUsuarioLogado(null);
 		return loginPage;
 	}
@@ -96,7 +95,7 @@ public class UsuarioBean extends BaseBean {
 		Years age = Years.yearsBetween(nascimento, now);
 		Years minAge = Years.years(18);
 		if(!age.isGreaterThan(minAge)){
-			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
+			MsgUtil.addErrorMessage("A data de nascimento não é valida.", "");
 			existeErro = true;
 		}
 

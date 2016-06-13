@@ -26,7 +26,8 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <p:panelGrid rendered="#{sessionBean.isAdmin()}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
                                aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Usuários<span
                                     class="caret"></span></a>
                         </p:panelGrid>
@@ -51,7 +52,8 @@
                     </li>
                     <li class="dropdown">
                         <p:panelGrid rendered="#{sessionBean.isAdmin()}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
                                aria-expanded="false"><i class="fa fa-bed" aria-hidden="true"></i> Quartos<span
                                     class="caret"></span></a>
                         </p:panelGrid>
@@ -65,8 +67,10 @@
                     </li>
                     <li class="dropdown">
                         <p:panelGrid rendered="#{sessionBean.isAdmin()}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                               aria-expanded="false"><i class="fa fa-credit-card" aria-hidden="true"></i> Cartões Magnéticos<span
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"><i class="fa fa-credit-card"
+                                                        aria-hidden="true"></i> Cartões Magnéticos<span
                                     class="caret"></span></a>
                         </p:panelGrid>
                         <ul class="dropdown-menu">
@@ -77,25 +81,27 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="h-active-dark-blue active"><a href="#"> Último acesso: #{sessionBean.usuarioLogado.ultimoAcesso}</a></li>
+                    <li class="h-active-dark-blue active"><a href="#"><i class="fa fa-clock-o"
+                                                                         aria-hidden="true"></i> Último acesso: #{sessionBean.usuarioLogado.ultimoAcesso}
+                    </a></li>
                     <li id="menu-usuario" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"> #{sessionBean.usuarioLogado.nomeCompleto} <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <h:form>
-                                        <h:commandButton id="editar-dados" class="btn-dropdown btn-default"
-                                                         action="#{usuarioBean.editar}" value="Editar dados"/>
-                                    </h:form>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <h:form>
-                                        <h:commandButton id="deslogar" class="btn-dropdown btn-default"
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h:form>
+                                    <h:commandButton id="editar-dados" class="btn-dropdown btn-default"
+                                                     action="#{usuarioBean.editar}" value="Editar dados"/>
+                                </h:form>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <h:form>
+                                    <h:commandButton id="deslogar" class="btn-dropdown btn-default"
                                                      action="#{sessionBean.logout}" value="Deslogar"/>
-                                    </h:form>
-                                </li>
-                            </ul>
+                                </h:form>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
