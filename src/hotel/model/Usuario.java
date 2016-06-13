@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "TBL_USUARIOS")
+@Table(name = "TBL_USUARIOS", uniqueConstraints = @UniqueConstraint(name = "UK_EMAIL",columnNames = {"DS_EMAIL"}))
 public class Usuario extends Entidade {
 
     @Column(name = "TP_STATUS", nullable = false)

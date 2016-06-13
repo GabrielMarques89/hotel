@@ -2,6 +2,7 @@ package hotel.controller;
 
 import hotel.Util.MsgUtil;
 import hotel.dao.UsuarioDAO;
+import hotel.model.Enum.TipoUsuario;
 import hotel.model.Usuario;
 
 import javax.annotation.PostConstruct;
@@ -51,6 +52,13 @@ public class SessionBean extends BaseBean{
 	@Override
 	public String salvar() throws Exception {
 		return null;
+	}
+
+	public Boolean isAdmin(){
+		if(this.getUsuarioLogado().getTipoUsuario() == TipoUsuario.ADMINISTRADOR || this.getUsuarioLogado().getTipoUsuario() == TipoUsuario.FUNCIONARIO){
+			return true;
+		}
+		return false;
 	}
 
 	public String editarDados() throws Exception {

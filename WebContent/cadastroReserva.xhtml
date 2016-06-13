@@ -16,22 +16,30 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dtFinal">Data final</label>
-                    <p:calendar id="dtFinal" name="dtFinal" value="#{reservaBean.reserva.dataFinal}"
-                        required="true" requiredMessage="O campo 'Data final' é obrigatório."/>
-                </div>
-
-                <div class="form-group">
-                    <label for="tipo-quarto">Tipo de quarto</label>
+                    <label for="tipo-quarto">Quarto</label>
                     <p:selectOneMenu
                             name="tipo-quarto" style="width: 100%"
                             id="tipo-quarto" placeholder="Escolha o quarto" required="true"
-                            requiredMessage="O campo 'Tipo de quarto' é obrigatório."
+                            requiredMessage="O campo 'Quarto' é obrigatório."
                             value="#{reservaBean.reserva.quarto.id}">
                         <f:selectItems value="#{reservaBean.listQuartos}" var="item"
                                        itemValue="#{item.id}" itemLabel="#{item.numero}"/>
                     </p:selectOneMenu>
                 </div>
+
+                <p:panelGrid rendered="#{sessionBean.isAdmin()}">
+                    <div class="form-group">
+                        <label for="tipo-usuario">Usuario</label>
+                        <p:selectOneMenu
+                                name="tipo-usuario" style="width: 100%"
+                                id="tipo-usuario" placeholder="Escolha o usuario" required="true"
+                                requiredMessage="O campo 'Usuario' é obrigatório."
+                                value="#{reservaBean.reserva.usuario.id}">
+                            <f:selectItems value="#{reservaBean.listUsuarios}" var="user"
+                                           itemValue="#{user.id}" itemLabel="#{user.nomeCompleto}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </p:panelGrid>
 
                 <div class="form-group">
                     <label for="quantidade-dependentes">Quantidade de dependentes</label>
@@ -41,7 +49,6 @@
                                  requiredMessage="O campo 'Quantidade de dependentes' é obrigatório."
                                  required="true"/>
                 </div>
-
                 <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false"
                                  action="#{reservaBean.salvar}"/>
             </h:form>

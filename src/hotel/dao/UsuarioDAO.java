@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +48,21 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	public List<Usuario> listarClientes(){
+		StringBuilder queryHql = new StringBuilder(selecionarUsuario);
+		queryHql.append("WHERE USR.tipoUsuario = :tipoUsuario");
+		try{
+			Query query = this.entityManager.createQuery(queryHql.toString());
+			query.setParameter("tipoUsuario", TipoUsuario.CLIENTE);
+			return query.getResultList();
+		}catch (NoResultException e){
+			return new ArrayList<>();
+		}catch (Exception e){
+			throw e;
+		}
+
 	}
 
 	public Boolean emailUnico(String email)throws Exception {

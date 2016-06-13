@@ -1,22 +1,27 @@
 package hotel.controller;
 
+import hotel.ExceptionHandlers.ConstraintViolationHandler;
 import hotel.Util.MsgUtil;
 import hotel.dao.UsuarioDAO;
 import hotel.model.Enum.StatusHospede;
 import hotel.model.Enum.TipoUsuario;
 import hotel.model.Usuario;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
+import static hotel.Util.Utilities.ConstraintViolationException;
 
 @Named
 @ConversationScoped
-public class UsuarioBean extends BaseBean{
+public class UsuarioBean extends BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -71,33 +76,37 @@ public class UsuarioBean extends BaseBean{
 	public String salvar() throws Exception{
 		Boolean existeErro = false;
 
-		//TODO: NÃO ESTÁ FUNCIONANDO
-//		if(user.getNascimento().equals(new Date()) || user.getNascimento().after(new Date())){
-//			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
-//			existeErro = true;
-//		}
-
-		//TODO: UNICIDADE NÃO ESTÁ FUNCIONANDO
-//		if(!userDAO.emailUnico(user.getEmail())){
-//			MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
-//			existeErro = true;
-//		}
+		LocalDate now = new LocalDate();
+		LocalDate nascimento = new LocalDate(user.getNascimento());
+		Years age = Years.yearsBetween(nascimento, now);
+		Years minAge = Years.years(18);
+		if(!age.isGreaterThan(minAge)){
+			MsgUtil.addWarnMessage("A data de nascimento não é valida.", "");
+			existeErro = true;
+		}
 
 		if(!existeErro){
-			//Inserindo a data de criação
 			user.setDataCriacao(new Date());
-
-			//Inserindo o status do usuário
 			user.setStatus(StatusHospede.ATIVO);
-
-			//Inserido o tipo de usuário
 			user.setTipoUsuario(TipoUsuario.CLIENTE);
 
-			Usuario usuario = userDAO.merge(user);
-
-			if(usuario != null){
-				sessionBean.setUsuarioLogado(usuario);
-				return indexPage;
+			try{
+				Usuario usuario = userDAO.merge(user);
+				if(usuario != null){
+					sessionBean.setUsuarioLogado(usuario);
+					return indexPage;
+				}
+			}catch (EJBException e){
+				ConstraintViolationHandler handler = ConstraintViolationException(e);
+				if(handler == null) {
+					throw e;
+				}
+				if(handler.getContraintName().equals("DS_EMAIL")){
+					MsgUtil.addErrorMessage("Este e-mail já está sendo utilizado por outro usuário.", "");
+					return cadastroPage;
+				}
+			}catch (Exception e){
+				throw e;
 			}
 		}
 		return cadastroPage;

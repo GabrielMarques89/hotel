@@ -9,13 +9,14 @@ import java.util.Date;
  * Created by grupoeuropa on 09/06/16.
  */
 @Entity
-@Table(name = "TBL_RESERVAS")
+@Table(name = "TBL_RESERVAS", uniqueConstraints = @UniqueConstraint(columnNames = {"ID_QUARTO", "DT_INICIO"}, name = "UK_DATA_QUARTO"))
 public class Reserva extends Entidade{
+
 	@Column(name = "DT_INICIO", nullable = false)
 	private Date dataInicial;
 
-	@Column(name = "DT_FIM")
-	private Date dataFinal;
+//	@Column(name = "DT_FIM")
+//	private Date dataFinal;
 
 	@Column(name = "QT_DEPENDENTES")
 	private int quantiaDependentes;
@@ -43,13 +44,13 @@ public class Reserva extends Entidade{
 		this.dataInicial = dataInicial;
 	}
 
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
+//	public Date getDataFinal() {
+//		return dataFinal;
+//	}
+//
+//	public void setDataFinal(Date dataFinal) {
+//		this.dataFinal = dataFinal;
+//	}
 
 	public int getQuantiaDependentes() {
 		return quantiaDependentes;

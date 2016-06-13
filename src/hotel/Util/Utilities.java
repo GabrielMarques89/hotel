@@ -1,11 +1,10 @@
 package hotel.Util;
 
+import hotel.ExceptionHandlers.ConstraintViolationHandler;
 import hotel.model.Entidade;
+import org.hibernate.exception.ConstraintViolationException;
 
 import javax.swing.text.MaskFormatter;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +19,19 @@ public class Utilities {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public static ConstraintViolationHandler ConstraintViolationException(Throwable throwable) {
+		try {
+			if (throwable instanceof ConstraintViolationException) {
+				ConstraintViolationHandler handler = new ConstraintViolationHandler(((ConstraintViolationException) throwable).getLocalizedMessage(), true);
+				return handler;
+			}
+			return ConstraintViolationException(throwable.getCause());
+		} catch (NullPointerException e2) {
+			System.out.println(e2);
+		}
+		return null;
 	}
 
 	public static String formatarCep(String value) throws Exception{
@@ -108,13 +120,6 @@ public class Utilities {
 		}
 		soma = 11 - soma % 11;
 		return soma > 9 ? 0 : soma;
-	}
-
-	public static String printStackToString(Throwable t) {
-		Writer result = new StringWriter();
-		PrintWriter printWriter = new PrintWriter(result);
-		t.printStackTrace(printWriter);
-		return result.toString();
 	}
 
 	public static Boolean doublePositive(Double valor) {

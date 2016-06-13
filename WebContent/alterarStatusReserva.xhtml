@@ -17,6 +17,7 @@
                 <div class="form-group">
                     <label for="reserva-cliente">Nome do cliente</label>
                     <p:inputText class="form-control" name="reserva-cliente" id="reserva-cliente" value="#{reservaBean.reserva.usuario.nomeCompleto}" readonly="true"/>
+                    <p:inputText class="form-control" type="hidden" name="id" id="idReserva" value="#{reservaBean.reserva.id}" readonly="true"/>
                 </div>
                 <div class="form-group">
                     <!--TODO - Corrigir... genero nao esta aparecendo ...-->

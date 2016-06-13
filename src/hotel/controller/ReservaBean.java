@@ -3,6 +3,7 @@ package hotel.controller;
  * Created by grupoeuropa on 10/06/16.
  */
 
+import hotel.ExceptionHandlers.ConstraintViolationHandler;
 import hotel.Util.MsgUtil;
 import hotel.dao.QuartoDAO;
 import hotel.dao.ReservaDAO;
@@ -11,18 +12,21 @@ import hotel.model.Enum.SituacaoReserva;
 import hotel.model.Quarto;
 import hotel.model.Reserva;
 import hotel.model.Usuario;
+import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+import static hotel.Util.Utilities.ConstraintViolationException;
 
 @Named
 @ConversationScoped
@@ -38,7 +42,7 @@ public class ReservaBean extends BaseBean {
 
 	private List<Quarto> listQuartos;
 
-	private List<Usuario> listUsuarios;
+	private List<Usuario> listaClientes;
 
 	private List<Reserva> listaReservas;
 
@@ -61,11 +65,11 @@ public class ReservaBean extends BaseBean {
 	}
 
 	public List<Usuario> getListUsuarios() {
-		return usuarioDAO.listAll();
+		return usuarioDAO.listarClientes();
 	}
 
 	public void setListUsuarios(List<Usuario> listUsuarios) {
-		this.listUsuarios = listUsuarios;
+		this.listaClientes = listUsuarios;
 	}
 
 	public List<Reserva> getListaReservas() {
@@ -98,26 +102,25 @@ public class ReservaBean extends BaseBean {
 
 	@Override
 	public String salvar() throws Exception{
-		boolean existeErro = false;
-
-		//Data inicial é maior que data final?
-		if(reserva.getDataInicial().after(reserva.getDataFinal())){
-            MsgUtil.addErrorMessage("Erro! A 'Data inicial' não pode ser posterior à 'Data final'.", "");
-            existeErro = true;
-        }
-		//Data inicial e final são iguais?
-		if(reserva.getDataInicial().equals(reserva.getDataFinal())){
-			MsgUtil.addErrorMessage("Erro! A 'Data inicial' e 'Data final' não podem ser iguais.", "");
-			existeErro = true;
-		}
-		//Data inicial é menor que o data atual?
-		if(reserva.getDataInicial().before(new Date()) && reserva.getDataInicial().equals(new Date())){
-			MsgUtil.addErrorMessage("Erro! A 'Data inicial' não pode ser anterior ou igual à data atual.", "");
-			existeErro = true;
-		}
-
-		if(!existeErro){
+		if(!sessionBean.isAdmin()){
 			reserva.setUsuario(sessionBean.getUsuarioLogado());
+		}
+		else {
+			reserva.setUsuario(usuarioDAO.findById(reserva.getUsuario().getId()));
+		}
+
+		LocalDate now = new LocalDate();
+		LocalDate dataInicial = new LocalDate(reserva.getDataInicial());
+
+		if(dataInicial.isBefore(now)){
+			MsgUtil.addErrorMessage("Erro, a data inicial não pode ser anterior a data atual.", "");
+			return cadastroReserva;
+		}
+		if(reserva.getSituacaoReserva() == null){
+			reserva.setSituacaoReserva(SituacaoReserva.AGENDADA);
+		}
+
+		try{
 			Reserva reservaSalva = reservaDAO.merge(reserva);
 
 			if(reservaSalva != null){
@@ -125,7 +128,18 @@ public class ReservaBean extends BaseBean {
 			}else{
 				MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
 			}
-        }
+		}catch (EJBException ex){
+			ConstraintViolationHandler handler = ConstraintViolationException(ex);
+			if(handler == null){
+				throw ex;
+			}
+//			TODO: Adequar o handler para ler o erro da constraint e lançar a mensagem especifica, mexer no metodo ConstraintViolationException dentro de utilities
+			if(handler.getHasError()){
+				MsgUtil.addErrorMessage("O quarto escolhido já possui reserva nesta data.", "");
+			}
+		}catch (Exception e){
+			throw e;
+		}
 		return cadastroReserva;
 	}
 
@@ -148,7 +162,14 @@ public class ReservaBean extends BaseBean {
 	}
 
 	public String alterarStatus() throws Exception{
+		SituacaoReserva situ = reserva.getSituacaoReserva();
+		reserva = reservaDAO.findById(reserva.getId());
+		reserva.setSituacaoReserva(situ);
 		reservaDAO.merge(reserva);
 		return listarReservas;
+	}
+
+	public Boolean isEditing(){
+		return reserva.getId()!= null && reserva.getId() > 0;
 	}
 }
