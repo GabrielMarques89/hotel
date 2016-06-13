@@ -21,11 +21,12 @@ public class SessionBean extends BaseBean{
 	private Usuario usuarioLogado;
 
 	public String logout() {
-        Usuario user = this.usuarioLogado;
-        user.setUltimoAcesso(new Date());
-        usuarioDAO.merge(user);
-		this.usuarioLogado = null;
-		return loginPage;
+        Long id = sessionBean.getUsuarioLogado().getId();
+        Usuario userToSave = usuarioDAO.findById(id);
+        userToSave.setUltimoAcesso(new Date());
+        usuarioDAO.merge(userToSave);
+        usuarioLogado = null;
+        return loginPage;
 	}
 
 	public String goHome() {
@@ -56,11 +57,9 @@ public class SessionBean extends BaseBean{
 	}
 
 	public Boolean isAdmin(){
-		if(this.getUsuarioLogado().getTipoUsuario() == TipoUsuario.ADMINISTRADOR || this.getUsuarioLogado().getTipoUsuario() == TipoUsuario.FUNCIONARIO){
-			return true;
-		}
-		return false;
-	}
+        TipoUsuario tipoUser = this.getUsuarioLogado().getTipoUsuario();
+        return tipoUser == TipoUsuario.ADMINISTRADOR || tipoUser == TipoUsuario.FUNCIONARIO;
+    }
 
 	public String editarDados() throws Exception {
 		Usuario usuarioDB = usuarioDAO.findById(usuarioLogado.getId());

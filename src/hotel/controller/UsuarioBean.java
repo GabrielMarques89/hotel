@@ -83,14 +83,6 @@ public class UsuarioBean extends BaseBean {
         return salvar();
     }
 
-	public String logout() throws Exception{
-		Usuario userToSave = sessionBean.getUsuarioLogado();
-		userToSave.setUltimoAcesso(new Date());
-		userDAO.merge(userToSave);
-		sessionBean.setUsuarioLogado(null);
-		return loginPage;
-	}
-
 	@Override
 	public String salvar() throws Exception{
 		Boolean existeErro = false;
@@ -138,10 +130,8 @@ public class UsuarioBean extends BaseBean {
                     MsgUtil.addErrorMessage("Este CPF já está sendo utilizado por outro usuário.", "");
                 }
                 return cadastroPage;
-            }catch (Exception e){
-				throw e;
-			}
-		}
+            }
+        }
 		return cadastroPage;
 	}
 }
