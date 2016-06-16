@@ -91,6 +91,21 @@ public class ReservaBean extends BaseBean {
         return reservaDAO.listarReservasUsuarioById(sessionBean.getUsuarioLogado().getId());
 	}
 
+    public Boolean canCancel(Long reservaId){
+        SituacaoReserva situacaoReserva  = reservaDAO.findById(reservaId).getSituacaoReserva();
+        return situacaoReserva.equals(SituacaoReserva.ATRASADA) || situacaoReserva.equals(SituacaoReserva.AGENDADA) || situacaoReserva.equals(SituacaoReserva.ATIVA);
+    }
+
+    public Boolean canCheckIn(Long reservaId){
+        SituacaoReserva situacaoReserva  = reservaDAO.findById(reservaId).getSituacaoReserva();
+        return situacaoReserva.equals(SituacaoReserva.AGENDADA) || situacaoReserva.equals(SituacaoReserva.ATRASADA);
+    }
+
+    public Boolean canCheckOut(Long reservaId){
+        SituacaoReserva situacaoReserva  = reservaDAO.findById(reservaId).getSituacaoReserva();
+        return situacaoReserva.equals(SituacaoReserva.HOSPEDADA);
+    }
+
 	public void setListaReservas(List<Reserva> listaReservas) {
 		this.listaReservas = listaReservas;
 	}
@@ -132,7 +147,7 @@ public class ReservaBean extends BaseBean {
 			MsgUtil.addErrorMessage("Erro, a data inicial não pode ser anterior a data atual.", "");
 			return cadastroReserva;
 		}
-		if(reserva.getSituacaoReserva() == null){
+		if(isContextReservaOfKind(null)){
 			reserva.setSituacaoReserva(SituacaoReserva.AGENDADA);
 		}
 
@@ -157,7 +172,7 @@ public class ReservaBean extends BaseBean {
 		}catch (Exception e){
 			throw e;
 		}
-		return cadastroReserva;
+		return listarReservas;
 	}
 
 	public String irEditar(long id) throws Exception{
@@ -199,12 +214,17 @@ public class ReservaBean extends BaseBean {
 
 	public String checkInOut(long id) throws Exception{
 		reserva = reservaDAO.findById(id);
-		if(reserva.getSituacaoReserva().equals(SituacaoReserva.HOSPEDADA)){
-			reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
-		}else if(reserva.getSituacaoReserva().equals(SituacaoReserva.AGENDADA)){
-			reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
+		if(isContextReservaOfKind(SituacaoReserva.HOSPEDADA)){
+            reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
+		}else if(isContextReservaOfKind(SituacaoReserva.AGENDADA) || isContextReservaOfKind(SituacaoReserva.ATRASADA)){
+            reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
 		}
 		reservaDAO.merge(reserva);
 		return listarReservas;
 	}
+
+    private Boolean isContextReservaOfKind(SituacaoReserva situ){
+        return this.reserva.isOfKind(situ);
+    }
+
 }

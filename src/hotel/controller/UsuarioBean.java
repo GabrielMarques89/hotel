@@ -132,6 +132,6 @@ public class UsuarioBean extends BaseBean {
                 return cadastroPage;
             }
         }
-		return cadastroPage;
+		return listarUsuarios;
 	}
 }

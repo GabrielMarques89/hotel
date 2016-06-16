@@ -44,13 +44,9 @@ public class Reserva extends Entidade{
 		this.dataInicial = dataInicial;
 	}
 
-//	public Date getDataFinal() {
-//		return dataFinal;
-//	}
-//
-//	public void setDataFinal(Date dataFinal) {
-//		this.dataFinal = dataFinal;
-//	}
+    public Boolean isOfKind(SituacaoReserva situ){
+        return this.getSituacaoReserva().equals(situ);
+    }
 
 	public int getQuantiaDependentes() {
 		return quantiaDependentes;
