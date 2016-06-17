@@ -8,7 +8,9 @@
 
         <p:column headerText="Reserva">
             <h:outputText
-                    value="Data: #{cartaoMagnetico.reserva.dataInicial} , Cliente #{cartaoMagnetico.reserva.usuario.nomeCompleto}" />
+                    value="Data: #{cartaoMagnetico.reserva.dataInicial} , Cliente #{cartaoMagnetico.reserva.usuario.nomeCompleto}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" style="align-content: center"/>
+            </h:outputText>
         </p:column>
 
         <p:column headerText="Consumo">

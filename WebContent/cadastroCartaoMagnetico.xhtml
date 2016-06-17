@@ -18,9 +18,9 @@
                             id="reserva" placeholder="Escolha a reserva" required="true"
                             requiredMessage="O campo 'Reserva' é obrigatório."
                             value="#{cartaoMagneticoBean.cartaoMagnetico.reserva.id}">
-                        <f:selectItems value="#{reservaBean.listaReservas}" var="itemReserva"
+                        <f:selectItems value="#{reservaBean.listaReservasHospedadas}" var="itemReserva"
                                        itemValue="#{itemReserva.id}"
-                                       itemLabel="#{itemReserva.id},#{itemReserva.dataInicial},#{itemReserva.usuario.nomeCompleto}"/>
+                                       itemLabel="Quarto - #{itemReserva.quarto.numero} / Data: #{reservaBean.formatDate(itemReserva.dataInicial)}, Hospede Titular: #{itemReserva.usuario.nomeCompleto}"/>
                     </p:selectOneMenu>
                 </div>
                 <div class="form-group">

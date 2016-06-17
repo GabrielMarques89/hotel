@@ -47,7 +47,17 @@ public class ReservaBean extends BaseBean {
 
 	private List<Reserva> listaReservas;
 
-	private List<Reserva> reservasFiltradas;
+    private List<Reserva> listaReservasHospedadas;
+
+    public List<Reserva> getListaReservasHospedadas() {
+        return listaReservasHospedadas;
+    }
+
+    public void setListaReservasHospedadas(List<Reserva> listaReservasHospedadas) {
+        this.listaReservasHospedadas = reservaDAO.listarReservasByStatus(SituacaoReserva.HOSPEDADA);
+    }
+
+    private List<Reserva> reservasFiltradas;
 
 	public List<Reserva> getReservasFiltradas() {
 		return reservasFiltradas;
@@ -146,7 +156,7 @@ public class ReservaBean extends BaseBean {
 			MsgUtil.addErrorMessage("Erro, a data inicial não pode ser anterior a data atual.", "");
 			return cadastroReserva;
 		}
-		if(isContextReservaOfKind(null)){
+		if(reserva.getSituacaoReserva()==null){
 			reserva.setSituacaoReserva(SituacaoReserva.AGENDADA);
 		}
 
@@ -225,5 +235,4 @@ public class ReservaBean extends BaseBean {
     private Boolean isContextReservaOfKind(SituacaoReserva situ){
         return this.reserva.isOfKind(situ);
     }
-
 }
