@@ -51,7 +51,6 @@ public class SessionBean extends BaseBean{
 		usuarioLogado = new Usuario();
 	}
 
-	@Override
 	public String salvar() throws Exception {
 		return null;
 	}

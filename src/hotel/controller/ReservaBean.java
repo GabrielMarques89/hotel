@@ -130,7 +130,6 @@ public class ReservaBean extends BaseBean {
 		requestContext.execute("PF('dlg').show()");
 	}
 
-	@Override
 	public String salvar() throws Exception{
 		if(!sessionBean.isAdmin()){
 			reserva.setUsuario(sessionBean.getUsuarioLogado());

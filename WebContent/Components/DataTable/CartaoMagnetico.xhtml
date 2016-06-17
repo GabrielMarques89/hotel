@@ -1,0 +1,27 @@
+<f:view xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <p:dataTable id="cartaoDT" var="cartaoMagnetico" value="#{cartaoMagneticoBean.listaCartoesMagneticos}">
+        <p:column headerText="Código">
+            <h:outputText value="#{cartaoMagnetico.codigo}" />
+        </p:column>
+
+        <p:column headerText="Reserva">
+            <h:outputText
+                    value="Data: #{cartaoMagnetico.reserva.dataInicial} , Cliente #{cartaoMagnetico.reserva.usuario.nomeCompleto}" />
+        </p:column>
+
+        <p:column headerText="Consumo">
+            <h:outputText value="#{cartaoMagnetico.consumo}" />
+        </p:column>
+
+        <p:column headerText="Atividade">
+            <h:outputText value="#{cartaoMagnetico.situacao}" />
+        </p:column>
+
+        <p:column headerText="Ações" class="action-header">
+            <p:commandButton value="Desativar" id="excluir-quarto" action="#{cartaoMagneticoBean.alternarSitu(cartaoMagnetico.id)}"
+                             icon="fa fa-trash" ajax="true" update="cartaoDT"/>
+        </p:column>
+    </p:dataTable>
+</f:view>

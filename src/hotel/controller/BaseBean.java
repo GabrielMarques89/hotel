@@ -37,6 +37,4 @@ public abstract class BaseBean implements Serializable {
 	public String encrypt(String value){
 		return DigestUtils.sha1Hex(value);
 	}
-
-	public abstract String salvar() throws Exception;
 }

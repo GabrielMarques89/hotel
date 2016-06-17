@@ -54,6 +54,9 @@
                 <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false"
                                  action="#{reservaBean.salvar}"/>
             </h:form>
+            <div>
+                <ui:include src="Components/DataTable/Reserva.xhtml"/>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

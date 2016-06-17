@@ -7,7 +7,8 @@ import hotel.ExceptionHandlers.ConstraintViolationHandler;
 import hotel.Util.MsgUtil;
 import hotel.dao.CartaoMagneticoDAO;
 import hotel.model.CartaoMagnetico;
-import hotel.model.Quarto;
+import hotel.model.Enum.Situacao;
+import hotel.model.Reserva;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
@@ -15,6 +16,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.UUID;
 
 import static hotel.Util.Utilities.ConstraintViolationException;
 
@@ -46,12 +48,18 @@ public class CartaoMagneticoBean extends BaseBean {
 	@PostConstruct
 	public void postConst() {
 		cartaoMagnetico = new CartaoMagnetico();
-		cartaoMagnetico.setQuarto(new Quarto());
+		cartaoMagnetico.setReserva(new Reserva());
 	}
 
-	@Override
-	public String salvar() {
+	public void salvar() {
         try{
+	        if(cartaoMagnetico.getSituacao() == null){
+		        cartaoMagnetico.setSituacao(Situacao.Ativo);
+	        }
+	        cartaoMagnetico.setCodigo(UUID.randomUUID().toString());
+	        while(!cartaoMagneticoDAO.hasUniqueUuid(cartaoMagnetico)){
+		        cartaoMagnetico.setCodigo(UUID.randomUUID().toString());
+	        }
             CartaoMagnetico cartaoMagneticoSalva = cartaoMagneticoDAO.merge(cartaoMagnetico);
 
             if(cartaoMagneticoSalva != null){
@@ -59,19 +67,17 @@ public class CartaoMagneticoBean extends BaseBean {
             }else{
                 MsgUtil.addErrorMessage("Desculpe, mas não foi possível salvar os dados.", "");
             }
-            return cadastroCartaoMagnetico;
         }catch (EJBException ex){
             ConstraintViolationHandler handler = ConstraintViolationException(ex);
             if(handler == null){
                 throw ex;
             }
-            if(handler.getConstraintName().equals("UK_CARTAO_CODIGO")){
+            if(handler.getConstraintName().equals("UK_CARTAO_RESERVA")){
                 MsgUtil.addErrorMessage("Já existe um Cartao Magnetico registrado com este número.", "");
-                return cadastroCartaoMagnetico;
             }
             throw ex;
         }catch (Exception e){
-            throw e;
+	        throw e;
         }
 	}
 
@@ -100,13 +106,13 @@ public class CartaoMagneticoBean extends BaseBean {
 		return listarCartoesMagneticos;
 	}
 
-	public String excluir(long id) throws Exception{
+	public void alternarSitu(long id){
 		cartaoMagnetico = cartaoMagneticoDAO.findById(id);
-		if(cartaoMagnetico != null){
-            cartaoMagneticoDAO.remove(cartaoMagnetico);
-        }else{
-            MsgUtil.addErrorMessage("Desculpe, mas não o cliente não foi encontrado.", "");
-        }
-		return listarQuartos;
+		if(cartaoMagnetico.getSituacao().equals(Situacao.Ativo)){
+			cartaoMagnetico.setSituacao(Situacao.Inativo);
+		}else{
+			cartaoMagnetico.setSituacao(Situacao.Ativo);
+		}
+		cartaoMagneticoDAO.merge(cartaoMagnetico);
 	}
 }

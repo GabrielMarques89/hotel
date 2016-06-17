@@ -83,7 +83,6 @@ public class UsuarioBean extends BaseBean {
         return salvar();
     }
 
-	@Override
 	public String salvar() throws Exception{
 		Boolean existeErro = false;
 

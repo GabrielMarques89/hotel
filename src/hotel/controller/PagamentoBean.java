@@ -37,7 +37,6 @@ public class PagamentoBean extends BaseBean {
 		pagamento.setReserva(new Reserva());
 	}
 
-	@Override
 	public String salvar() {
 		return null;
 	}

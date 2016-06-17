@@ -1,0 +1,58 @@
+<f:view xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:form>
+        <p:dataTable var="reserva" value="#{reservaBean.listaReservas}" id="dataTable"
+                     widgetVar="listaDeReservas" style="table-layout: auto !important;"
+                     emptyMessage="Nenhuma reserva foi encontrada" filteredValue="#{reservaBean.reservasFiltradas}">
+
+            <p:column headerText="Quarto">
+                <h:outputText value="#{reserva.quarto.numero}" />
+            </p:column>
+
+            <p:column filterBy="#{reserva.usuario.id}" headerText="Cliente" filterMatchMode="contains">
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('listaDeReservas').filter()" >
+                        <f:selectItem itemLabel="Selecione um usuário" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{reservaBean.listUsuarios}" var="user"
+                                       itemValue="#{user.id}" itemLabel="#{user.nomeCompleto}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <h:outputText value="#{reserva.usuario.nomeCompleto}" />
+            </p:column>
+
+            <p:column headerText="Data Inicial da Reserva">
+                <!--TODO: Acertar o filtro de data (Mudar o modelo?)-->
+                <!--<f:facet name="filter">-->
+                <!--<p:calendar id="dtInicial" pattern="yyyy-mm-dd" name="dtInicial" value="#{reservaBean.reserva.dataInicial}"/>-->
+                <!--</f:facet>-->
+                <h:outputText pattern="yyyy-mm-dd" value="#{reserva.dataInicial}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy" style="align-content: center"/>
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Situação" filterBy="#{reserva.situacaoReserva}" filterMatchMode="exact">
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('listaDeReservas').filter()" >
+                        <f:selectItem itemLabel="Selecione a situação" itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{enumBean.situacoesReserva}" var="situ"
+                                       itemValue="#{situ}" itemLabel="#{situ.label}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+                <h:outputText value="#{reserva.situacaoReserva}" />
+            </p:column>
+
+            <p:column headerText="Ações" class="action-header" width="45%">
+                <p:panelGrid rendered="#{sessionBean.isAdmin()}">
+                    <p:commandButton value="Editar" id="editar-reserva" action="#{reservaBean.irEditar(reserva.id)}" icon="fa fa-pencil" ajax="false" />
+                    <p:commandButton value="Alterar status" id="alterar-status-reserva" action="#{reservaBean.irAlterarStatus(reserva.id)}" icon="fa fa-flag" ajax="false"/>
+                    <p:commandButton value="Check-out" id="check-out" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-times" ajax="false" disabled="#{!reservaBean.canCheckOut(reserva.id)}"/>
+                    <p:commandButton value="Check-in" id="check-in" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-check" ajax="false" disabled="#{!reservaBean.canCheckIn(reserva.id)}"/>
+                </p:panelGrid>
+                <p:panelGrid rendered="#{!sessionBean.isAdmin()}">
+                    <p:commandButton value="Cancelar" id="cancelarBtn" action="#{reservaBean.cancelar(reserva.id)}" icon="fa fa-ban" ajax="false" disabled="#{reservaBean.canCheckIn(reserva.id)}"/>
+                </p:panelGrid>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</f:view>
