@@ -2,44 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui">
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+>
 	<ui:composition template="/template/layoutAdmin.xhtml">
 		<ui:define name="content">
-			<h:form rendered="#{!empty sessionBean.usuarioLogado and (sessionBean.usuarioLogado.tipoUsuario eq 'FUNCIONARIO' or sessionBean.usuarioLogado.tipoUsuario eq 'ADMINISTRADOR')}">
-				<div class="col-lg-24">
-					<h3 class="text-center">Próximas reservas</h3>
-					<p:dataTable var="reserva" value="#{reservaBean.listaReservas}" style="table-layout: auto !important;">
-						<p:column headerText="Id">
-							<h:outputText value="#{reserva.id}" />
-						</p:column>
-
-						<p:column headerText="N. Quarto">
-							<h:outputText value="#{reserva.quarto.numero}" />
-						</p:column>
-
-						<p:column headerText="Cliente">
-							<h:outputText value="#{reserva.usuario.nomeCompleto}" />
-						</p:column>
-
-						<p:column headerText="Data entrada">
-							<h:outputText value="#{reserva.dataInicial}" />
-						</p:column>
-
-						<p:column headerText="Situação">
-							<h:outputText value="#{reserva.situacaoReserva}" />
-						</p:column>
-
-						<p:column headerText="Ações" class="action-header">
-							<h:form>
-								<p:commandButton value="Check-out" id="check-out" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-times" ajax="false" rendered="#{reserva.situacaoReserva eq 'HOSPEDADA'}"/>
-								<p:commandButton value="Check-in" id="check-in" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-check" ajax="false" rendered="#{reserva.situacaoReserva eq 'AGENDADA'}"/>
-							</h:form>
-						</p:column>
-					</p:dataTable>
-				</div>
+			<h:form>
+				<ui:include src="Components/DataTable/Reserva.xhtml"/>
 			</h:form>
 		</ui:define>
 	</ui:composition>

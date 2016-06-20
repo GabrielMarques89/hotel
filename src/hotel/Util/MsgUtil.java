@@ -29,15 +29,22 @@ public class MsgUtil {
     private MsgUtil() {}
 
     public static void addErrorMessage(String messageKey, Object... params) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getMessage(messageKey, params), getMessage(messageKey, params)));
+        addMessageOfSeverity(FacesMessage.SEVERITY_ERROR,messageKey,params);
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, getMessage(messageKey, params), getMessage(messageKey, params)));
+    }
+
+    private static void addMessageOfSeverity(FacesMessage.Severity severity,String messageKey, Object... params){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(messageKey, params), getMessage(messageKey, params)));
     }
 
     public static void addInfoMessage(String messageKey, Object... params) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getMessage(messageKey, params), getMessage(messageKey, params)));
+        addMessageOfSeverity(FacesMessage.SEVERITY_INFO,messageKey,params);
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getMessage(messageKey, params), getMessage(messageKey, params)));
     }
 
     public static void addWarnMessage(String messageKey, Object... params) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, getMessage(messageKey, params), getMessage(messageKey, params)));
+        addMessageOfSeverity(FacesMessage.SEVERITY_WARN,messageKey,params);
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, getMessage(messageKey, params), getMessage(messageKey, params)));
     }
 
     public static String getConfiguration(String key) {
@@ -48,13 +55,18 @@ public class MsgUtil {
     }
 
     private static ResourceBundle getJavaliMessagesBundle() {
+        Locale locale = getLocale();
+        return ResourceBundle.getBundle(PROJMESSAGES, locale);
+    }
+
+    private static Locale getLocale() {
         Locale locale = null;
         if (FacesContext.getCurrentInstance() != null && FacesContext.getCurrentInstance().getViewRoot() != null && FacesContext.getCurrentInstance().getViewRoot().getLocale() != null) {
             locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
         } else {
             locale = Locale.getDefault();
         }
-        return ResourceBundle.getBundle(PROJMESSAGES, locale);
+        return locale;
     }
 
     private static String getMessage(ResourceBundle messageBundle, String messageKey, Object... params) {
@@ -85,12 +97,7 @@ public class MsgUtil {
     }
 
     private static ResourceBundle getMessagesBundle() {
-        Locale locale = null;
-        if (FacesContext.getCurrentInstance() != null && FacesContext.getCurrentInstance().getViewRoot() != null && FacesContext.getCurrentInstance().getViewRoot().getLocale() != null) {
-            locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-        } else {
-            locale = Locale.getDefault();
-        }
+        Locale locale = getLocale();
         return ResourceBundle.getBundle(MESSAGES, locale);
     }
 
@@ -100,10 +107,7 @@ public class MsgUtil {
 
     public Boolean getHasGlobalMessage() {
         Iterator<FacesMessage> messages = FacesContext.getCurrentInstance().getMessages(null);
-        if (messages != null && messages.hasNext()) {
-            return true;
-        }
-        return false;
+        return messages != null && messages.hasNext();
     }
 
 }

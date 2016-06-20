@@ -10,7 +10,7 @@ public enum TipoPagamento {
 
 	private String label;
 
-	private TipoPagamento(String label) {
+	TipoPagamento(String label) {
 		this.label = label;
 	}
 

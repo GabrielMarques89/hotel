@@ -28,6 +28,7 @@ public class UsuarioBean extends BaseBean {
 	private UsuarioDAO userDAO;
 
 	private Usuario user;
+	private List<Usuario> listaUsuario;
 
 	public List<Usuario> getListaUsuario() {
 		return listaUsuario;
@@ -36,8 +37,6 @@ public class UsuarioBean extends BaseBean {
 	public void setListaUsuario(List<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
 	}
-
-	private List<Usuario> listaUsuario;
 
 	public Usuario getUser() {
 		return user;
@@ -49,12 +48,7 @@ public class UsuarioBean extends BaseBean {
 
 	public String login() throws Exception{
 		Usuario usuario = userDAO.login(user.getEmail(),encrypt(user.getSenha()));
-		if(usuario!=null){
-			sessionBean.setUsuarioLogado(usuario);
-			return listarReservas;
-		}
-        MsgUtil.addErrorMessage("Login ou senha inválidos.", "");
-		return loginPage;
+		return login(usuario);
 	}
 
 	@Override
@@ -83,6 +77,15 @@ public class UsuarioBean extends BaseBean {
         return salvar();
     }
 
+	private String login(Usuario usuario){
+		if(usuario != null){
+			sessionBean.setUsuarioLogado(usuario);
+			return indexPage;
+		}
+		MsgUtil.addErrorMessage("Email ou senha inválido. Tente novamente.", "");
+		return loginPage;
+	}
+
 	public String salvar() throws Exception{
 		Boolean existeErro = false;
 
@@ -108,10 +111,7 @@ public class UsuarioBean extends BaseBean {
 			user.setSenha(encrypt(user.getSenha()));
 			try{
 				Usuario usuario = userDAO.merge(user);
-				if(usuario != null){
-					sessionBean.setUsuarioLogado(usuario);
-					return indexPage;
-				}
+				login(usuario);
 			}catch (EJBException e){
 				ConstraintViolationHandler handler = ConstraintViolationException(e);
 				if(handler == null) {

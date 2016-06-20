@@ -25,6 +25,7 @@ public class SessionBean extends BaseBean{
         Usuario userToSave = usuarioDAO.findById(id);
         userToSave.setUltimoAcesso(new Date());
         usuarioDAO.merge(userToSave);
+		usuarioLogado = userToSave;
         usuarioLogado = null;
         return loginPage;
 	}

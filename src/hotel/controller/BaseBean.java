@@ -11,10 +11,7 @@ import java.util.Date;
 
 public abstract class BaseBean implements Serializable {
 
-	public BaseBean(){}
-
     private static final long serialVersionUID = 1L;
-
 	protected static String loginPage = "login.xhtml";
 	protected static String indexPage = "index.xhtml";
 	protected static String editarDados = "editarDados.xhtml";
@@ -29,9 +26,11 @@ public abstract class BaseBean implements Serializable {
 	protected static String cadastroCartaoMagnetico = "cadastroCartaoMagnetico.xhtml";
 	protected static String cadastroQuarto = "cadastroQuarto.xhtml";
 	protected static String cadastroTipoQuarto = "cadastroTipoQuarto.xhtml";
-
+	protected static String checkoutPage = "checkOut.xhtml";
 	@Inject
 	protected SessionBean sessionBean;
+
+	public BaseBean(){}
 
 	@PostConstruct
 	public abstract void postConst();

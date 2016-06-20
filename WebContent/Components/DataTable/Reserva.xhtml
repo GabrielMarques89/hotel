@@ -50,7 +50,7 @@
                     <p:commandButton value="Check-in" id="check-in" action="#{reservaBean.checkInOut(reserva.id)}" icon="fa fa-check" ajax="false" disabled="#{!reservaBean.canCheckIn(reserva.id)}"/>
                 </p:panelGrid>
                 <p:panelGrid rendered="#{!sessionBean.isAdmin()}">
-                    <p:commandButton value="Cancelar" id="cancelarBtn" action="#{reservaBean.cancelar(reserva.id)}" icon="fa fa-ban" ajax="false" disabled="#{reservaBean.canCheckIn(reserva.id)}"/>
+                    <p:commandButton rendered="#{reservaBean.canCancel(reserva.id)}" value="Cancelar" id="cancelarBtn" action="#{reservaBean.cancelar(reserva.id)}" icon="fa fa-ban" ajax="false" disabled="#{reservaBean.canCheckIn(reserva.id)}"/>
                 </p:panelGrid>
             </p:column>
         </p:dataTable>

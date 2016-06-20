@@ -15,9 +15,6 @@ public class Reserva extends Entidade{
 	@Column(name = "DT_INICIO", nullable = false)
 	private Date dataInicial;
 
-//	@Column(name = "DT_FIM")
-//	private Date dataFinal;
-
 	@Column(name = "QT_DEPENDENTES")
 	private int quantiaDependentes;
 

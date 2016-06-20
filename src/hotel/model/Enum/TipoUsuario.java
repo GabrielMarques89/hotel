@@ -11,7 +11,7 @@ public enum TipoUsuario {
 
 	private String label;
 
-	private TipoUsuario(String label) {
+	TipoUsuario(String label) {
 		this.label = label;
 	}
 

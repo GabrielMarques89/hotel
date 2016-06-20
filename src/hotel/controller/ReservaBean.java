@@ -34,6 +34,9 @@ import static hotel.Util.Utilities.ConstraintViolationException;
 public class ReservaBean extends BaseBean {
 	private static final long serialVersionUID = 1L;
 
+
+	@Inject
+	private CheckoutBean checkoutBean;
 	@Inject
 	private ReservaDAO reservaDAO;
 	@Inject
@@ -48,6 +51,8 @@ public class ReservaBean extends BaseBean {
 	private List<Reserva> listaReservas;
 
     private List<Reserva> listaReservasHospedadas;
+    private List<Reserva> reservasFiltradas;
+	private Reserva reserva;
 
     public List<Reserva> getListaReservasHospedadas() {
         return listaReservasHospedadas;
@@ -57,8 +62,6 @@ public class ReservaBean extends BaseBean {
         this.listaReservasHospedadas = reservaDAO.listarReservasByStatus(SituacaoReserva.HOSPEDADA);
     }
 
-    private List<Reserva> reservasFiltradas;
-
 	public List<Reserva> getReservasFiltradas() {
 		return reservasFiltradas;
 	}
@@ -66,8 +69,6 @@ public class ReservaBean extends BaseBean {
 	public void setReservasFiltradas(List<Reserva> reservasFiltradas) {
 		this.reservasFiltradas = reservasFiltradas;
 	}
-
-	private Reserva reserva;
 
 	public Reserva getReserva() {
 		return reserva;
@@ -101,6 +102,10 @@ public class ReservaBean extends BaseBean {
         return reservaDAO.listarReservasUsuarioById(sessionBean.getUsuarioLogado().getId());
 	}
 
+	public void setListaReservas(List<Reserva> listaReservas) {
+		this.listaReservas = listaReservas;
+	}
+
     public Boolean canCancel(Long reservaId){
         SituacaoReserva situacaoReserva  = reservaDAO.findById(reservaId).getSituacaoReserva();
         return situacaoReserva.equals(SituacaoReserva.ATRASADA) || situacaoReserva.equals(SituacaoReserva.AGENDADA) || situacaoReserva.equals(SituacaoReserva.ATIVA);
@@ -115,10 +120,6 @@ public class ReservaBean extends BaseBean {
         SituacaoReserva situacaoReserva  = reservaDAO.findById(reservaId).getSituacaoReserva();
         return situacaoReserva.equals(SituacaoReserva.HOSPEDADA);
     }
-
-	public void setListaReservas(List<Reserva> listaReservas) {
-		this.listaReservas = listaReservas;
-	}
 
 	@Override
 	@PostConstruct
@@ -185,21 +186,21 @@ public class ReservaBean extends BaseBean {
 	}
 
 	public String irEditar(long id) throws Exception{
-		reserva = reservaDAO.findById(id);
-		if(reserva != null){
-            return cadastroReserva;
-        }
-		MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
-		return listarReservas;
+		return redirectIfNull(id,cadastroReserva,listarReservas);
 	}
 
-	public String irAlterarStatus(long id) throws Exception{
+	private String redirectIfNull(Long id, String notNullRedirectString, String nullRedirectString){
 		reserva = reservaDAO.findById(id);
 		if(reserva != null){
-            return alterarStatusReserva;
-        }
+			return notNullRedirectString;
+		}
 		MsgUtil.addErrorMessage("Desculpe, mas não a reserva não foi encontrada.", "");
-		return listarReservas;
+		return nullRedirectString;
+	}
+
+
+	public String irAlterarStatus(long id) throws Exception{
+		return redirectIfNull(id,alterarStatusReserva,listarReservas);
 	}
 
 	public String alterarStatus() throws Exception{
@@ -224,7 +225,14 @@ public class ReservaBean extends BaseBean {
 	public String checkInOut(long id) throws Exception{
 		reserva = reservaDAO.findById(id);
 		if(isContextReservaOfKind(SituacaoReserva.HOSPEDADA)){
-            reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
+//			Checkout checkout = new Checkout();
+//			checkout.setData(new Date());
+//			checkout.setReserva(reserva);
+//			checkout.setValorTotal(checkout.calculaValorTotal());
+//			checkoutBean.setCheckout(checkout);
+//            return checkoutPage;
+			//TODO: Corrigir o fluxo para levar a tela de criacao de checkout.
+			reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
 		}else if(isContextReservaOfKind(SituacaoReserva.AGENDADA) || isContextReservaOfKind(SituacaoReserva.ATRASADA)){
             reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
 		}

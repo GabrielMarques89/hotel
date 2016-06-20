@@ -70,9 +70,6 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 		queryHql.append("WHERE USR.email = :email");
 		query.setParameter("email", email);
 		Usuario usuario = (Usuario) query.getSingleResult();
-		if(usuario.equals(null)){
-			return true;
-		}
-		return false;
+		return usuario.equals(null);
 	}
 }
