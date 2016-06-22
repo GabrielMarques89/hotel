@@ -25,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static hotel.Util.Utilities.ConstraintViolationException;
@@ -225,14 +226,10 @@ public class ReservaBean extends BaseBean {
 	public String checkInOut(long id) throws Exception{
 		reserva = reservaDAO.findById(id);
 		if(isContextReservaOfKind(SituacaoReserva.HOSPEDADA)){
-//			Checkout checkout = new Checkout();
-//			checkout.setData(new Date());
-//			checkout.setReserva(reserva);
-//			checkout.setValorTotal(checkout.calculaValorTotal());
-//			checkoutBean.setCheckout(checkout);
-//            return checkoutPage;
-			//TODO: Corrigir o fluxo para levar a tela de criacao de checkout.
-			reserva.setSituacaoReserva(SituacaoReserva.ARQUIVADA);
+			checkoutBean.getCheckout().setData(new Date());
+			checkoutBean.getCheckout().setReserva(reserva);
+			checkoutBean.getCheckout().setValorTotal(checkoutBean.getCheckout().calculaValorTotal());
+            return checkoutPage;
 		}else if(isContextReservaOfKind(SituacaoReserva.AGENDADA) || isContextReservaOfKind(SituacaoReserva.ATRASADA)){
             reserva.setSituacaoReserva(SituacaoReserva.HOSPEDADA);
 		}

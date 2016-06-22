@@ -36,20 +36,6 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long>{
 		}
 	}
 
-	//TODO: NÃO ESTÁ FUNCIONANDO
-	public List<Usuario> listarPorTipo(TipoUsuario tipoUsuario)throws Exception {
-		try {
-			StringBuilder queryHql = new StringBuilder(selecionarUsuario);
-			Query query = this.entityManager.createQuery(queryHql.toString());
-			queryHql.append("WHERE USR.email = :email AND USR.senha = :senha");
-			query.setParameter("tipoUsuario", tipoUsuario);
-			List<Usuario> lista = query.getResultList();
-			return lista;
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-
 	public List<Usuario> listarClientes(){
 		StringBuilder queryHql = new StringBuilder(selecionarUsuario);
 		queryHql.append("WHERE USR.tipoUsuario = :tipoUsuario");

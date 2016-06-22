@@ -11,43 +11,44 @@
         <ui:define name="content">
             <h:form>
                 <div class="form-group">
-                    <label>
-                        Início da Estadia
-                    </label>
+                    <b> Início da Estadia:</b>
                     <h:outputText value="#{checkoutBean.formatDate(checkoutBean.checkout.reserva.dataInicial)}"/>
+                    <h:inputText class="hidden" value="#{checkoutBean.checkout.reserva}"/>
                 </div>
                 <div class="form-group">
                     <label>
-                        Fim da Estadia
+                        Fim da Estadia:
                     </label>
                     <h:outputText value="#{checkoutBean.formatDate(checkoutBean.checkout.data)}"/>
+                    <!--<h:inputText class="hidden" value="#{checkoutBean.checkout.data}"/>-->
                 </div>
                 <div class="form-group">
                     <label>
-                        Total de dias
+                        Total de dias:
                     </label>
                     <h:outputText value="#{checkoutBean.checkout.totalDeDias()}"/>
                 </div>
                 <div class="form-group">
                     <label>
-                        Custo da diária
+                        Custo da diária:
                     </label>
                     <h:outputText value="#{checkoutBean.checkout.totalDiarias()}"/>
                 </div>
                 <div class="form-group">
                     <label>
-                        Consumo total
+                        Consumo total:
                     </label>
                     <h:outputText value="#{checkoutBean.checkout.totalConsumo()}"/>
                 </div>
                 <div class="form-group">
                     <label>
-                        Valor total
+                        Valor total:
                     </label>
                     <h:outputText value="#{checkoutBean.checkout.valorTotal}"/>
+                    <h:inputText class="hidden" value="#{checkoutBean.checkout.valorTotal}"/>
                 </div>
                 <div class="form-group">
-                    <p:commandButton class="btn btn-success btn-block" value="Salvar" ajax="false"
+                    <p:commandButton class="btn btn-success btn-block" value="Confirmar Pagamento" ajax="false"
                                      action="#{checkoutBean.salvar}"/>
                 </div>
             </h:form>

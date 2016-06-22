@@ -4,6 +4,7 @@ import hotel.model.Enum.SituacaoReserva;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by grupoeuropa on 09/06/16.
@@ -28,6 +29,17 @@ public class Reserva extends Entidade{
 	@JoinColumn(name = "ID_QUARTO", nullable = false, foreignKey = @ForeignKey(name = "FK_RESERVA_QUARTO"))
 	@OneToOne(fetch = FetchType.EAGER)
 	private Quarto quarto;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "reserva")
+	private List<CartaoMagnetico> listaCartoesDaReserva;
+
+	public List<CartaoMagnetico> getListaCartoesDaReserva() {
+		return listaCartoesDaReserva;
+	}
+
+	public void setListaCartoesDaReserva(List<CartaoMagnetico> listaCartoesDaReserva) {
+		this.listaCartoesDaReserva = listaCartoesDaReserva;
+	}
 
 	public float calcularPreco(){
 		return quarto.getTipo().getDiaria() * quantiaDependentes;

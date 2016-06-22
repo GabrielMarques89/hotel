@@ -19,6 +19,7 @@ public class Checkout extends Entidade {
 
 	@Column(name = "Data", nullable = false)
 	private Date data;
+
 	@JoinColumn(name = "ID_RESERVA", nullable = false, foreignKey = @ForeignKey(name = "FK_CHECKOUT_X_RESERVA"))
 	@OneToOne(fetch = FetchType.EAGER)
 	private Reserva reserva;
@@ -40,7 +41,8 @@ public class Checkout extends Entidade {
 	}
 
 	public float calculaValorTotal() throws Exception {
-		return totalDiarias()*totalConsumo();
+		float result = totalDiarias() + totalConsumo();
+		return result;
 	}
 
 	public float totalDiarias(){
@@ -49,12 +51,11 @@ public class Checkout extends Entidade {
 
 	public float totalConsumo() throws Exception{
 		//TODO: A lista de cartoes de uma reserva deve constar na modelagem - IMPORTANTISSIMO.
-//		float totalConsumo = 0;
-//		for(CartaoMagnetico item : listaDeCartoes){
-//			totalConsumo = totalConsumo + item.getConsumo();
-//		}
-//		return totalConsumo;
-		return 0;
+		float totalConsumo = 0;
+		for(CartaoMagnetico item : reserva.getListaCartoesDaReserva()){
+			totalConsumo = totalConsumo + item.getConsumo();
+		}
+		return totalConsumo;
 	}
 
 	public int totalDeDias(){

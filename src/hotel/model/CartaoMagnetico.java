@@ -23,7 +23,7 @@ public class CartaoMagnetico extends Entidade {
 	private Situacao situacao;
 
 	@JoinColumn(name = "ID_RESERVA", nullable = false, foreignKey = @ForeignKey(name = "FK_CARTAO_X_RESERVA"))
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Reserva reserva;
 
 	public String getCodigo() {
@@ -38,16 +38,16 @@ public class CartaoMagnetico extends Entidade {
 		return consumo;
 	}
 
+	public void setConsumo(float consumo) {
+		this.consumo = consumo;
+	}
+
 	public Situacao getSituacao() {
 		return situacao;
 	}
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
-	}
-
-	public void setConsumo(float consumo) {
-		this.consumo = consumo;
 	}
 
 	public Reserva getReserva() {

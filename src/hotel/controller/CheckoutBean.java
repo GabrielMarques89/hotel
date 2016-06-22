@@ -4,6 +4,7 @@ package hotel.controller;
  * Template by Gabriel Marques
  */
 
+import hotel.dao.CartaoMagneticoDAO;
 import hotel.dao.CheckoutDAO;
 import hotel.dao.ReservaDAO;
 import hotel.model.Checkout;
@@ -25,7 +26,10 @@ public class CheckoutBean extends BaseBean {
 
 	@Inject
 	private ReservaDAO reservaDAO;
-	
+
+	@Inject
+	private CartaoMagneticoDAO cartaoMagneticoDAO;
+
 	private Checkout checkout = new Checkout();
 	
 	@PostConstruct
